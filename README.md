@@ -39,7 +39,7 @@ CMD ["imgproxy"]
 EXPOSE 8080
 ```
 
-You probably want to use multistage build to minimize the final image, and it's a bit tricky. You need to take care of the following:
+But you probably want to use multistage build to minimize the final image, and it's a bit tricky. You need to take care of the following:
 
 1. Copy built dependencies from `/usr/local/lib`.
 2. Install ca-certificates, libsm6, liblzma5, and libzstd1 from the Debian repo.
