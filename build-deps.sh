@@ -65,7 +65,7 @@ curl -Ls https://github.com/libexif/libexif/archive/libexif-$(snake_version $LIB
 print_download_stage lcms2 $LCMS2_VERSION
 mkdir $DEPS_SRC/lcms2
 cd $DEPS_SRC/lcms2
-curl -Ls https://github.com/mm2/Little-CMS/archive/lcms$LCMS2_VERSION.tar.gz \
+curl -Ls https://sourceforge.net/projects/lcms/files/lcms/$LCMS2_VERSION/lcms2-$LCMS2_VERSION.tar.gz/download \
   | tar -xzC . --strip-components=1
 
 print_download_stage libjpeg-turbo $LIBJPEGTURBO_VERSION
