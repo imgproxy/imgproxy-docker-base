@@ -268,7 +268,6 @@ cmake \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DENABLE_SHARED=TRUE \
   -DENABLE_STATIC=FALSE \
-  -DWITH_JPEG8=1 \
   -DWITH_TURBOJPEG=FALSE \
   .
 make install/strip
