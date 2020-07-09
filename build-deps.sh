@@ -306,9 +306,12 @@ make install
 
 print_build_stage libde265 $LIBDE265_VERSION
 cd $DEPS_SRC/libde265
-cmake .
-make
-make install
+./configure \
+  --host=$HOST \
+  --prefix=/usr/local \
+  --enable-shared \
+  --disable-static
+make install-strip
 
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif

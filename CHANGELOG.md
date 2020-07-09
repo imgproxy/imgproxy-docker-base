@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Fix libde265 build
 
 ## [1.0.1] - 2020-06-22
 - Update GLib version to 2.65.0.
