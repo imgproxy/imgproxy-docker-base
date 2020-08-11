@@ -131,8 +131,8 @@ curl -Ls https://www.freedesktop.org/software/fontconfig/release/fontconfig-${FO
 print_download_stage harfbuzz $HARFBUZZ_VERSION
 mkdir $DEPS_SRC/harfbuzz
 cd $DEPS_SRC/harfbuzz
-curl -Ls https://www.freedesktop.org/software/harfbuzz/release/harfbuzz-${HARFBUZZ_VERSION}.tar.xz \
-  | tar -xJC . --strip-components=1
+curl -Ls https://github.com/harfbuzz/harfbuzz/archive/${HARFBUZZ_VERSION}.tar.gz \
+  | tar -xzC . --strip-components=1
 
 print_download_stage pixman $PIXMAN_VERSION
 mkdir $DEPS_SRC/pixman
@@ -365,13 +365,14 @@ make install-strip
 
 print_build_stage harfbuzz $HARFBUZZ_VERSION
 cd $DEPS_SRC/harfbuzz
-./configure \
-  --host=$HOST \
+meson build \
+  --buildtype=release \
+  --strip \
   --prefix=/usr/local \
-  --enable-shared \
-  --disable-static \
-  --disable-dependency-tracking
-make install-strip
+  --libdir=lib \
+  ${MESON_CROSS_CONFIG}
+ninja -C _build
+ninja -C _build install
 rm /usr/local/lib/libharfbuzz-subset*
 
 print_build_stage pixman $PIXMAN_VERSION
