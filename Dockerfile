@@ -30,7 +30,7 @@ RUN apt-get update \
   liblzma-dev \
   libzstd-dev \
   && curl https://sh.rustup.rs -sSf | sh -s -- -y \
-  && pip3 install meson
+  && pip3 install meson setuptools
 
 WORKDIR /root
 COPY . .
