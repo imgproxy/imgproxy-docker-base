@@ -365,7 +365,7 @@ make install-strip
 
 print_build_stage harfbuzz $HARFBUZZ_VERSION
 cd $DEPS_SRC/harfbuzz
-meson build \
+meson setup _build \
   --buildtype=release \
   --strip \
   --prefix=/usr/local \
