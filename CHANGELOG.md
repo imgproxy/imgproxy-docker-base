@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [1.0.4] - 2020-08-27
 ### Changed
 - Update GLib to 2.65.2.
 - Update libde265 to 1.0.6.
