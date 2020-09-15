@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Add libaom 2.0.0.
 
 ## [1.0.4] - 2020-08-27
 ### Changed

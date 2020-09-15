@@ -20,6 +20,7 @@ RUN apt-get update \
   automake \
   cmake \
   nasm \
+  yasm \
   libtool \
   ninja-build \
   python3-pip \

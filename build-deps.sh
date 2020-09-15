@@ -104,6 +104,12 @@ cd $DEPS_SRC/libde265
 curl -Ls https://github.com/strukturag/libde265/releases/download/v$LIBDE265_VERSION/libde265-$LIBDE265_VERSION.tar.gz \
   | tar -xzC . --strip-components=1
 
+print_download_stage libaom $LIBAOM_VERSION
+mkdir $DEPS_SRC/libaom
+cd $DEPS_SRC/libaom
+curl -Ls "https://aomedia.googlesource.com/aom/+archive/v$LIBAOM_VERSION.tar.gz" \
+  | tar -xzC .
+
 print_download_stage libheif $LIBHEIF_VERSION
 mkdir $DEPS_SRC/libheif
 cd $DEPS_SRC/libheif
@@ -312,6 +318,20 @@ cd $DEPS_SRC/libde265
   --enable-shared \
   --disable-static
 make install-strip
+
+print_build_stage libaom $LIBAOM_VERSION
+mkdir -p $DEPS_SRC/libaom/aom_build
+cd $DEPS_SRC/libaom/aom_build
+cmake \
+  -G"Unix Makefiles" \
+  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DBUILD_SHARED_LIBS=1\
+  -DENABLE_EXAMPLES=OFF \
+  -DENABLE_TESTS=OFF \
+  -DENABLE_TOOLS=OFF \
+  ..
+make
+make install
 
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif

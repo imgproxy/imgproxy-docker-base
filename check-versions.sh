@@ -40,4 +40,10 @@ check_version "LIBRSVG" $LIBRSVG_VERSION "5420"
 check_version "IMAGEMAGICK" $IMAGEMAGICK_VERSION "1372"
 check_version "VIPS" $VIPS_VERSION "5097"
 
+libaom_latest_version=$(git ls-remote -t https://aomedia.googlesource.com/aom.git | grep -E 'refs/tags/v\d+\.\d+\.\d+$' | awk '{print $2}' | sed -e "s/refs\/tags\/v//" | tail -1)
+if [ "$libaom_latest_version" != "$LIBAOM_VERSION" ]; then
+  all_latest=no
+  echo "LIBAOM. Latest version: $libaom_latest_version. Current version: $LIBAOM_VERSION"
+fi
+
 if [ "$all_latest" = "no" ]; then exit 1; fi
