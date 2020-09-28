@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Add rav1e 0.3.4.
 
 ## [1.2.0] - 2020-09-15
 ### Added

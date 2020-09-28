@@ -110,6 +110,12 @@ cd $DEPS_SRC/libaom
 curl -Ls "https://aomedia.googlesource.com/aom/+archive/v$LIBAOM_VERSION.tar.gz" \
   | tar -xzC .
 
+print_download_stage rav1e $RAV1E_VERSION
+mkdir $DEPS_SRC/rav1e
+cd $DEPS_SRC/rav1e
+curl -Ls https://github.com/xiph/rav1e/archive/v$RAV1E_VERSION.tar.gz \
+  | tar -xzC . --strip-components=1
+
 print_download_stage libheif $LIBHEIF_VERSION
 mkdir $DEPS_SRC/libheif
 cd $DEPS_SRC/libheif
@@ -326,6 +332,7 @@ cmake \
   -G"Unix Makefiles" \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_SHARED_LIBS=1\
+  -DCONFIG_AV1_ENCODER=0 \
   -DENABLE_EXAMPLES=OFF \
   -DENABLE_TESTS=OFF \
   -DENABLE_TOOLS=OFF \
@@ -333,8 +340,17 @@ cmake \
 make
 make install
 
+print_build_stage rav1e $RAV1E_VERSION
+cd $DEPS_SRC/rav1e
+cargo cinstall --release
+
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
+# Patch configure.ac and libheif/Makefile.am to use pkg-config for rav1e
+patch -p1 < /root/libheif_rav1e.patch
+# Patch to support libaom compiled without encoder
+patch -p1 < /root/libheif_aom.patch
+./autogen.sh
 ./configure \
   --host=$HOST \
   --prefix=/usr/local \
@@ -342,6 +358,8 @@ cd $DEPS_SRC/libheif
   --disable-go \
   --disable-examples
 make install-strip
+# Fix builtin_avif_encoder variable since it doesn't depend on rav1e
+sed -i 's/builtin_avif_encoder=no/builtin_avif_encoder=yes/' /usr/local/lib/pkgconfig/libheif.pc
 
 print_build_stage gdk-pixbuf $GDKPIXBUF_VERSION
 cd $DEPS_SRC/gdk-pixbuf

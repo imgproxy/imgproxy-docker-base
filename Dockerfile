@@ -26,11 +26,13 @@ RUN apt-get update \
   python3-pip \
   gettext \
   gperf \
+  libssl-dev \
   libffi-dev \
   zlib1g-dev \
   liblzma-dev \
   libzstd-dev \
   && curl https://sh.rustup.rs -sSf | sh -s -- -y \
+  && cargo install cargo-c \
   && pip3 install meson setuptools
 
 WORKDIR /root
