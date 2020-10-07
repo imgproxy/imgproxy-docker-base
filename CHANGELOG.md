@@ -3,6 +3,10 @@
 ## [Unreleased]
 ### Added
 - Add rav1e 0.3.4.
+- Add dav1d 0.7.1.
+
+# Removed
+- Remove libaom.
 
 ## [1.2.0] - 2020-09-15
 ### Added

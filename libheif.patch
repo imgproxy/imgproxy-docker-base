@@ -1,0 +1,202 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5076fec..6dfaa20 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,9 +2,6 @@ cmake_minimum_required (VERSION 3.3.2)
+ 
+ project(libheif LANGUAGES C CXX VERSION 1.9.1.0)
+ 
+-option(USE_LOCAL_RAV1E "Include rav1e support from local rav1e source" FALSE)
+-option(USE_LOCAL_DAV1D "Include dav1d support from local dav1d source" FALSE)
+-
+ # https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
+ cmake_policy(SET CMP0054 NEW)
+ include(GNUInstallDirs)
+@@ -55,9 +52,17 @@ if (has_potentially_evaluated_expression)
+ endif()
+ 
+ LIST (APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
+-find_package(Libde265 REQUIRED)
+-find_package(X265)
++option(WITH_LIBDE265 "Build libde265 decoder" ON)
++if (WITH_LIBDE265)
++    find_package(Libde265)
++endif ()
++option(WITH_X265 "Build x265 encoder" ON)
++if (WITH_X265)
++    find_package(X265)
++endif ()
+ find_package(LibAOM)
++find_package(Rav1e)
++find_package(Dav1d)
+ 
+ if (LIBDE265_FOUND)
+     message("HEIF decoder, libde265: found")
+@@ -77,16 +82,16 @@ else ()
+     message("AVIF decoder/encoder, aom: not found")
+ endif ()
+ 
+-if (USE_LOCAL_RAV1E)
+-    message("AVIF encoder, use local rav1e: yes")
++if (RAV1E_FOUND)
++    message("AVIF encoder, rav1e: found")
+ else ()
+-    message("AVIF encoder, use local rav1e: no")
++    message("AVIF encoder, rav1e: not found")
+ endif ()
+ 
+-if (USE_LOCAL_DAV1D)
+-    message("AVIF decoder, use local dav1d: yes")
++if (DAV1D_FOUND)
++    message("AVIF decoder, dav1d: found")
+ else ()
+-    message("AVIF decoder, use local dav1d: no")
++    message("AVIF decoder, dav1d: not found")
+ endif ()
+ 
+ 
+@@ -105,12 +110,12 @@ if (X265_FOUND)
+ else()
+     set(have_x265 no)
+ endif()
+-if (AOM_FOUND OR USE_LOCAL_DAV1D)
++if (AOM_FOUND OR DAV1D_FOUND)
+     set(have_avif_decoder yes)
+ else()
+     set(have_avif_decoder no)
+ endif()
+-if (AOM_FOUND OR USE_LOCAL_RAV1E)
++if (AOM_FOUND OR RAV1E_FOUND)
+     set(have_avif_encoder yes)
+ else()
+     set(have_avif_encoder no)
+diff --git a/cmake/modules/FindDav1d.cmake b/cmake/modules/FindDav1d.cmake
+new file mode 100644
+index 0000000..aa823da
+--- /dev/null
++++ b/cmake/modules/FindDav1d.cmake
+@@ -0,0 +1,24 @@
++include(LibFindMacros)
++libfind_pkg_check_modules(DAV1D_PKGCONF dav1d)
++
++find_path(DAV1D_INCLUDE_DIR
++    NAMES dav1d/dav1d.h
++    HINTS ${DAV1D_PKGCONF_INCLUDE_DIRS} ${DAV1D_PKGCONF_INCLUDEDIR}
++    PATH_SUFFIXES DAV1D
++)
++
++find_library(DAV1D_LIBRARY
++    NAMES libdav1d dav1d
++    HINTS ${DAV1D_PKGCONF_LIBRARY_DIRS} ${DAV1D_PKGCONF_LIBDIR}
++)
++
++set(DAV1D_PROCESS_LIBS DAV1D_LIBRARY)
++set(DAV1D_PROCESS_INCLUDES DAV1D_INCLUDE_DIR)
++libfind_process(DAV1D)
++
++include(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(DAV1D
++    REQUIRED_VARS
++        DAV1D_INCLUDE_DIR
++        DAV1D_LIBRARIES
++)
+diff --git a/cmake/modules/FindRav1e.cmake b/cmake/modules/FindRav1e.cmake
+new file mode 100644
+index 0000000..8c29672
+--- /dev/null
++++ b/cmake/modules/FindRav1e.cmake
+@@ -0,0 +1,24 @@
++include(LibFindMacros)
++libfind_pkg_check_modules(RAV1E_PKGCONF rav1e)
++
++find_path(RAV1E_INCLUDE_DIR
++    NAMES rav1e.h
++    HINTS ${RAV1E_PKGCONF_INCLUDE_DIRS} ${RAV1E_PKGCONF_INCLUDEDIR}
++    PATH_SUFFIXES RAV1E
++)
++
++find_library(RAV1E_LIBRARY
++    NAMES librav1e rav1e
++    HINTS ${RAV1E_PKGCONF_LIBRARY_DIRS} ${RAV1E_PKGCONF_LIBDIR}
++)
++
++set(RAV1E_PROCESS_LIBS RAV1E_LIBRARY)
++set(RAV1E_PROCESS_INCLUDES RAV1E_INCLUDE_DIR)
++libfind_process(RAV1E)
++
++include(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(RAV1E
++    REQUIRED_VARS
++        RAV1E_INCLUDE_DIR
++        RAV1E_LIBRARIES
++)
+diff --git a/libheif/CMakeLists.txt b/libheif/CMakeLists.txt
+index 21e08a8..a7e88b0 100644
+--- a/libheif/CMakeLists.txt
++++ b/libheif/CMakeLists.txt
+@@ -116,28 +116,38 @@ if(AOM_FOUND)
+   target_link_libraries(heif PRIVATE ${AOM_LIBRARIES} ${AOM_LINKDIR})
+ endif()
+ 
+-if(USE_LOCAL_RAV1E)
++if(RAV1E_FOUND)
+     target_compile_definitions(heif PRIVATE HAVE_RAV1E=1)
+     target_sources(heif PRIVATE
+             heif_encoder_rav1e.cc
+             heif_encoder_rav1e.h
+             )
+-    target_include_directories(heif PRIVATE ${CMAKE_SOURCE_DIR}/third-party/rav1e/target/release/include)
+-    target_link_libraries(heif PRIVATE ${CMAKE_SOURCE_DIR}/third-party/rav1e/target/release/librav1e.a -ldl)
++    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${RAV1E_CFLAGS}")
++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${RAV1E_CFLAGS}")
++
++    if (NOT "${RAV1E_LIBRARY_DIRS}" STREQUAL "")
++        set(RAV1E_LINKDIR "-L${RAV1E_LIBRARY_DIRS}")
++    endif()
++
++    include_directories(SYSTEM ${RAV1E_INCLUDE_DIR})
++    target_link_libraries(heif PRIVATE ${RAV1E_LIBRARIES} ${RAV1E_LINKDIR})
+ endif()
+ 
+-if(USE_LOCAL_DAV1D)
++if(DAV1D_FOUND)
+     target_compile_definitions(heif PRIVATE HAVE_DAV1D=1)
+     target_sources(heif PRIVATE
+             heif_decoder_dav1d.cc
+             heif_decoder_dav1d.h
+             )
+-    target_include_directories(heif PRIVATE ${CMAKE_SOURCE_DIR}/third-party/dav1d/build
+-            ${CMAKE_SOURCE_DIR}/third-party/dav1d/build/include
+-            ${CMAKE_SOURCE_DIR}/third-party/dav1d/build/include/dav1d
+-            ${CMAKE_SOURCE_DIR}/third-party/dav1d/include)
++    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${DAV1D_CFLAGS}")
++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${DAV1D_CFLAGS}")
++
++    if (NOT "${DAV1D_LIBRARY_DIRS}" STREQUAL "")
++        set(DAV1D_LINKDIR "-L${DAV1D_LIBRARY_DIRS}")
++    endif()
+ 
+-    target_link_libraries(heif PRIVATE ${CMAKE_SOURCE_DIR}/third-party/dav1d/build/src/libdav1d.a -ldl)
++    include_directories(SYSTEM ${DAV1D_INCLUDE_DIR})
++    target_link_libraries(heif PRIVATE ${DAV1D_LIBRARIES} ${DAV1D_LINKDIR})
+ endif ()
+ 
+ write_basic_package_version_file(${PROJECT_NAME}-config-version.cmake COMPATIBILITY ExactVersion)
+diff --git a/libheif/heif_encoder_rav1e.cc b/libheif/heif_encoder_rav1e.cc
+index a429633..9d5e0b7 100644
+--- a/libheif/heif_encoder_rav1e.cc
++++ b/libheif/heif_encoder_rav1e.cc
+@@ -31,10 +31,12 @@
+ #include <memory>
+ #include <cstring>
+ #include <cassert>
++#include <string>
++#include <algorithm>
+ 
+ #include <iostream>  // TODO: remove me
+ 
+-#include "rav1e/rav1e.h"
++#include "rav1e.h"
+ 
+ 
+ struct encoder_struct_rav1e

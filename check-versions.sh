@@ -26,6 +26,7 @@ check_version "GIFLIB" $GIFLIB_VERSION "1158"
 check_version "LIBWEBP" $LIBWEBP_VERSION "1761"
 check_version "LIBTIFF" $LIBTIFF_VERSION "13521"
 check_version "LIBDE265" $LIBDE265_VERSION "11239"
+check_version "DAV1D" $DAV1D_VERSION "18920"
 check_version "RAV1E" $RAV1E_VERSION "75048"
 check_version "LIBHEIF" $LIBHEIF_VERSION "64439"
 check_version "GDKPIXBUF" $GDKPIXBUF_VERSION "9533"
@@ -40,11 +41,5 @@ check_version "PANGO" $PANGO_VERSION "11783"
 check_version "LIBRSVG" $LIBRSVG_VERSION "5420"
 check_version "IMAGEMAGICK" $IMAGEMAGICK_VERSION "1372"
 check_version "VIPS" $VIPS_VERSION "5097"
-
-libaom_latest_version=$(git ls-remote -t https://aomedia.googlesource.com/aom.git | grep -E 'refs/tags/v\d+\.\d+\.\d+$' | awk '{print $2}' | sed -e "s/refs\/tags\/v//" | tail -1)
-if [ "$libaom_latest_version" != "$LIBAOM_VERSION" ]; then
-  all_latest=no
-  echo "LIBAOM. Latest version: $libaom_latest_version. Current version: $LIBAOM_VERSION"
-fi
 
 if [ "$all_latest" = "no" ]; then exit 1; fi

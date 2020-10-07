@@ -104,11 +104,11 @@ cd $DEPS_SRC/libde265
 curl -Ls https://github.com/strukturag/libde265/releases/download/v$LIBDE265_VERSION/libde265-$LIBDE265_VERSION.tar.gz \
   | tar -xzC . --strip-components=1
 
-print_download_stage libaom $LIBAOM_VERSION
-mkdir $DEPS_SRC/libaom
-cd $DEPS_SRC/libaom
-curl -Ls "https://aomedia.googlesource.com/aom/+archive/v$LIBAOM_VERSION.tar.gz" \
-  | tar -xzC .
+print_download_stage dav1d $DAV1D_VERSION
+mkdir $DEPS_SRC/dav1d
+cd $DEPS_SRC/dav1d
+curl -Ls https://code.videolan.org/videolan/dav1d/-/archive/$DAV1D_VERSION/dav1d-$DAV1D_VERSION.tar.gz \
+  | tar -xzC . --strip-components=1
 
 print_download_stage rav1e $RAV1E_VERSION
 mkdir $DEPS_SRC/rav1e
@@ -325,41 +325,35 @@ cd $DEPS_SRC/libde265
   --disable-static
 make install-strip
 
-print_build_stage libaom $LIBAOM_VERSION
-mkdir -p $DEPS_SRC/libaom/aom_build
-cd $DEPS_SRC/libaom/aom_build
-cmake \
-  -G"Unix Makefiles" \
-  -DCMAKE_INSTALL_PREFIX=/usr/local \
-  -DBUILD_SHARED_LIBS=1\
-  -DCONFIG_AV1_ENCODER=0 \
-  -DENABLE_EXAMPLES=OFF \
-  -DENABLE_TESTS=OFF \
-  -DENABLE_TOOLS=OFF \
-  ..
-make
-make install
+print_build_stage dav1d $DAV1D_VERSION
+cd $DEPS_SRC/dav1d
+meson setup _build \
+  --buildtype=release \
+  --strip \
+  --prefix=/usr/local \
+  --libdir=lib \
+  ${MESON_CROSS_CONFIG}
+ninja -C _build
+ninja -C _build install
 
 print_build_stage rav1e $RAV1E_VERSION
 cd $DEPS_SRC/rav1e
-cargo cinstall --release
+cargo cinstall --release --library-type=cdylib
 
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
-# Patch configure.ac and libheif/Makefile.am to use pkg-config for rav1e
-patch -p1 < /root/libheif_rav1e.patch
-# Patch to support libaom compiled without encoder
-patch -p1 < /root/libheif_aom.patch
-./autogen.sh
-./configure \
-  --host=$HOST \
-  --prefix=/usr/local \
-  --disable-static \
-  --disable-go \
-  --disable-examples
-make install-strip
-# Fix builtin_avif_encoder variable since it doesn't depend on rav1e
-sed -i 's/builtin_avif_encoder=no/builtin_avif_encoder=yes/' /usr/local/lib/pkgconfig/libheif.pc
+# Patch cmake to use pkg-config for rav1e and dav1d
+patch -p1 < /root/libheif.patch
+mkdir _build
+cd _build
+cmake \
+  -G"Unix Makefiles" \
+  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DBUILD_SHARED_LIBS=1 \
+  -DWITH_EXAMPLES=0 \
+  ..
+make
+make install
 
 print_build_stage gdk-pixbuf $GDKPIXBUF_VERSION
 cd $DEPS_SRC/gdk-pixbuf
