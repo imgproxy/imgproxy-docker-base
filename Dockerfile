@@ -10,27 +10,27 @@ ENV CGO_LDFLAGS_ALLOW "-s|-w"
 # Install dependencies
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
-  bash \
-  curl \
-  git \
-  ca-certificates \
-  build-essential \
-  autoconf \
-  autopoint \
-  automake \
-  cmake \
-  nasm \
-  yasm \
-  libtool \
-  ninja-build \
-  python3-pip \
-  gettext \
-  gperf \
-  libssl-dev \
-  libffi-dev \
-  zlib1g-dev \
-  liblzma-dev \
-  libzstd-dev \
+    bash \
+    curl \
+    git \
+    ca-certificates \
+    build-essential \
+    autoconf \
+    autopoint \
+    automake \
+    cmake \
+    nasm \
+    yasm \
+    libtool \
+    ninja-build \
+    python3-pip \
+    gettext \
+    gperf \
+    libssl-dev \
+    libffi-dev \
+    zlib1g-dev \
+    liblzma-dev \
+    libzstd-dev \
   && curl https://sh.rustup.rs -sSf | sh -s -- -y \
   && cargo install cargo-c \
   && pip3 install meson setuptools
