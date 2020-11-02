@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [1.3.0] - 2020-09-15
 ### Added
 - Add rav1e 0.3.4.
 - Add dav1d 0.7.1.
@@ -13,11 +15,11 @@
 - Add libaom 2.0.0.
 
 ### Changed
-Update GLib to 2.66.0.
-Update harfbuzz to 2.7.2.
-Update librsvg to 2.50.0.
-Update ImageMagick to 7.0.10-29.
-Update libvips to 8.10.1.
+- Update GLib to 2.66.0.
+- Update harfbuzz to 2.7.2.
+- Update librsvg to 2.50.0.
+- Update ImageMagick to 7.0.10-29.
+- Update libvips to 8.10.1.
 
 ## [1.0.4] - 2020-08-27
 ### Changed
