@@ -458,7 +458,7 @@ meson setup _build \
   --libdir=lib \
   ${MESON_CROSS_CONFIG} \
   -Dgtk_doc=false \
-  -Dintrospection=false
+  -Dintrospection=disabled
 ninja -C _build
 ninja -C _build install
 
