@@ -1,6 +1,19 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Update GLib to 2.66.0.
+- Update libexpat to 2.2.9.
+- Update libjpegturbo to 2.0.5.
+- Update libde265 to 1.0.6.
+- Update dav1d to 0.7.1.
+- Update gdkpixbuf to 2.40.0.
+- Update freetype to 2.10.2.
+- Update fontconfig to 2.13.92.
+- Update pango to 1.46.1.
+- Update librsvg to 2.50.0.
+- Update ImageMagick to 7.0.10-29.
+- Update libvips to 8.10.1.
 
 ## [1.3.0] - 2020-09-15
 ### Added
