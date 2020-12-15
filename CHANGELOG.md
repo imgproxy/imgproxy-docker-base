@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [1.3.1] - 2020-12-15
 ### Changed
 - Update GLib to 2.66.0.
 - Update libexpat to 2.2.9.
