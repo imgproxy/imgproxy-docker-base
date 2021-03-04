@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+## [1.3.2] - 2021-03-04
+- Update GLib to 2.67.5.
+- Update lcms2 to 2.12.
+- Update libwebp to 1.2.0.
+- Update libtiff to 4.2.0.
+- Update dav1d to 0.8.2.
+- Update rav1e to 0.4.0.
+- Update libheif to 1.11.0.
+- Update harfbuzz to 2.7.4.
+- Update pango to 1.48.2.
+- Update librsvg to 2.50.3.
+- Update ImageMagick to 7.0.11-2.
+- Update vips to 8.10.5.
+
 ## [1.3.1] - 2020-12-15
 ### Changed
 - Update GLib to 2.67.0.

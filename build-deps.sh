@@ -342,8 +342,6 @@ cargo cinstall --release --library-type=cdylib
 
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
-# Patch cmake to use pkg-config for rav1e and dav1d
-patch -p1 < /root/libheif.patch
 mkdir _build
 cd _build
 cmake \
@@ -520,6 +518,7 @@ rm -rf /usr/local/lib/libMagickWand-7.*
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
+patch -p1 < /root/vips.patch
 ./configure \
   --host=$HOST \
   --prefix=/usr/local \
