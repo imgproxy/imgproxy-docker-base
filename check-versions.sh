@@ -2,15 +2,23 @@
 set -e
 
 my_dir="$(dirname "$0")"
-source "$my_dir/versions.sh"
+versions_file="$my_dir/versions.sh"
+source $versions_file
 
-all_latest=yes
+version_entry() {
+  echo "export $1_VERSION=$2"
+}
 
 check_version() {
-  version=$(curl -s https://release-monitoring.org/api/project/$3  | jq -r '.versions[]' | grep -E -m1 "^[0-9]+(\.[0-9]+)*(\-[0-9]+)?$")
-  if [ "$version" != "$2" ]; then
-    all_latest=no
-    echo "$1. Latest version: $version. Current version: $2"
+  name=$1
+  old_version=$2
+  new_version=$(curl -s https://release-monitoring.org/api/project/$3  | jq -r '.versions[]' | grep -E -m1 "^[0-9]+(\.[0-9]+)*(\-[0-9]+)?$")
+
+  if [ "$new_version" != "$old_version" ]; then
+    old_entry=$(version_entry $name $old_version)
+    new_entry=$(version_entry $name $new_version)
+    sed -i '' "s/$old_entry/$new_entry/g" "$versions_file"
+    echo "$name. Latest version: $new_version. Current version: $old_version"
   fi
 }
 
@@ -41,5 +49,3 @@ check_version "PANGO" $PANGO_VERSION "11783"
 check_version "LIBRSVG" $LIBRSVG_VERSION "5420"
 check_version "IMAGEMAGICK" $IMAGEMAGICK_VERSION "1372"
 check_version "VIPS" $VIPS_VERSION "5097"
-
-if [ "$all_latest" = "no" ]; then exit 1; fi

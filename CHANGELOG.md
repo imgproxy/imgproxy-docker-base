@@ -1,6 +1,19 @@
 # Changelog
 
 ## [Unreleased]
+- Update GLib to 2.68.2.
+- Update libexpat to 2.3.0.
+- Update libxml2 to 2.9.12.
+- Update libjpegturbo to 2.1.0.
+- Update libtiff to 4.3.0.
+- Update dav1d to 0.9.0.
+- Update rav1e to 0.4.1.
+- Update libheif to 1.12.0.
+- Update gdkpixbuf to 2.42.6.
+- Update harfbuzz to 2.8.1.
+- Update pango to 1.48.5.
+- Update ImageMagick to 7.0.11-13.
+- Update vips to 8.10.6.
 
 ## [1.3.2] - 2021-03-04
 - Update GLib to 2.67.5.
