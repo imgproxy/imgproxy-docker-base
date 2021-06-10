@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [1.4.0] - 2021-06-10
 ### Changed
 - Use Debian Bullseye as a base.
 - Reduce final image size by using multistage build.
