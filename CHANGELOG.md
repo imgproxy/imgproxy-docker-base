@@ -1,8 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Use Debian Bullseye as a base.
+- Reduce final image size by using multistage build.
 - Update GLib to 2.68.2.
-- Update libexpat to 2.3.0.
+- Update libexpat to 2.4.1.
 - Update libxml2 to 2.9.12.
 - Update libjpegturbo to 2.1.0.
 - Update libtiff to 4.3.0.
@@ -12,10 +15,18 @@
 - Update gdkpixbuf to 2.42.6.
 - Update harfbuzz to 2.8.1.
 - Update pango to 1.48.5.
-- Update ImageMagick to 7.0.11-13.
-- Update vips to 8.10.6.
+- Update librsvg to 2.50.7.
+- Update ImageMagick to 7.0.11-14.
+- Update vips to 8.11.0.
+
+### Fix
+- Fix librsvg panics when processing some SVGs.
+
+### Removed
+- Remove giflib (libvips has builtin libnsgif now).
 
 ## [1.3.2] - 2021-03-04
+### Changed
 - Update GLib to 2.67.5.
 - Update lcms2 to 2.12.
 - Update libwebp to 1.2.0.

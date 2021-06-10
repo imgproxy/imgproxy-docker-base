@@ -22,6 +22,7 @@ check_version() {
   fi
 }
 
+check_version "GOLANG" $GOLANG_VERSION "1227"
 check_version "GLIB" $GLIB_VERSION "10024"
 # check_version "QUANTIZR" $QUANTIZR_VERSION ""
 check_version "LIBEXPAT" $LIBEXPAT_VERSION "770"
@@ -30,9 +31,8 @@ check_version "LIBEXIF" $LIBEXIF_VERSION "1607"
 check_version "LCMS2" $LCMS2_VERSION "9815"
 check_version "LIBJPEGTURBO" $LIBJPEGTURBO_VERSION "1648"
 check_version "LIBPNG" $LIBPNG_VERSION "15294"
-check_version "GIFLIB" $GIFLIB_VERSION "1158"
 check_version "LIBWEBP" $LIBWEBP_VERSION "1761"
-check_version "LIBTIFF" $LIBTIFF_VERSION "13521"
+check_version "LIBTIFF" $LIBTIFF_VERSION "1738"
 check_version "LIBDE265" $LIBDE265_VERSION "11239"
 check_version "DAV1D" $DAV1D_VERSION "18920"
 check_version "RAV1E" $RAV1E_VERSION "75048"
@@ -46,6 +46,7 @@ check_version "PIXMAN" $PIXMAN_VERSION "3648"
 check_version "FRIBIDI" $FRIBIDI_VERSION "857"
 check_version "LIBCROCO" $LIBCROCO_VERSION "11787"
 check_version "PANGO" $PANGO_VERSION "11783"
-check_version "LIBRSVG" $LIBRSVG_VERSION "5420"
+# New librsvg releases are experimental
+# check_version "LIBRSVG" $LIBRSVG_VERSION "5420"
 check_version "IMAGEMAGICK" $IMAGEMAGICK_VERSION "1372"
 check_version "VIPS" $VIPS_VERSION "5097"
