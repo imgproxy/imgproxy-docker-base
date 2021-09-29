@@ -1,6 +1,19 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Update Go to 1.17.1.
+- Update GLib to 2.70.0.
+- Update libexif to 0.6.23.
+- Update libjpegturbo to 2.1.1.
+- Update libwebp to 1.2.1.
+- Update dav1d to 0.9.2.
+- Update fontconfig to 2.13.94.
+- Update harfbuzz to 3.0.0.
+- Update fribidi to 1.0.11.
+- Update pango to 1.49.1.
+- Update ImageMagick to 7.1.0-8.
+- Update vips to 8.11.4.
 
 ## [1.4.0] - 2021-06-10
 ### Changed
