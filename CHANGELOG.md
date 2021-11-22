@@ -7,16 +7,16 @@
 - Add cgif 0.0.2.
 
 ### Changed
-- Update golang 1.17.3.
-- Update glib 2.70.1.
-- Update libjpegturbo 2.1.2.
-- Update libpng 1.6.37.
+- Update golang to 1.17.3.
+- Update glib to 2.70.1.
+- Update libjpegturbo to 2.1.2.
+- Update libpng to 1.6.37.
 - Update Quantizr to 1.0.1.
-- Update rav1e 0.5.0.
-- Update freetype 2.11.0.
-- Update harfbuzz 3.1.1.
-- Update pango 1.49.3.
-- Update vips 8.12.0.
+- Update rav1e to 0.5.0.
+- Update freetype to 2.11.0.
+- Update harfbuzz to 3.1.1.
+- Update pango to 1.49.3.
+- Update vips to 8.12.0.
 
 ### Removed
 - Remove ImageMagick.
