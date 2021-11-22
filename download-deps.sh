@@ -82,6 +82,12 @@ cd $DEPS_SRC/libtiff
 curl -Ls https://gitlab.com/libtiff/libtiff/-/archive/v$LIBTIFF_VERSION/libtiff-v$LIBTIFF_VERSION.tar.gz \
   | tar -xzC . --strip-components=1
 
+print_download_stage cgif $CGIF_VERSION
+mkdir $DEPS_SRC/cgif
+cd $DEPS_SRC/cgif
+curl -Ls https://github.com/dloebl/cgif/archive/refs/tags/V$CGIF_VERSION.tar.gz \
+  | tar -xzC . --strip-components=1
+
 print_download_stage libde265 $LIBDE265_VERSION
 mkdir $DEPS_SRC/libde265
 cd $DEPS_SRC/libde265
@@ -165,12 +171,6 @@ mkdir $DEPS_SRC/librsvg
 cd $DEPS_SRC/librsvg
 curl -Lks https://download.gnome.org/sources/librsvg/$(minor_version $LIBRSVG_VERSION)/librsvg-${LIBRSVG_VERSION}.tar.xz \
   | tar -xJC . --strip-components=1
-
-print_download_stage ImageMagick $IMAGEMAGICK_VERSION
-mkdir $DEPS_SRC/ImageMagick
-cd $DEPS_SRC/ImageMagick
-curl -Ls https://github.com/ImageMagick/ImageMagick/archive/$IMAGEMAGICK_VERSION.tar.gz \
-  | tar -xzC . --strip-components=1
 
 print_download_stage vips $VIPS_VERSION
 mkdir $DEPS_SRC/vips

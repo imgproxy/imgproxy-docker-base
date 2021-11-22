@@ -19,7 +19,8 @@ RUN apt-get update \
     libffi-dev \
     zlib1g-dev \
     liblzma-dev \
-    libzstd-dev
+    libzstd-dev \
+    libpcre3-dev
 
 FROM base AS deps-src
 

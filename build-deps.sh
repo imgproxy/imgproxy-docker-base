@@ -22,22 +22,15 @@ meson setup _build \
   --prefix=/usr/local \
   --libdir=lib \
   ${MESON_CROSS_CONFIG} \
-  -Dinternal_pcre=true \
   -Dlibmount=disabled
 ninja -C _build
 ninja -C _build install
 
 print_build_stage quantizr $QUANTIZR_VERSION
 cd $DEPS_SRC/quantizr
-# TODO: Implement proper cross-compile
-QUANTIZR_BUILD_DIR=${QUANTIZR_BUILD_DIR:-target/release}
-mkdir .cargo
-echo $QUANTIZR_CARGO_CONFIG > .cargo/config
-./configure \
-  --prefix=/usr/local \
-  --enable-imagequant-compatibility
-make
-make BUILD_DIR=$QUANTIZR_BUILD_DIR install
+cargo cinstall --release --library-type=cdylib
+cp /usr/local/lib/pkgconfig/quantizr.pc /usr/local/lib/pkgconfig/imagequant.pc
+cp /usr/local/include/quantizr/quantizr.h /usr/local/include/quantizr/libimagequant.h
 
 print_build_stage expat $LIBEXPAT_VERSION
 cd $DEPS_SRC/expat
@@ -128,6 +121,17 @@ cmake .
 make
 make install
 
+print_build_stage cgif $CGIF_VERSION
+cd $DEPS_SRC/cgif
+meson setup _build \
+  --buildtype=release \
+  --strip \
+  --prefix=/usr/local \
+  --libdir=lib \
+  ${MESON_CROSS_CONFIG}
+ninja -C _build
+ninja -C _build install
+
 print_build_stage libde265 $LIBDE265_VERSION
 cd $DEPS_SRC/libde265
 ./configure \
@@ -173,8 +177,7 @@ meson setup _build \
   --prefix=/usr/local \
   --libdir=lib \
   ${MESON_CROSS_CONFIG} \
-  -Dx11=false \
-  -Dgir=false \
+  -Dintrospection=disabled \
   -Dinstalled_tests=false \
   -Dgio_sniffing=false \
   -Dman=false \
@@ -296,38 +299,6 @@ patch -p1 < /root/librsvg.patch
   --disable-tools \
   --disable-pixbuf-loader
 make install-strip
-
-print_build_stage ImageMagick $IMAGEMAGICK_VERSION
-cd $DEPS_SRC/ImageMagick
-./configure \
-  --host=$HOST \
-  --prefix=/usr/local \
-  --enable-silent-rules \
-  --disable-static \
-  --disable-openmp \
-  --disable-deprecated \
-  --disable-docs \
-  --with-threads \
-  --without-magick-plus-plus \
-  --without-utilities \
-  --without-perl \
-  --without-bzlib \
-  --without-dps \
-  --without-freetype \
-  --without-fontconfig \
-  --without-jbig \
-  --without-jpeg \
-  --without-lcms \
-  --without-lzma \
-  --without-png \
-  --without-tiff \
-  --without-wmf \
-  --without-xml \
-  --without-webp \
-  --without-heic \
-  --without-pango
-make install-strip
-rm -rf /usr/local/lib/libMagickWand-7.*
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
