@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.0.1] - 2021-11-22
 ### Added
 - Add cgif 0.0.2.
 
