@@ -14,6 +14,9 @@ print_build_stage() {
 DEPS_SRC=/root/deps
 mkdir -p $DEPS_SRC
 
+CMAKE_SYSTEM_PROCESSOR=${CMAKE_SYSTEM_PROCESSOR:-amd64}
+CARGO_TARGET=${CARGO_TARGET:-"x86_64-unknown-linux-gnu"}
+
 print_build_stage glib $GLIB_VERSION
 cd $DEPS_SRC/glib
 meson setup _build \
@@ -28,7 +31,9 @@ ninja -C _build install
 
 print_build_stage quantizr $QUANTIZR_VERSION
 cd $DEPS_SRC/quantizr
-cargo cinstall --release --library-type=cdylib
+mkdir .cargo
+echo -e $CARGO_CROSS_CONFIG > .cargo/config
+cargo cinstall --release --library-type=cdylib --target=$CARGO_TARGET
 cp /usr/local/lib/pkgconfig/quantizr.pc /usr/local/lib/pkgconfig/imagequant.pc
 cp /usr/local/include/quantizr/quantizr.h /usr/local/include/quantizr/libimagequant.h
 
@@ -86,10 +91,13 @@ print_build_stage libjpeg-turbo $LIBJPEGTURBO_VERSION
 cd $DEPS_SRC/libjpeg-turbo
 cmake \
   -G"Unix Makefiles" \
+  -DCMAKE_SYSTEM_NAME=Linux \
+  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DENABLE_SHARED=TRUE \
   -DENABLE_STATIC=FALSE \
   -DWITH_TURBOJPEG=FALSE \
+  -DPNG_SUPPORTED=FALSE \
   .
 make install/strip
 
@@ -117,7 +125,14 @@ make install-strip
 
 print_build_stage libtiff $LIBTIFF_VERSION
 cd $DEPS_SRC/libtiff
-cmake .
+cmake \
+  -G"Unix Makefiles" \
+  -DCMAKE_SYSTEM_NAME=Linux \
+  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
+  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DENABLE_SHARED=TRUE \
+  -DENABLE_STATIC=FALSE \
+  .
 make
 make install
 
@@ -154,7 +169,9 @@ ninja -C _build install
 
 print_build_stage rav1e $RAV1E_VERSION
 cd $DEPS_SRC/rav1e
-cargo cinstall --release --library-type=cdylib
+mkdir .cargo
+echo -e $CARGO_CROSS_CONFIG > .cargo/config
+cargo cinstall --release --library-type=cdylib --target=$CARGO_TARGET
 
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
@@ -162,6 +179,8 @@ mkdir _build
 cd _build
 cmake \
   -G"Unix Makefiles" \
+  -DCMAKE_SYSTEM_NAME=Linux \
+  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_SHARED_LIBS=1 \
   -DWITH_EXAMPLES=0 \
@@ -314,6 +333,5 @@ cd $DEPS_SRC/vips
 make install-strip
 rm -rf /usr/local/lib/libvips-cpp.*
 
-rm -rf $DEPS_SRC
 rm -rf /usr/local/lib/*.a
 rm -rf /usr/local/lib/*.la
