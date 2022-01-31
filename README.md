@@ -32,7 +32,14 @@ If you don't care about the size, you can just build your Docker image on top of
 FROM darthsim/imgproxy-base:latest
 
 COPY . .
-RUN go build -v -o /usr/local/bin/imgproxy
+# We use bash here to load dynamically generated build environment from /root/.basrc
+RUN ["bash", "-c", "go build -v -o /usr/local/bin/imgproxy"]
+
+ENV VIPS_WARNING=0
+ENV MALLOC_ARENA_MAX=2
+
+RUN groupadd -r imgproxy && useradd -r -u 999 -g imgproxy imgproxy
+USER 999
 
 CMD ["imgproxy"]
 
@@ -42,7 +49,7 @@ EXPOSE 8080
 But you probably want to use multistage build to minimize the final image, and it's a bit tricky. You need to take care of the following:
 
 1. Copy built dependencies from `/usr/local/lib`.
-2. Install ca-certificates, libsm6, liblzma5, and libzstd1 from the Debian repo.
+2. Install ca-certificates, libsm6, liblzma5, libzstd1, and libpcre3 from the Debian repo.
 3. Set proper libraries paths.
 
 Here is the working example:
@@ -51,26 +58,33 @@ Here is the working example:
 FROM darthsim/imgproxy-base:latest
 
 COPY . .
-RUN go build -v -o /usr/local/bin/imgproxy
+RUN ["bash", "-c", "go build -v -o /usr/local/bin/imgproxy"]
 
 # ==================================================================================================
 # Final image
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 RUN apt-get update \
+  && apt-get upgrade -y \
   && apt-get install -y --no-install-recommends \
     bash \
     ca-certificates \
     libsm6 \
     liblzma5 \
     libzstd1 \
+    libpcre3 \
   && rm -rf /var/lib/apt/lists/*
 
 COPY --from=0 /usr/local/bin/imgproxy /usr/local/bin/
 COPY --from=0 /usr/local/lib /usr/local/lib
 
+ENV VIPS_WARNING=0
+ENV MALLOC_ARENA_MAX=2
 ENV LD_LIBRARY_PATH /usr/local/lib
+
+RUN groupadd -r imgproxy && useradd -r -u 999 -g imgproxy imgproxy
+USER 999
 
 CMD ["imgproxy"]
 
