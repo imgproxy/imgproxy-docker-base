@@ -4,13 +4,27 @@
 ### Added
 - Multiarch build.
 
+### Changed
+- Update Go to 1.17.6.
+- Update GLib to 2.71.1.
+- Update libexpat to 2.4.4.
+- Update libexif to 0.6.24.
+- Update lcms2 to 2.13.
+- Update Quantizr to 1.1.0.
+- Update libwebp to 1.2.2.
+- Update rav1e to 0.5.1.
+- Update freetype to 2.11.1.
+- Update harfbuzz to 3.2.0.
+- Update pango to 1.50.3.
+- Update vips to 8.12.2.
+
 ## [3.0.1] - 2021-11-22
 ### Added
 - Add cgif 0.0.2.
 
 ### Changed
-- Update golang to 1.17.3.
-- Update glib to 2.70.1.
+- Update Go to 1.17.3.
+- Update GLib to 2.70.1.
 - Update libjpegturbo to 2.1.2.
 - Update libpng to 1.6.37.
 - Update Quantizr to 1.0.1.
