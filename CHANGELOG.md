@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.1.0] - 2022-01-31
 ### Added
 - Multiarch build.
 
