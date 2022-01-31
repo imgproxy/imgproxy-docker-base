@@ -27,7 +27,8 @@ steps:
   args:
     - '-c'
     - |
-      docker login -u darthsim -p $$DOCKER_HUB_TOKEN \
+      apk add --no-cache bash \
+      && docker login -u darthsim -p $$DOCKER_HUB_TOKEN \
       && ./push-images.sh ${TAG_NAME}
   secretEnv: ['DOCKER_HUB_TOKEN']
   waitFor: ['docker_amd64', 'docker_arm64']
