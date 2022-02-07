@@ -167,11 +167,35 @@ meson setup _build \
 ninja -C _build
 ninja -C _build install
 
-print_build_stage rav1e $RAV1E_VERSION
-cd $DEPS_SRC/rav1e
-mkdir .cargo
-echo -e $CARGO_CROSS_CONFIG > .cargo/config
-cargo cinstall --release --library-type=cdylib --target=$CARGO_TARGET
+# print_build_stage rav1e $RAV1E_VERSION
+# cd $DEPS_SRC/rav1e
+# mkdir .cargo
+# echo -e $CARGO_CROSS_CONFIG > .cargo/config
+# cargo cinstall --release --library-type=cdylib --target=$CARGO_TARGET
+
+print_build_stage aom $AOM_VERSION
+cd $DEPS_SRC/aom
+mkdir _build
+cd _build
+cmake \
+  -G"Unix Makefiles" \
+  $AOM_FLAGS \
+  -DCMAKE_SYSTEM_NAME=Linux \
+  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
+  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DBUILD_SHARED_LIBS=1 \
+  -DCMAKE_BUILD_TYPE=MinSizeRel \
+  -DENABLE_DOCS=0 \
+  -DENABLE_TESTS=0 \
+  -DENABLE_TESTDATA=0 \
+  -DENABLE_TOOLS=0 \
+  -DENABLE_EXAMPLES=0 \
+  -DCONFIG_AV1_HIGHBITDEPTH=0 \
+  -DCONFIG_WEBM_IO=0 \
+  -DCONFIG_AV1_DECODER=0 \
+  ..
+make
+make install
 
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif

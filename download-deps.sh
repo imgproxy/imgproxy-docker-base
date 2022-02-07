@@ -100,11 +100,17 @@ cd $DEPS_SRC/dav1d
 curl -Ls https://code.videolan.org/videolan/dav1d/-/archive/$DAV1D_VERSION/dav1d-$DAV1D_VERSION.tar.gz \
   | tar -xzC . --strip-components=1
 
-print_download_stage rav1e $RAV1E_VERSION
-mkdir $DEPS_SRC/rav1e
-cd $DEPS_SRC/rav1e
-curl -Ls https://github.com/xiph/rav1e/archive/v$RAV1E_VERSION.tar.gz \
-  | tar -xzC . --strip-components=1
+# print_download_stage rav1e $RAV1E_VERSION
+# mkdir $DEPS_SRC/rav1e
+# cd $DEPS_SRC/rav1e
+# curl -Ls https://github.com/xiph/rav1e/archive/v$RAV1E_VERSION.tar.gz \
+#   | tar -xzC . --strip-components=1
+
+print_download_stage aom $AOM_VERSION
+mkdir $DEPS_SRC/aom
+cd $DEPS_SRC/aom
+curl -Ls https://storage.googleapis.com/aom-releases/libaom-${AOM_VERSION}.tar.gz \
+  | tar -xzC .
 
 print_download_stage libheif $LIBHEIF_VERSION
 mkdir $DEPS_SRC/libheif

@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Add libaom 3.2.0.
+
+### Removed
+- Remove rav1e.
 
 ## [3.1.0] - 2022-01-31
 ### Added

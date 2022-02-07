@@ -21,6 +21,7 @@ ARM_ENV=""
 if [ "$TARGET_ARCH" = "arm64" ]; then
   ARM_ENV=$(cat << EOF
 export CFLAGS="-march=armv8.2-a+fp16+rcpc+dotprod+crypto -mtune=neoverse-n1 -Os"
+export AOM_FLAGS="-DCMAKE_TOOLCHAIN_FILE=../build/cmake/toolchains/arm64-linux-gcc.cmake"
 EOF
   )
 fi
