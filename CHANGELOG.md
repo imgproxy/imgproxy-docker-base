@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.2.0] - 2022-02-07
 ### Added
 - Add libaom 3.2.0.
 
