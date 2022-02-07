@@ -4,6 +4,11 @@
 ### Added
 - Add libaom 3.2.0.
 
+### Changed
+- Update lcms2 to 2.13.1.
+- Update fontconfig to 2.13.96.
+- Update harfbuzz to 3.3.2.
+
 ### Removed
 - Remove rav1e.
 
