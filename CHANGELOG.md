@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.2.1] - 2022-02-11
 ## Fixed
 - Fix `CFLAGS` for amd64 build.
 
