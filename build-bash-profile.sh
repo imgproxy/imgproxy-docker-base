@@ -20,7 +20,7 @@ esac
 ARM_ENV=""
 if [ "$TARGET_ARCH" = "arm64" ]; then
   ARM_ENV=$(cat << EOF
-export CFLAGS="-march=armv8.2-a+fp16+rcpc+dotprod+crypto -mtune=neoverse-n1 -Os"
+export CFLAGS="-march=armv8.2-a+fp16+rcpc+dotprod+crypto -mtune=neoverse-n1"
 export AOM_FLAGS="-DCMAKE_TOOLCHAIN_FILE=../build/cmake/toolchains/arm64-linux-gcc.cmake"
 EOF
   )
@@ -38,6 +38,7 @@ export HOST=$ARCH-linux-gnu
 export CC=$ARCH-linux-gnu-gcc
 export CXX=$ARCH-linux-gnu-g++
 export STRIP=$ARCH-linux-gnu-strip
+export CFLAGS="\$CFLAGS -Os"
 export CXXFLAGS=\$CFLAGS
 export PKG_CONFIG_PATH=/usr/lib/$ARCH-linux-gnu/pkgconfig:\${PKG_CONFIG_PATH}
 export CMAKE_SYSTEM_PROCESSOR=$ARCH
