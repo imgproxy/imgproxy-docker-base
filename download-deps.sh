@@ -43,8 +43,8 @@ curl -Ls https://github.com/libexpat/libexpat/releases/download/R_$(snake_versio
 print_download_stage libxml2 $LIBXML2_VERSION
 mkdir $DEPS_SRC/libxml2
 cd $DEPS_SRC/libxml2
-curl -Ls http://xmlsoft.org/sources/libxml2-${LIBXML2_VERSION}.tar.gz \
-  | tar -xzC . --strip-components=1
+curl -Ls https://download.gnome.org/sources/libxml2/$(minor_version $LIBXML2_VERSION)/libxml2-${LIBXML2_VERSION}.tar.xz \
+  | tar -xJC . --strip-components=1
 
 print_download_stage libexif $LIBEXIF_VERSION
 mkdir $DEPS_SRC/libexif
@@ -110,7 +110,7 @@ print_download_stage aom $AOM_VERSION
 mkdir $DEPS_SRC/aom
 cd $DEPS_SRC/aom
 curl -Ls https://storage.googleapis.com/aom-releases/libaom-${AOM_VERSION}.tar.gz \
-  | tar -xzC .
+  | tar -xzC . --strip-components=1
 
 print_download_stage libheif $LIBHEIF_VERSION
 mkdir $DEPS_SRC/libheif
@@ -151,8 +151,8 @@ curl -Ls https://cairographics.org/releases/pixman-${PIXMAN_VERSION}.tar.gz \
 print_download_stage cairo $CAIRO_VERSION
 mkdir $DEPS_SRC/cairo
 cd $DEPS_SRC/cairo
-curl -Ls https://cairographics.org/releases/cairo-${CAIRO_VERSION}.tar.xz \
-  | tar -xJC . --strip-components=1
+curl -Ls https://gitlab.freedesktop.org/cairo/cairo/-/archive/$CAIRO_VERSION/cairo-$CAIRO_VERSION.tar.gz \
+  | tar -xzC . --strip-components=1
 
 print_download_stage fribidi $FRIBIDI_VERSION
 mkdir $DEPS_SRC/fribidi

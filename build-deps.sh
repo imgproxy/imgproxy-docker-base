@@ -17,6 +17,9 @@ mkdir -p $DEPS_SRC
 CMAKE_SYSTEM_PROCESSOR=${CMAKE_SYSTEM_PROCESSOR:-amd64}
 CARGO_TARGET=${CARGO_TARGET:-"x86_64-unknown-linux-gnu"}
 
+export CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1
+export CARGO_PROFILE_RELEASE_LTO=true
+
 print_build_stage glib $GLIB_VERSION
 cd $DEPS_SRC/glib
 meson setup _build \
@@ -276,23 +279,21 @@ make install-strip
 
 print_build_stage cairo $CAIRO_VERSION
 cd $DEPS_SRC/cairo
-./configure \
-  --host=$HOST \
+meson setup _build \
+  --buildtype=release \
+  --strip \
   --prefix=/usr/local \
-  --enable-shared \
-  --disable-static \
-  --disable-dependency-tracking \
-  --disable-xlib \
-  --disable-xcb \
-  --disable-quartz \
-  --disable-win32 \
-  --disable-egl \
-  --disable-glx \
-  --disable-wgl \
-  --disable-ps \
-  --disable-trace \
-  --disable-interpreter
-make install-strip
+  --libdir=lib \
+  -Dquartz=disabled \
+  -Dxcb=disabled \
+  -Dxlib=disabled \
+  -Dzlib=disabled \
+  -Dtests=disabled \
+  -Dspectre=disabled \
+  -Dsymbol-lookup=disabled \
+  ${MESON_CROSS_CONFIG}
+ninja -C _build
+ninja -C _build install
 
 print_build_stage fribidi $FRIBIDI_VERSION
 cd $DEPS_SRC/fribidi
@@ -312,9 +313,9 @@ meson setup _build \
   --strip \
   --prefix=/usr/local \
   --libdir=lib \
-  ${MESON_CROSS_CONFIG} \
   -Dgtk_doc=false \
-  -Dintrospection=disabled
+  -Dintrospection=disabled \
+  ${MESON_CROSS_CONFIG}
 ninja -C _build
 ninja -C _build install
 
@@ -330,9 +331,15 @@ make install-strip
 
 print_build_stage librsvg $LIBRSVG_VERSION
 cd $DEPS_SRC/librsvg
-patch -p1 < /root/librsvg.patch
+# [PATCH] (#859): Make rst2man and gi-docgen optional
+curl -Ls https://gitlab.gnome.org/GNOME/librsvg/-/commit/8eccd72a6b07f624768e734d3eadc3a1cde14f47.patch | patch -p1
+autoreconf -fiv
+sed -i'.bak' "s/^\(Requires:.*\)/\1 cairo-gobject pangocairo/" librsvg.pc.in
+# LTO optimization does not work for staticlib+rlib compilation
+sed -i'.bak' "s/, \"rlib\"//" Cargo.toml
+# Skip executables
+sed -i'.bak' "/SCRIPTS = /d" Makefile.in
 ./configure \
-  --build="x86_64-linux-gnu" \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -340,7 +347,10 @@ patch -p1 < /root/librsvg.patch
   --disable-dependency-tracking \
   --disable-introspection \
   --disable-tools \
-  --disable-pixbuf-loader
+  --disable-pixbuf-loader \
+  --disable-nls \
+  --without-libiconv-prefix \
+  --without-libintl-prefix
 make install-strip
 
 print_build_stage vips $VIPS_VERSION

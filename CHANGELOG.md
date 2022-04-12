@@ -1,11 +1,29 @@
 # Changelog
 
 ## [Unreleased]
-## Fix
+### Changed
+Update Go to 1.18.
+Update GLib to 2.72.0.
+Update Quantizr to 1.2.0.
+Update libexpat to 2.4.8.
+Update libxml2 to 2.9.13.
+Update libjpegturbo to 2.1.3.
+Update cgif to 0.2.1.
+Update dav1d to 1.0.0.
+Update aom to 3.3.0.
+Update gdkpixbuf to 2.42.8.
+Update freetype to 2.12.0.
+Update fontconfig to 2.14.0.
+Update harfbuzz to 4.2.0.
+Update cairo to 1.17.6.
+Update pango to 1.50.6.
+Update librsvg to 2.54.0.
+
+### Fix
 - Patch nsgif in vips code to recover from LZW_EOI_CODE.
 
 ## [3.2.1] - 2022-02-11
-## Fix
+### Fix
 - Fix `CFLAGS` for amd64 build.
 
 ## [3.2.0] - 2022-02-07
