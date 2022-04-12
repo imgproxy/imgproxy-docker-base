@@ -345,6 +345,8 @@ make install-strip
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
+# Fix loading of some GIFs
+sed -i 's/(res == LZW_OK_EOD)/(res == LZW_OK_EOD || res == LZW_EOI_CODE)/' libvips/foreign/libnsgif/libnsgif.c
 ./configure \
   --host=$HOST \
   --prefix=/usr/local \

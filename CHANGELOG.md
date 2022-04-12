@@ -1,9 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+## Fix
+- Patch nsgif in vips code to recover from LZW_EOI_CODE.
 
 ## [3.2.1] - 2022-02-11
-## Fixed
+## Fix
 - Fix `CFLAGS` for amd64 build.
 
 ## [3.2.0] - 2022-02-07
