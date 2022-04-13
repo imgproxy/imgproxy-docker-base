@@ -34,6 +34,7 @@ export CPATH=/usr/local/include
 export CGO_LDFLAGS_ALLOW="-s|-w"
 
 $ARM_ENV
+export BUILD=$(uname -m)-linux-gnu
 export HOST=$ARCH-linux-gnu
 export CC=$ARCH-linux-gnu-gcc
 export CXX=$ARCH-linux-gnu-g++

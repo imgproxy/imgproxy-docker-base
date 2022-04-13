@@ -43,6 +43,7 @@ cp /usr/local/include/quantizr/quantizr.h /usr/local/include/quantizr/libimagequ
 print_build_stage expat $LIBEXPAT_VERSION
 cd $DEPS_SRC/expat
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -54,6 +55,7 @@ make install
 print_build_stage libxml2 $LIBXML2_VERSION
 cd $DEPS_SRC/libxml2
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -73,6 +75,7 @@ print_build_stage libexif $LIBEXIF_VERSION
 cd $DEPS_SRC/libexif
 autoreconf -i
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -83,6 +86,7 @@ make install-strip
 print_build_stage lcms2 $LCMS2_VERSION
 cd $DEPS_SRC/lcms2
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -107,6 +111,7 @@ make install/strip
 print_build_stage libpng $LIBPNG_VERSION
 cd $DEPS_SRC/libpng
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -117,6 +122,7 @@ make install-strip
 print_build_stage libwebp $LIBWEBP_VERSION
 cd $DEPS_SRC/libwebp
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -153,6 +159,7 @@ ninja -C _build install
 print_build_stage libde265 $LIBDE265_VERSION
 cd $DEPS_SRC/libde265
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -235,6 +242,7 @@ rm -rf /usr/local/lib/gdk-pixbuf-2.0
 print_build_stage freetype $FREETYPE_VERSION
 cd $DEPS_SRC/freetype
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -246,6 +254,7 @@ make install
 print_build_stage fontconfig $FONTCONFIG_VERSION
 cd $DEPS_SRC/fontconfig
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -269,6 +278,7 @@ rm /usr/local/lib/libharfbuzz-subset*
 print_build_stage pixman $PIXMAN_VERSION
 cd $DEPS_SRC/pixman
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -299,6 +309,7 @@ print_build_stage fribidi $FRIBIDI_VERSION
 cd $DEPS_SRC/fribidi
 autoreconf -fiv
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -322,6 +333,7 @@ ninja -C _build install
 print_build_stage libcroco $LIBCROCO_VERSION
 cd $DEPS_SRC/libcroco
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -340,6 +352,7 @@ sed -i'.bak' "s/, \"rlib\"//" Cargo.toml
 # Skip executables
 sed -i'.bak' "/SCRIPTS = /d" Makefile.in
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --enable-shared \
@@ -358,6 +371,7 @@ cd $DEPS_SRC/vips
 # Fix loading of some GIFs
 sed -i 's/(res == LZW_OK_EOD)/(res == LZW_OK_EOD || res == LZW_EOI_CODE)/' libvips/foreign/libnsgif/libnsgif.c
 ./configure \
+  --build=$BUILD \
   --host=$HOST \
   --prefix=/usr/local \
   --without-python \
