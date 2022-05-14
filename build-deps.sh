@@ -343,9 +343,6 @@ make install-strip
 
 print_build_stage librsvg $LIBRSVG_VERSION
 cd $DEPS_SRC/librsvg
-# [PATCH] (#859): Make rst2man and gi-docgen optional
-curl -Ls https://gitlab.gnome.org/GNOME/librsvg/-/commit/8eccd72a6b07f624768e734d3eadc3a1cde14f47.patch | patch -p1
-autoreconf -fiv
 sed -i'.bak' "s/^\(Requires:.*\)/\1 cairo-gobject pangocairo/" librsvg.pc.in
 # LTO optimization does not work for staticlib+rlib compilation
 sed -i'.bak' "s/, \"rlib\"//" Cargo.toml

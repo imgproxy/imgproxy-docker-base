@@ -1,6 +1,17 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Update Go to 1.18.2.
+- Update GLib to 2.72.1.
+- Update libxml2 to 2.9.14.
+- Update cgif to 0.3.0.
+- Update freetype to 2.12.1.
+- Update harfbuzz to 4.2.1.
+- Update fribidi to 1.0.12.
+- Update pango to 1.50.7.
+- Update librsvg to 2.54.3.
+
 ### Fix
 - Patch libvips to not fail on PNGs with to many text chunks.
 
