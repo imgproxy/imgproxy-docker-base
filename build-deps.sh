@@ -368,6 +368,8 @@ make install-strip
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
+# Fix failing on too many text chunks in PNGs
+patch -p1 < /root/libvips-png-dont-fail-on-text-chunks.patch
 # Fix loading of some GIFs
 sed -i 's/(res == LZW_OK_EOD)/(res == LZW_OK_EOD || res == LZW_EOI_CODE)/' libvips/foreign/libnsgif/libnsgif.c
 ./configure \

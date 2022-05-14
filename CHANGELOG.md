@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Fix
+- Patch libvips to not fail on PNGs with to many text chunks.
 
 ## [3.2.2] - 2022-04-13
 ### Changed
