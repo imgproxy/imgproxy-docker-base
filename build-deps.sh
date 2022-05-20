@@ -209,6 +209,7 @@ make install
 
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
+curl -Ls https://github.com/strukturag/libheif/commit/0f8496f22d284e1a69df12fe0b72f375aed31315.patch | patch -p1
 mkdir _build
 cd _build
 cmake \
