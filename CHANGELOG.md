@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.2.4] - 2022-05-20
 ### Fix
 - Fix dav1d plugin of libheif.
 
