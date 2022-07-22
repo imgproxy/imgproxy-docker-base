@@ -1,40 +1,38 @@
-ARG TARGET_ARCH=amd64
+FROM --platform=${BUILDPLATFORM} debian:bullseye-slim AS base
 
-FROM debian:bullseye-slim AS base
+ARG TARGETARCH
 
-ARG TARGET_ARCH
-
-RUN dpkg --add-architecture ${TARGET_ARCH} \
+RUN dpkg --add-architecture ${TARGETARCH} \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
     bash \
     curl \
     git \
     ca-certificates \
-    crossbuild-essential-${TARGET_ARCH} \
+    crossbuild-essential-${TARGETARCH} \
     pkg-config \
     libssl-dev \
-    libstdc++6:${TARGET_ARCH} \
-    libffi-dev:${TARGET_ARCH} \
-    zlib1g-dev:${TARGET_ARCH} \
-    liblzma-dev:${TARGET_ARCH} \
-    libzstd-dev:${TARGET_ARCH} \
-    libpcre3-dev:${TARGET_ARCH}
+    libstdc++6:${TARGETARCH} \
+    libffi-dev:${TARGETARCH} \
+    zlib1g-dev:${TARGETARCH} \
+    liblzma-dev:${TARGETARCH} \
+    libzstd-dev:${TARGETARCH} \
+    libpcre3-dev:${TARGETARCH}
 
 WORKDIR /root
 
 # ==============================================================================
 
-FROM base AS deps-src
+FROM --platform=${BUILDPLATFORM} base AS deps-src
 
 COPY versions.sh download-deps.sh ./
 RUN ./download-deps.sh
 
 # ==============================================================================
 
-FROM base AS deps
+FROM --platform=${BUILDPLATFORM} base AS deps
 
-ARG TARGET_ARCH
+ARG TARGETARCH
 
 COPY install-rust.sh ./
 
@@ -54,10 +52,10 @@ RUN apt-get install -y --no-install-recommends \
   && ./install-rust.sh \
   && pip3 install meson setuptools
 
-COPY versions.sh build-deps.sh build-bash-profile.sh *.patch meson_${TARGET_ARCH}.ini ./
+COPY versions.sh build-deps.sh build-bash-profile.sh *.patch meson_${TARGETARCH}.ini ./
 COPY --from=deps-src /root/deps /root/deps
 
-# We need environment variables that based on the TARGET_ARCH,
+# We need environment variables that based on the TARGETARCH,
 # so we have to use a Bash profile instead of ENV
 RUN ./build-bash-profile.sh > /root/.bashrc
 ENV BASH_ENV=/root/.bashrc
@@ -66,10 +64,10 @@ RUN ./build-deps.sh
 
 # ==============================================================================
 
-FROM --platform=${TARGET_ARCH} debian:bullseye-slim AS final
+FROM --platform=${TARGETPLATFORM} debian:bullseye-slim AS final
 LABEL maintainer="Sergey Alexandrovich <darthsim@gmail.com>"
 
-ARG TARGET_ARCH
+ARG TARGETARCH
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \

@@ -1,7 +1,14 @@
 steps:
 - id: 'docker_amd64'
   name: 'docker'
-  args: ['build', '-t', 'darthsim/imgproxy-base:${TAG_NAME}-amd64', '.']
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |
+      docker build \
+        -t darthsim/imgproxy-base:$TAG_NAME-amd64 \
+        --platform=linux/amd64 \
+        .
   env:
     - DOCKER_BUILDKIT=1
   waitFor: ['-']
@@ -14,8 +21,8 @@ steps:
     - |
       docker run --rm --privileged multiarch/qemu-user-static --reset -p yes \
       && docker build \
-        --build-arg TARGET_ARCH=arm64 \
-        -t darthsim/imgproxy-base:${TAG_NAME}-arm64 \
+        -t darthsim/imgproxy-base:$TAG_NAME-arm64 \
+        --platform=linux/arm64/v8 \
         .
   env:
     - DOCKER_BUILDKIT=1

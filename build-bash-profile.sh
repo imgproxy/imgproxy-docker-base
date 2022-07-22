@@ -2,7 +2,7 @@
 
 set -e
 
-case "$TARGET_ARCH" in
+case "$TARGETARCH" in
 
   amd64)
     ARCH="x86_64"
@@ -13,12 +13,12 @@ case "$TARGET_ARCH" in
     ;;
 
   *)
-    echo "Unknows arch: $TAGGET_ARCH"
+    echo "Unknows arch: $TARGETARCH"
     exit 1
 esac
 
 ARM_ENV=""
-if [ "$TARGET_ARCH" = "arm64" ]; then
+if [ "$TARGETARCH" = "arm64" ]; then
   ARM_ENV=$(cat << EOF
 export CFLAGS="-march=armv8.2-a+fp16+rcpc+dotprod+crypto -mtune=neoverse-n1"
 export AOM_FLAGS="-DCMAKE_TOOLCHAIN_FILE=../build/cmake/toolchains/arm64-linux-gcc.cmake"
@@ -47,7 +47,7 @@ export CMAKE_C_COMPILER=\$CC
 export CMAKE_CXX_COMPILER=\$CXX
 export CMAKE_C_FLAGS=\$CFLAGS
 export CMAKE_CXX_FLAGS=\$CFLAGS
-export MESON_CROSS_CONFIG="--cross-file=/root/meson_$TARGET_ARCH.ini"
+export MESON_CROSS_CONFIG="--cross-file=/root/meson_$TARGETARCH.ini"
 export CARGO_TARGET="$ARCH-unknown-linux-gnu"
 export CARGO_CROSS_CONFIG='[target.$ARCH-unknown-linux-gnu]\nlinker = "$ARCH-linux-gnu-gcc"'
 EOF
