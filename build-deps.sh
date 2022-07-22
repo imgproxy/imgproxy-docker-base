@@ -37,8 +37,6 @@ cd $DEPS_SRC/quantizr
 mkdir .cargo
 echo -e $CARGO_CROSS_CONFIG > .cargo/config
 cargo cinstall --release --library-type=cdylib --target=$CARGO_TARGET
-cp /usr/local/lib/pkgconfig/quantizr.pc /usr/local/lib/pkgconfig/imagequant.pc
-cp /usr/local/include/quantizr/quantizr.h /usr/local/include/quantizr/libimagequant.h
 
 print_build_stage expat $LIBEXPAT_VERSION
 cd $DEPS_SRC/expat
@@ -366,21 +364,16 @@ make install-strip
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
-# Fix failing on too many text chunks in PNGs
-patch -p1 < /root/libvips-png-dont-fail-on-text-chunks.patch
-# Fix loading of some GIFs
-sed -i 's/(res == LZW_OK_EOD)/(res == LZW_OK_EOD || res == LZW_EOI_CODE)/' libvips/foreign/libnsgif/libnsgif.c
-./configure \
-  --build=$BUILD \
-  --host=$HOST \
+meson setup _build \
+  --buildtype=release \
+  --strip \
   --prefix=/usr/local \
-  --without-python \
-  --without-OpenEXR \
-  --enable-debug=no \
-  --disable-static \
-  --disable-introspection \
-  --enable-silent-rules
-make install-strip
+  --libdir=lib \
+  -Dgtk_doc=false \
+  -Dintrospection=false \
+  ${MESON_CROSS_CONFIG}
+ninja -C _build
+ninja -C _build install
 rm -rf /usr/local/lib/libvips-cpp.*
 
 rm -rf /usr/local/lib/*.a

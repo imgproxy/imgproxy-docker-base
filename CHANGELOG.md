@@ -1,6 +1,17 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Update Go to 1.18.4.
+- Update GLib to 2.73.2.
+- Update Quantizr to 1.3.0.
+- Update libwebp to 1.2.3.
+- Update libtiff to 4.4.0.
+- Update aom to 3.4.0.
+- Update harfbuzz to 4.4.1.
+- Update pango to 1.50.8.
+- Update librsvg to 2.54.4.
+- Update vips to 8.13.0.
 
 ## [3.2.4] - 2022-05-20
 ### Fix
