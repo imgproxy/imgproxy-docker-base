@@ -351,6 +351,7 @@ sed -i'.bak' "s/^\(Requires:.*\)/\1 cairo-gobject pangocairo/" librsvg.pc.in
 sed -i'.bak' "s/, \"rlib\"//" Cargo.toml
 # Skip executables
 sed -i'.bak' "/SCRIPTS = /d" Makefile.in
+RUST_TARGET=$CARGO_TARGET \
 ./configure \
   --build=$BUILD \
   --host=$HOST \
