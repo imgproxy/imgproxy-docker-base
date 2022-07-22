@@ -12,6 +12,7 @@
 - Update pango to 1.50.8.
 - Update librsvg to 2.54.4.
 - Update vips to 8.13.0.
+- Patch libheif.
 
 ## [3.2.4] - 2022-05-20
 ### Fix
