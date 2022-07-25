@@ -70,6 +70,12 @@ cd $DEPS_SRC/libpng
 curl -Ls https://sourceforge.net/projects/libpng/files/libpng16/$LIBPNG_VERSION/libpng-$LIBPNG_VERSION.tar.gz/download \
   | tar -xzC . --strip-components=1
 
+print_download_stage libspng $LIBSPNG_VERSION
+mkdir $DEPS_SRC/libspng
+cd $DEPS_SRC/libspng
+curl -Ls https://github.com/randy408/libspng/archive/refs/tags/v$LIBSPNG_VERSION.tar.gz \
+  | tar -xzC . --strip-components=1
+
 print_download_stage libwebp $LIBWEBP_VERSION
 mkdir $DEPS_SRC/libwebp
 cd $DEPS_SRC/libwebp

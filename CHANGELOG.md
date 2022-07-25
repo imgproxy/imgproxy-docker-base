@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Add
+- Add libspng 0.7.2.
+
 ### Changed
 - Update Go to 1.18.4.
 - Update GLib to 2.73.2.
