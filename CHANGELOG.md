@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.3.0] - 2022-07-25
 ### Add
 - Add libspng 0.7.2.
 
