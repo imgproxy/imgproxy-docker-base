@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Patch libvips to speed up GIF loading.
 
 ## [3.3.0] - 2022-07-25
 ### Add
