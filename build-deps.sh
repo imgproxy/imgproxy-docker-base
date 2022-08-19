@@ -284,6 +284,12 @@ meson setup _build \
   --strip \
   --prefix=/usr/local \
   --libdir=lib \
+  -Dgobject=disabled \
+  -Dicu=disabled \
+  -Dtests=disabled \
+  -Dintrospection=disabled \
+  -Ddocs=disabled \
+  -Dbenchmark=disabled \
   ${MESON_CROSS_CONFIG}
 ninja -C _build
 ninja -C _build install
