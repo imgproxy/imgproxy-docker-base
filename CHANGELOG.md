@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 ### Changed
+- Update Go to 1.19.
+- Update GLib to 2.73.3.
+- Update Quantizr to 1.4.1.
+- Update libxml2 to 2.10.0.
+- Update libjpegturbo to 2.1.4.
+- Update libwebp to 1.2.4.
+- Update gdkpixbuf to 2.42.9.
+- Update harfbuzz to 5.1.0.
+- Update pango to 1.50.9.
+- Update librsvg to 2.55.0.
 - Patch libvips to speed up GIF loading.
 
 ## [3.3.0] - 2022-07-25
