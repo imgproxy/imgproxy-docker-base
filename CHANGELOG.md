@@ -1,6 +1,17 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Update Go to 1.19.2.
+- Update GLib to 2.74.0.
+- Update libexpat to 2.4.9.
+- Update libxml2 to 2.10.2.
+- Update aom to 3.5.0.
+- Update libheif to 1.13.0.
+- Update harfbuzz to 5.2.0.
+- Update pango to 1.50.11.
+- Update librsvg to 2.55.1.
+- Update vips to 8.13.2.
 
 ## [3.3.1] - 2022-08-19
 ### Changed
