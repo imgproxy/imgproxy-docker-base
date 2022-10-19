@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Update libxml2 to 2.10.3.
+- Update harfbuzz to 5.3.0.
+- Update pixman to 0.42.0.
+
 ### Fix
 - Patch libvips to fix saving of paletted PNGs with low bit-depth.
 
