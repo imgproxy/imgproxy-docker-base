@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.3.3] - 2022-10-19
 ### Changed
 - Update libxml2 to 2.10.3.
 - Update harfbuzz to 5.3.0.
