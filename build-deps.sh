@@ -383,6 +383,8 @@ print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
 # Fix tile-height in `vips_nsgifload`
 curl -Ls https://github.com/DarthSim/libvips/commit/5a97b130fe48e4954531e71e620f82ce9454797e.patch | git apply -
+# Fix saving of paletted PNGs with low bitdepth
+curl -Ls https://github.com/libvips/libvips/commit/51b657b01cb4656db5e9b111b032bd6ccbdf9556.patch | git apply -
 meson setup _build \
   --buildtype=release \
   --strip \

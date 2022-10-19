@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Fix
+- Patch libvips to fix saving of paletted PNGs with low bit-depth.
 
 ## [3.3.2] - 2022-10-06
 ### Changed
