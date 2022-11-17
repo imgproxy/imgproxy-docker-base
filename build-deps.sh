@@ -211,7 +211,6 @@ cmake \
   -DENABLE_EXAMPLES=0 \
   -DCONFIG_AV1_HIGHBITDEPTH=0 \
   -DCONFIG_WEBM_IO=0 \
-  -DCONFIG_AV1_DECODER=0 \
   ..
 make
 make install
