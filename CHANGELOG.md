@@ -1,6 +1,18 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Update Go to 1.19.3.
+- Update GLib to 2.75.0.
+- Update libexpat to 2.5.0.
+- Update lcms2 to 2.14.
+- Update libde265 to 1.0.9.
+- Update libheif to 1.14.0.
+- Update gdkpixbuf to 2.42.10.
+- Update fontconfig to 2.14.1.
+- Update harfbuzz to 5.3.1.
+- Update pixman to 0.42.2.
+- Update vips to 8.13.3.
 
 ## [3.3.3] - 2022-10-19
 ### Changed
