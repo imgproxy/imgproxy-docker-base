@@ -380,8 +380,6 @@ make install-strip
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
-# Fix tile-height in `vips_nsgifload`
-curl -Ls https://github.com/DarthSim/libvips/commit/5a97b130fe48e4954531e71e620f82ce9454797e.patch | git apply -
 meson setup _build \
   --buildtype=release \
   --strip \

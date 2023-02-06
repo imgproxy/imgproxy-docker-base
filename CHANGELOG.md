@@ -1,6 +1,21 @@
 # Changelog
 
 ## [Unreleased]
+### Changed                                                                                          (base) 18:48:39
+- Update Go to 1.20.
+- Update GLib to 2.75.2.
+- Update libjpegturbo to 2.1.90.
+- Update libspng to 0.7.3.
+- Update libwebp to 1.3.0.
+- Update libtiff to 4.5.0.
+- Update libde265 to 1.0.11.
+- Update libheif to 1.14.2.
+- Update fontconfig to 2.14.2.
+- Update harfbuzz to 6.0.0.
+- Update cairo to 1.17.8.
+- Update pango to 1.50.12.
+- Update librsvg to 2.55.90.
+- Update vips to 8.14.1.
 
 ## [3.3.4] - 2022-11-17
 ### Changed
