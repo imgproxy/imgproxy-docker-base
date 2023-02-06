@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.3.5] - 2023-02-06
 ### Changed                                                                                          (base) 18:48:39
 - Update Go to 1.20.
 - Update GLib to 2.75.2.
