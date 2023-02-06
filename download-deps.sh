@@ -187,5 +187,5 @@ curl -Lks https://download.gnome.org/sources/librsvg/$(minor_version $LIBRSVG_VE
 print_download_stage vips $VIPS_VERSION
 mkdir $DEPS_SRC/vips
 cd $DEPS_SRC/vips
-curl -Ls https://github.com/libvips/libvips/releases/download/v$VIPS_VERSION/vips-$VIPS_VERSION.tar.gz \
-  | tar -xzC . --strip-components=1
+curl -Ls https://github.com/libvips/libvips/releases/download/v$VIPS_VERSION/vips-$VIPS_VERSION.tar.xz \
+  | tar -xJC . --strip-components=1
