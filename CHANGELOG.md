@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.4.0] - 2023-05-16
 ### Add
 - Add orc 0.4.33.
 
