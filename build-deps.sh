@@ -76,14 +76,15 @@ cd $DEPS_SRC/libxml2
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking \
+  --with-minimum \
+  --with-reader \
+  --with-writer \
+  --with-valid \
+  --with-http \
+  --with-tree \
+  --with-zlib \
   --without-python \
-  --without-debug \
-  --without-docbook \
-  --without-ftp \
-  --without-html \
-  --without-legacy \
-  --without-push \
-  --without-schematron
+  --without-lzma
 make install-strip
 
 print_build_stage libexif $LIBEXIF_VERSION
