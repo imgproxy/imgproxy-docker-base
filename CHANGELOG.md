@@ -23,6 +23,9 @@
 - Update librsvg to 2.56.0.
 - Update vips to 8.14.2.
 
+### Removed
+- Remove libcroco.
+
 ## [3.3.5] - 2023-02-06
 ### Changed
 - Update Go to 1.20.

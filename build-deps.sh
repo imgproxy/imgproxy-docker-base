@@ -366,17 +366,6 @@ meson setup _build \
 ninja -C _build
 ninja -C _build install
 
-print_build_stage libcroco $LIBCROCO_VERSION
-cd $DEPS_SRC/libcroco
-./configure \
-  --build=$BUILD \
-  --host=$HOST \
-  --prefix=/usr/local \
-  --enable-shared \
-  --disable-static \
-  --disable-dependency-tracking
-make install-strip
-
 print_build_stage librsvg $LIBRSVG_VERSION
 cd $DEPS_SRC/librsvg
 sed -i'.bak' "s/^\(Requires:.*\)/\1 cairo-gobject pangocairo/" librsvg.pc.in

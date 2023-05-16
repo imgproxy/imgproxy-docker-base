@@ -178,12 +178,6 @@ cd $DEPS_SRC/pango
 curl -Lks https://download.gnome.org/sources/pango/$(minor_version $PANGO_VERSION)/pango-${PANGO_VERSION}.tar.xz \
   | tar -xJC . --strip-components=1
 
-print_download_stage libcroco $LIBCROCO_VERSION
-mkdir $DEPS_SRC/libcroco
-cd $DEPS_SRC/libcroco
-curl -Ls https://download.gnome.org/sources/libcroco/$(minor_version $LIBCROCO_VERSION)/libcroco-$LIBCROCO_VERSION.tar.xz \
-  | tar -xJC . --strip-components=1
-
 print_download_stage librsvg $LIBRSVG_VERSION
 mkdir $DEPS_SRC/librsvg
 cd $DEPS_SRC/librsvg
