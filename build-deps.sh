@@ -82,6 +82,7 @@ cd $DEPS_SRC/libxml2
   --with-valid \
   --with-http \
   --with-tree \
+  --with-xpath \
   --with-zlib \
   --without-python \
   --without-lzma
