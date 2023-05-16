@@ -40,6 +40,7 @@ check_version_github() {
 
 check_version "GOLANG" $GOLANG_VERSION "1227"
 check_version "GLIB" $GLIB_VERSION "10024"
+check_version "ORC" "$ORC_VERSION" "2573"
 check_version_github "QUANTIZR" $QUANTIZR_VERSION "Darthsim/quantizr"
 check_version "LIBEXPAT" $LIBEXPAT_VERSION "770"
 check_version "LIBXML2" $LIBXML2_VERSION "1783"

@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Add
+- Add orc 0.4.33.
+
 ### Changed
 - Update Go to 1.20.4.
 - Update GLib to 2.76.2.
