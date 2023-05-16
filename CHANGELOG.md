@@ -1,9 +1,25 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Update Go to 1.20.4.
+- Update GLib to 2.76.2.
+- Update libxml2 to 2.11.3.
+- Update lcms2 to 2.15.
+- Update libjpegturbo to 2.1.91.
+- Update libspng to 0.7.4.
+- Update cgif to 0.3.1.
+- Update dav1d to 1.2.0.
+- Update aom to 3.6.1.
+- Update libheif to 1.16.1.
+- Update freetype to 2.13.0.
+- Update harfbuzz to 7.3.0.
+- Update pango to 1.50.14.
+- Update librsvg to 2.56.0.
+- Update vips to 8.14.2.
 
 ## [3.3.5] - 2023-02-06
-### Changed                                                                                          (base) 18:48:39
+### Changed
 - Update Go to 1.20.
 - Update GLib to 2.75.2.
 - Update libjpegturbo to 2.1.90.
