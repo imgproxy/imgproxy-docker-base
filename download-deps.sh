@@ -139,8 +139,8 @@ curl -Lks https://download.gnome.org/sources/gdk-pixbuf/$(minor_version $GDKPIXB
 print_download_stage freetype $FREETYPE_VERSION
 mkdir $DEPS_SRC/freetype
 cd $DEPS_SRC/freetype
-curl -Ls https://download.savannah.gnu.org/releases/freetype/freetype-${FREETYPE_VERSION}.tar.xz \
-  | tar -xJC . --strip-components=1
+curl -Ls https://gitlab.freedesktop.org/freetype/freetype/-/archive/VER-${FREETYPE_VERSION//./-}/freetype-VER-${FREETYPE_VERSION//./-}.tar.bz2 \
+  | tar -xjC . --strip-components=1
 
 print_download_stage fontconfig $FONTCONFIG_VERSION
 mkdir $DEPS_SRC/fontconfig

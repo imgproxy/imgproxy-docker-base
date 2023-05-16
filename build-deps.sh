@@ -266,15 +266,19 @@ rm -rf /usr/local/lib/gdk-pixbuf-2.0
 
 print_build_stage freetype $FREETYPE_VERSION
 cd $DEPS_SRC/freetype
-./configure \
-  --build=$BUILD \
-  --host=$HOST \
+meson setup _build \
+  --buildtype=release \
+  --strip \
   --prefix=/usr/local \
-  --enable-shared \
-  --disable-static \
-  --disable-dependency-tracking \
-  --without-bzip2
-make install
+  --libdir=lib \
+  ${MESON_CROSS_CONFIG} \
+  -Dzlib=enabled \
+  -Dpng=disabled \
+  -Dharfbuzz=disabled \
+  -Dbrotli=disabled \
+  -Dbzip2=disabled
+ninja -C _build
+ninja -C _build install
 
 print_build_stage fontconfig $FONTCONFIG_VERSION
 cd $DEPS_SRC/fontconfig
