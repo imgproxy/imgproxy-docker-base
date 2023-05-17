@@ -13,8 +13,6 @@ RUN dpkg --add-architecture ${TARGETARCH} \
     pkg-config \
     libssl-dev \
     libstdc++6:${TARGETARCH} \
-    libffi-dev:${TARGETARCH} \
-    zlib1g-dev:${TARGETARCH} \
     liblzma-dev:${TARGETARCH} \
     libzstd-dev:${TARGETARCH} \
     libpcre3-dev:${TARGETARCH}
@@ -79,8 +77,6 @@ RUN apt-get update \
     pkg-config \
     libssl-dev \
     libstdc++6 \
-    libffi-dev \
-    zlib1g-dev \
     liblzma-dev \
     libzstd-dev \
     libpcre3-dev

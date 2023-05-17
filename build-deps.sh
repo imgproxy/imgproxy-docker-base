@@ -20,6 +20,32 @@ CARGO_TARGET=${CARGO_TARGET:-"x86_64-unknown-linux-gnu"}
 export CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1
 export CARGO_PROFILE_RELEASE_LTO=true
 
+print_build_stage zlib $ZLIB_VERSION
+cd $DEPS_SRC/zlib
+cmake \
+  -G"Unix Makefiles" \
+  -DCMAKE_SYSTEM_NAME=Linux \
+  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
+  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DBUILD_SHARED_LIBS=TRUE \
+  -DZLIB_COMPAT=TRUE
+make install/strip
+
+print_build_stage ffi $FFI_VERSION
+cd $DEPS_SRC/ffi
+./configure \
+  --build=$BUILD \
+  --host=$HOST \
+  --prefix=/usr/local \
+  --enable-shared \
+  --disable-static \
+  --disable-dependency-tracking \
+  --disable-builddir \
+  --disable-multi-os-directory \
+  --disable-raw-api
+make install-strip
+
 print_build_stage glib $GLIB_VERSION
 cd $DEPS_SRC/glib
 meson setup _build \

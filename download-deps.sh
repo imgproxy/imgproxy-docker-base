@@ -22,6 +22,18 @@ minor_version() {
 DEPS_SRC=/root/deps
 mkdir -p $DEPS_SRC
 
+print_download_stage zlib $ZLIB_VERSION
+mkdir $DEPS_SRC/zlib
+cd $DEPS_SRC/zlib
+curl -Lks https://github.com/zlib-ng/zlib-ng/archive/${ZLIB_VERSION}.tar.gz \
+  | tar -xzC . --strip-components=1
+
+print_download_stage ffi $FFI_VERSION
+mkdir $DEPS_SRC/ffi
+cd $DEPS_SRC/ffi
+curl -Lks https://github.com/libffi/libffi/releases/download/v${FFI_VERSION}/libffi-${FFI_VERSION}.tar.gz \
+  | tar -xzC . --strip-components=1
+
 print_download_stage glib $GLIB_VERSION
 mkdir $DEPS_SRC/glib
 cd $DEPS_SRC/glib
