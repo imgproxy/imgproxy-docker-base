@@ -5,6 +5,9 @@
 - Add zlib-ng 2.0.7.
 - Add ffi 3.4.4.
 
+### Changed
+- Update fribidi to 1.0.13.
+
 ## [3.4.0] - 2023-05-16
 ### Add
 - Add orc 0.4.33.
