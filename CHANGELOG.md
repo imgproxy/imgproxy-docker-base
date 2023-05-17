@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.5.0] - 2023-05-17
 ### Add
 - Add zlib-ng 2.0.7.
 - Add ffi 3.4.4.
