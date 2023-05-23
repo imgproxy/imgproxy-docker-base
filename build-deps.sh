@@ -22,6 +22,7 @@ export CARGO_PROFILE_RELEASE_LTO=true
 
 print_build_stage zlib $ZLIB_VERSION
 cd $DEPS_SRC/zlib
+CFLAGS="${CFLAGS} -O3" \
 cmake \
   -G"Unix Makefiles" \
   -DCMAKE_SYSTEM_NAME=Linux \
@@ -128,6 +129,7 @@ make install-strip
 
 print_build_stage lcms2 $LCMS2_VERSION
 cd $DEPS_SRC/lcms2
+CFLAGS="${CFLAGS} -O3" \
 ./configure \
   --build=$BUILD \
   --host=$HOST \
@@ -164,6 +166,7 @@ make install-strip
 
 print_build_stage libspng $LIBSPNG_VERSION
 cd $DEPS_SRC/libspng
+CFLAGS="${CFLAGS} -O3 -DSPNG_SSE=4" \
 meson setup _build \
   --buildtype=release \
   --strip \
@@ -201,6 +204,7 @@ make install
 
 print_build_stage cgif $CGIF_VERSION
 cd $DEPS_SRC/cgif
+CFLAGS="${CFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
   --strip \
@@ -264,6 +268,7 @@ print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
 mkdir _build
 cd _build
+CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 cmake \
   -G"Unix Makefiles" \
   -DCMAKE_SYSTEM_NAME=Linux \
@@ -418,6 +423,7 @@ make install-strip
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
+CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
   --strip \

@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Change
+- Set optimization flags for some libraries.
 
 ## [3.5.0] - 2023-05-17
 ### Add
