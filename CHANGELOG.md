@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.6.0] - 2023-07-28
 ### Add
 - Add libyuv.
 
