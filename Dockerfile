@@ -40,7 +40,6 @@ RUN apt-get install -y --no-install-recommends \
     automake \
     cmake \
     nasm \
-    yasm \
     libtool \
     ninja-build \
     python3-pip \
