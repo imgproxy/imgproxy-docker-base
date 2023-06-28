@@ -5,6 +5,17 @@
 - Add libyuv.
 
 ### Change
+- Update Go to 1.20.5.
+- Update zlib to 2.1.2.
+- Update GLib to 2.76.3.
+- Update libxml2 to 2.11.4.
+- Update libtiff to 4.5.1.
+- Update cgif to 0.3.2.
+- Update libde265 to 1.0.12.
+- Update dav1d to 1.2.1.
+- Update libheif to 1.16.2.
+- Update freetype to 2.13.1.
+- Update librsvg to 2.56.1.
 - Add SIMD optimizations to vips.
 - Patch libheif to support libyuv.
 
