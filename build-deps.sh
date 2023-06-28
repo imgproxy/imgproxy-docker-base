@@ -247,8 +247,8 @@ cmake \
 make
 make install
 
-print_build_stage libheif $LIBHEIF_VERSION
-cd $DEPS_SRC/libheif
+print_build_stage libyuv $LIBYUV_SHA
+cd $DEPS_SRC/libyuv
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
@@ -257,6 +257,28 @@ cmake \
   -DCMAKE_SYSTEM_NAME=Linux \
   -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DBUILD_SHARED_LIBS=1 \
+  ..
+make
+make install
+
+print_build_stage libheif $LIBHEIF_VERSION
+cd $DEPS_SRC/libheif
+# Fix possible memory leak
+curl -Ls https://github.com/strukturag/libheif/commit/9f9e084608f4fd38fe6abac85d97a5c7316d44c9.patch | git apply
+# libyuv support
+curl -Ls https://github.com/DarthSim/libheif/commit/cf4e086f1872b54123ac96efb02a3fdcfbf800fe.patch | git apply
+# Set default threads to 1 (works better for highly loaded apps)
+sed -i "s/p->integer.default_value = 4/p->integer.default_value = 1/" libheif/plugins/encoder_aom.cc
+mkdir _build
+cd _build
+CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
+cmake \
+  -G"Unix Makefiles" \
+  -DCMAKE_SYSTEM_NAME=Linux \
+  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
+  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  --preset=release-noplugins \
   -DBUILD_SHARED_LIBS=1 \
   -DWITH_EXAMPLES=0 \
   ..

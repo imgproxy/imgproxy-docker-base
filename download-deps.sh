@@ -130,6 +130,12 @@ cd $DEPS_SRC/aom
 curl -Ls https://storage.googleapis.com/aom-releases/libaom-${AOM_VERSION}.tar.gz \
   | tar -xzC . --strip-components=1
 
+print_download_stage libyuv $LIBYUV_SHA
+mkdir $DEPS_SRC/libyuv
+cd $DEPS_SRC/libyuv
+curl -Ls https://chromium.googlesource.com/libyuv/libyuv/+archive/${LIBYUV_SHA}.tar.gz \
+  | tar -xzC .
+
 print_download_stage libheif $LIBHEIF_VERSION
 mkdir $DEPS_SRC/libheif
 cd $DEPS_SRC/libheif

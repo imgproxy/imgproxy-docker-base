@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### Add
+- Add libyuv.
+
+### Change
+- Patch libheif to support libyuv.
+
 ### Removed
 - Removed orc.
 
