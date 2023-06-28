@@ -228,9 +228,9 @@ print_build_stage aom $AOM_VERSION
 cd $DEPS_SRC/aom
 mkdir _build
 cd _build
+AOM_AS_FLAGS=#{CFLAGS} \
 cmake \
   -G"Unix Makefiles" \
-  $AOM_FLAGS \
   -DCMAKE_SYSTEM_NAME=Linux \
   -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
