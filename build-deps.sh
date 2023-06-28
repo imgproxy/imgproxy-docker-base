@@ -434,6 +434,26 @@ make install-strip
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
+# Speedup premultiply/unpremutiply a bit
+curl -Ls https://github.com/libvips/libvips/commit/7eba4ee43fdd0098b7f717d9a5d09a5a7fe6b073.patch | git apply
+# Copyless vips_jpegload_buffer
+curl -Ls https://github.com/libvips/libvips/commit/e08190f7efa1c510a3e774af2c1dd277076fd152.patch | git apply
+curl -Ls https://github.com/libvips/libvips/commit/db1eec430c124d3b0573ee2208246565022e1c36.patch | git apply
+# Scan multiple lines at once in jpegload
+curl -Ls https://github.com/DarthSim/libvips/commit/479058fbc904abaea6920f7004972e711823cca6.patch | git apply
+# Optimize webpsave
+curl -Ls https://github.com/DarthSim/libvips/commit/1fa9c41a6c2eb73179abd1ee57babc34a28887bb.patch | git apply
+# Change introspection option to feature type (can't apply further patches without this)
+curl -Ls https://github.com/libvips/libvips/commit/c0a0630c6bc10420766a6f83adcdd02330fa859d.patch | git apply --exclude=README.md
+# Fix signed_fixed_round( 0 )
+curl -Ls https://github.com/libvips/libvips/commit/0df1fc51a9cc2a61777d8fba97189f5ceee68511.patch | git apply
+# int64_t intermediate for int/uint redice(v/h)
+curl -Ls https://github.com/libvips/libvips/commit/8550ae110ba61e69648d9c5313e1686114cb1b06.patch | git apply
+# SIMD optimizations for convi, reducev, and reduceh
+curl -Ls https://github.com/DarthSim/libvips/commit/379c653137189db3bf13fdfa5587ce5ece404e92.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/e93002de01a00b2ef7ee053c3396486efa3cc14c.patch | git apply
+# reduce(v/h) without embed
+curl -Ls https://github.com/DarthSim/libvips/commit/e5b87b039f6d7250273c684072a3df9bcbe30c97.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
@@ -441,7 +461,9 @@ meson setup _build \
   --prefix=/usr/local \
   --libdir=lib \
   -Dgtk_doc=false \
-  -Dintrospection=false \
+  -Dintrospection=disabled \
+  -Dmodules=disabled \
+  -Dsimd=true \
   ${MESON_CROSS_CONFIG}
 ninja -C _build
 ninja -C _build install

@@ -5,6 +5,7 @@
 - Add libyuv.
 
 ### Change
+- Add SIMD optimizations to vips.
 - Patch libheif to support libyuv.
 
 ### Removed
