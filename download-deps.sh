@@ -40,12 +40,6 @@ cd $DEPS_SRC/glib
 curl -Lks https://download.gnome.org/sources/glib/$(minor_version $GLIB_VERSION)/glib-${GLIB_VERSION}.tar.xz \
   | tar -xJC . --strip-components=1
 
-print_download_stage orc $ORC_VERSION
-mkdir $DEPS_SRC/orc
-cd $DEPS_SRC/orc
-curl -Lks https://gstreamer.freedesktop.org/data/src/orc/orc-${ORC_VERSION}.tar.xz \
-  | tar -xJC . --strip-components=1
-
 print_download_stage quantizr $QUANTIZR_VERSION
 mkdir $DEPS_SRC/quantizr
 cd $DEPS_SRC/quantizr

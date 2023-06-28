@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Removed
+- Removed orc.
 
 ## [3.5.1] - 2023-05-23
 ### Change

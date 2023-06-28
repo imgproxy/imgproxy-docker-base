@@ -59,23 +59,6 @@ meson setup _build \
 ninja -C _build
 ninja -C _build install
 
-print_build_stage orc $ORC_VERSION
-cd $DEPS_SRC/orc
-meson setup _build \
-  --buildtype=release \
-  --strip \
-  --prefix=/usr/local \
-  --libdir=lib \
-  ${MESON_CROSS_CONFIG} \
-  -Dorc-test=disabled \
-  -Dbenchmarks=disabled \
-  -Dexamples=disabled \
-  -Dgtk_doc=disabled \
-  -Dtests=disabled \
-  -Dtools=disabled
-ninja -C _build
-ninja -C _build install
-
 print_build_stage quantizr $QUANTIZR_VERSION
 cd $DEPS_SRC/quantizr
 mkdir .cargo
