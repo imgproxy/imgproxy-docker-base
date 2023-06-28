@@ -180,8 +180,12 @@ cmake \
   -DCMAKE_SYSTEM_NAME=Linux \
   -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
-  -DENABLE_SHARED=TRUE \
-  -DENABLE_STATIC=FALSE \
+  -DBUILD_SHARED_LIBS=TRUE \
+  -Dtiff-tools=FALSE \
+  -Dtiff-tests=FALSE \
+  -Dtiff-contrib=FALSE \
+  -Dtiff-docs=FALSE \
+  -Dtiff-deprecated=FALSE \
   .
 make
 make install
@@ -298,7 +302,8 @@ meson setup _build \
   -Dinstalled_tests=false \
   -Dgio_sniffing=false \
   -Dman=false \
-  -Dbuiltin_loaders=png,jpeg,tiff
+  -Dtiff=disabled \
+  -Dbuiltin_loaders=png,jpeg
 ninja -C _build
 ninja -C _build install
 rm -rf /usr/local/lib/gdk-pixbuf-2.0
