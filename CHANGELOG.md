@@ -1,6 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+### Change
+- Update Go to 1.20.6.
+- Update zlib to 2.1.3.
+- Update GLib to 2.77.0.
+- Update libjpegturbo to 3.0.0.
+- Update libwebp to 1.3.1.
+- Update harfbuzz to 8.0.0.
+- Update librsvg to 2.56.90.
+
 ### Fix
 - Fix SIMD-optimized methods in vips.
 
