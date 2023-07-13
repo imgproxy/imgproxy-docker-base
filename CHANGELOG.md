@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.6.1] - 2023-07-13
 ### Change
 - Update Go to 1.20.6.
 - Update zlib to 2.1.3.
@@ -13,7 +15,7 @@
 ### Fix
 - Fix SIMD-optimized methods in vips.
 
-## [3.6.0] - 2023-07-28
+## [3.6.0] - 2023-06-28
 ### Add
 - Add libyuv.
 
