@@ -450,10 +450,10 @@ curl -Ls https://github.com/libvips/libvips/commit/0df1fc51a9cc2a61777d8fba97189
 # int64_t intermediate for int/uint redice(v/h)
 curl -Ls https://github.com/libvips/libvips/commit/8550ae110ba61e69648d9c5313e1686114cb1b06.patch | git apply
 # SIMD optimizations for convi, reducev, and reduceh
-curl -Ls https://github.com/DarthSim/libvips/commit/379c653137189db3bf13fdfa5587ce5ece404e92.patch | git apply
-curl -Ls https://github.com/DarthSim/libvips/commit/e93002de01a00b2ef7ee053c3396486efa3cc14c.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/603f8fa04ca90982eadcaa108b0eaced6c2e9bd1.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/3ddf2cc743b265adfb041798767ba2f803986011.patch | git apply
 # reduce(v/h) without embed
-curl -Ls https://github.com/DarthSim/libvips/commit/e5b87b039f6d7250273c684072a3df9bcbe30c97.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/bcc22de57b1c20bb3bef1c56ec2b9e5903d44b22.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \

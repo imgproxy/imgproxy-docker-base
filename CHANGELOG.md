@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Fix
+- Fix SIMD-optimized methods in vips.
 
 ## [3.6.0] - 2023-07-28
 ### Add
