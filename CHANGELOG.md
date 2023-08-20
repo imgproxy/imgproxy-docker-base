@@ -1,6 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+### Change
+- Update Go to 1.21.0.
+- Update GLib to 2.77.2.
+- Update libxml2 to 2.11.5.
+- Update harfbuzz to 8.1.1.
+- Update pango to 1.51.0.
+- Update librsvg to 2.56.92.
+- Update vips to 8.14.4.
 
 ## [3.6.1] - 2023-07-13
 ### Change

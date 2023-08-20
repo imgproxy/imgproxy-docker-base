@@ -405,6 +405,7 @@ meson setup _build \
   --libdir=lib \
   -Dgtk_doc=false \
   -Dintrospection=disabled \
+  -Dfontconfig=enabled \
   ${MESON_CROSS_CONFIG}
 ninja -C _build
 ninja -C _build install
