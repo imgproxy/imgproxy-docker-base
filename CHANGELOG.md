@@ -9,6 +9,7 @@
 - Update pango to 1.51.0.
 - Update librsvg to 2.56.92.
 - Update vips to 8.14.4.
+- Update vips patches.
 
 ## [3.6.1] - 2023-07-13
 ### Change

@@ -436,25 +436,26 @@ make install-strip
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
 # Speedup premultiply/unpremutiply a bit
-curl -Ls https://github.com/libvips/libvips/commit/7eba4ee43fdd0098b7f717d9a5d09a5a7fe6b073.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/f1f08552f4004e8a32cf1538651e4c17ad51523a.patch | git apply
 # Copyless vips_jpegload_buffer
-curl -Ls https://github.com/libvips/libvips/commit/e08190f7efa1c510a3e774af2c1dd277076fd152.patch | git apply
-curl -Ls https://github.com/libvips/libvips/commit/db1eec430c124d3b0573ee2208246565022e1c36.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/fa0bf99fc00625b3cb192055a4da8b3e9c494ba3.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/c5cc788d215177021ab2496c58bc36d993c28e43.patch | git apply
 # Scan multiple lines at once in jpegload
-curl -Ls https://github.com/DarthSim/libvips/commit/479058fbc904abaea6920f7004972e711823cca6.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/389127b463d1ec628995fcf0ee0f3e4e02a8813a.patch | git apply
 # Optimize webpsave
-curl -Ls https://github.com/DarthSim/libvips/commit/1fa9c41a6c2eb73179abd1ee57babc34a28887bb.patch | git apply
-# Change introspection option to feature type (can't apply further patches without this)
-curl -Ls https://github.com/libvips/libvips/commit/c0a0630c6bc10420766a6f83adcdd02330fa859d.patch | git apply --exclude=README.md
+curl -Ls https://github.com/DarthSim/libvips/commit/5ce91bcb309587cc2a18c3ac00ad4b60c8404a8a.patch | git apply
 # Fix signed_fixed_round( 0 )
-curl -Ls https://github.com/libvips/libvips/commit/0df1fc51a9cc2a61777d8fba97189f5ceee68511.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/e5843ecedfd729568bc97de257891b668e530511.patch | git apply
 # int64_t intermediate for int/uint redice(v/h)
-curl -Ls https://github.com/libvips/libvips/commit/8550ae110ba61e69648d9c5313e1686114cb1b06.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/47c789041ddfadb7355c9cbd2a899c12b23b6399.patch | git apply
+# Aligned image buffers
+curl -Ls https://github.com/DarthSim/libvips/commit/800a1d92abf4081ea9ce0cacd0bd5ab729c7a111.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/48789206a3e9c83110dee31b3451db2d7ccba12b.patch | git apply
 # SIMD optimizations for convi, reducev, and reduceh
-curl -Ls https://github.com/DarthSim/libvips/commit/603f8fa04ca90982eadcaa108b0eaced6c2e9bd1.patch | git apply
-curl -Ls https://github.com/DarthSim/libvips/commit/3ddf2cc743b265adfb041798767ba2f803986011.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/4bf1efdf26a2df1d5573172f8fd3be0074fd76e8.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/3065889762f4c76213de179f7c5a429c6e1cf420.patch | git apply
 # reduce(v/h) without embed
-curl -Ls https://github.com/DarthSim/libvips/commit/bcc22de57b1c20bb3bef1c56ec2b9e5903d44b22.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/338920bb8e644800ba17f9def78b0edbab207864.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
@@ -462,7 +463,7 @@ meson setup _build \
   --prefix=/usr/local \
   --libdir=lib \
   -Dgtk_doc=false \
-  -Dintrospection=disabled \
+  -Dintrospection=false \
   -Dmodules=disabled \
   -Dsimd=true \
   ${MESON_CROSS_CONFIG}
