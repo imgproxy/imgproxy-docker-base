@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.7.0] - 2023-08-20
 ### Change
 - Change base image to `debian:stable-slim`.
 - Update Go to 1.21.0.
