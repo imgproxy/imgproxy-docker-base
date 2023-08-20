@@ -36,9 +36,8 @@ EOF
 fi
 
 cat << EOF
-export PATH="/root/.cargo/bin:\$PATH"
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-export PKG_CONFIG_PATH=\${PKG_CONFIG_PATH}:/usr/lib/$ARCH-linux-gnu/pkgconfig
+export PATH="/root/.cargo/bin:/root/.python/bin:\$PATH"
+export PKG_CONFIG_LIBDIR=/usr/local/lib/pkgconfig:/usr/lib/$ARCH-linux-gnu/pkgconfig
 export LD_LIBRARY_PATH=/usr/local/lib
 export CPATH=/usr/local/include
 export CGO_LDFLAGS_ALLOW="-s|-w"

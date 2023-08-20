@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Change
+- Change base image to `debian:stable-slim`.
 - Update Go to 1.21.0.
 - Update GLib to 2.77.2.
 - Update libxml2 to 2.11.5.

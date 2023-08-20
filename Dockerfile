@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM} debian:bullseye-slim AS base
+FROM --platform=${BUILDPLATFORM} debian:stable-slim AS base
 
 ARG TARGETARCH
 
@@ -41,13 +41,13 @@ RUN apt-get install -y --no-install-recommends \
     cmake \
     nasm \
     libtool \
-    ninja-build \
     python3-pip \
-    python-is-python3 \
+    python3-venv \
     gettext \
     gperf \
   && ./install-rust.sh \
-  && pip3 install meson setuptools
+  && python3 -m venv /root/.python \
+  && /root/.python/bin/pip install meson ninja
 
 COPY versions.sh build-deps.sh build-bash-profile.sh *.patch meson_${TARGETARCH}.ini ./
 COPY --from=deps-src /root/deps /root/deps
@@ -61,7 +61,7 @@ RUN ./build-deps.sh
 
 # ==============================================================================
 
-FROM --platform=${TARGETPLATFORM} debian:bullseye-slim AS final
+FROM --platform=${TARGETPLATFORM} debian:stable-slim AS final
 LABEL maintainer="Sergey Alexandrovich <darthsim@gmail.com>"
 
 ARG TARGETARCH
