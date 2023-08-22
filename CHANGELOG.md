@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Fix
+- Fix building libheif with dav1d support.
 
 ## [3.7.0] - 2023-08-20
 ### Change

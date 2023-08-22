@@ -286,6 +286,8 @@ cmake \
   --preset=release-noplugins \
   -DBUILD_SHARED_LIBS=1 \
   -DWITH_EXAMPLES=0 \
+  -DWITH_DAV1D=1 \
+  -DWITH_AOM_DECODER=0 \
   ..
 make
 make install
