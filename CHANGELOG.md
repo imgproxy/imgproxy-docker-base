@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 ### Change
+- Update GLib to 2.77.3.
+- Update aom to 3.7.0.
+- Update freetype to 2.13.2.
+- Update librsvg to 2.56.93.
 - Enable HDR support in aom.
 
 ## [3.7.1] - 2023-08-22
