@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.7.2] - 2023-09-04
 ### Change
 - Update GLib to 2.77.3.
 - Update aom to 3.7.0.
