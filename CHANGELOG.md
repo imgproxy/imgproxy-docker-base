@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Change
+- Enable HDR support in aom.
 
 ## [3.7.1] - 2023-08-22
 ### Fix
