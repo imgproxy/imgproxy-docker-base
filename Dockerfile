@@ -12,7 +12,7 @@ RUN dpkg --add-architecture ${TARGETARCH} \
     crossbuild-essential-${TARGETARCH} \
     pkg-config \
     libssl-dev \
-    libstdc++6:${TARGETARCH} \
+    libstdc++-11-dev:${TARGETARCH} \
     liblzma-dev:${TARGETARCH} \
     libzstd-dev:${TARGETARCH}
 
@@ -74,7 +74,7 @@ RUN apt-get update \
     build-essential \
     pkg-config \
     libssl-dev \
-    libstdc++6 \
+    libstdc++-11-dev \
     liblzma-dev \
     libzstd-dev
 
