@@ -12,6 +12,9 @@
 - Update pango to 1.51.1.
 - Update librsvg to 2.57.0.
 - Update vips to 8.14.5.
+- Patch vips to fix invalid UTF-8 strings instead of ignoring them.
+- Patch vips for 16-bit float TIFFs support.
+- Patch vips for OJPEG TIFFs support.
 
 ## [3.7.2] - 2023-09-04
 ### Change
