@@ -1,6 +1,17 @@
 # Changelog
 
 ## [Unreleased]
+### Change
+- Update Go to 1.21.1.
+- Update GLib to 2.78.0.
+- Update libwebp to 1.3.2.
+- Update libtiff to 4.6.0.
+- Update dav1d to 1.3.0.
+- Update harfbuzz to 8.2.1.
+- Update cairo to 1.18.0.
+- Update pango to 1.51.1.
+- Update librsvg to 2.57.0.
+- Update vips to 8.14.5.
 
 ## [3.7.2] - 2023-09-04
 ### Change
