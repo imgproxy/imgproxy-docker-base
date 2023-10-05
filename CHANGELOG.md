@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.7.3] - 2023-10-05
 ### Change
 - Update Go to 1.21.1.
 - Update GLib to 2.78.0.
