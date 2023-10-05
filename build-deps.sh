@@ -55,7 +55,9 @@ meson setup _build \
   --prefix=/usr/local \
   --libdir=lib \
   ${MESON_CROSS_CONFIG} \
-  -Dlibmount=disabled
+  -Dlibmount=disabled \
+  -Dtests=false \
+  -Dinstalled_tests=false
 ninja -C _build
 ninja -C _build install
 

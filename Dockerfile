@@ -14,8 +14,7 @@ RUN dpkg --add-architecture ${TARGETARCH} \
     libssl-dev \
     libstdc++6:${TARGETARCH} \
     liblzma-dev:${TARGETARCH} \
-    libzstd-dev:${TARGETARCH} \
-    libpcre3-dev:${TARGETARCH}
+    libzstd-dev:${TARGETARCH}
 
 WORKDIR /root
 
@@ -77,8 +76,7 @@ RUN apt-get update \
     libssl-dev \
     libstdc++6 \
     liblzma-dev \
-    libzstd-dev \
-    libpcre3-dev
+    libzstd-dev
 
 WORKDIR /root
 
@@ -89,6 +87,7 @@ ENV PATH $PATH:/usr/local/go/bin
 
 COPY --from=deps /usr/local/lib /usr/local/lib
 COPY --from=deps /usr/local/include /usr/local/include
+COPY --from=deps /usr/local/bin /usr/local/bin
 
 COPY --from=deps /root/.bashrc /root/.bashrc
 ENV BASH_ENV=/root/.bashrc
