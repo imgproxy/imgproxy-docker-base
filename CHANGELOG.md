@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.7.4] - 2023-10-21
 ### Change
 - Update Go to 1.21.3.
 - Update zlib to 2.1.4.
