@@ -31,7 +31,7 @@ cmake \
   -DCMAKE_BUILD_TYPE=Release \
   -DBUILD_SHARED_LIBS=TRUE \
   -DZLIB_COMPAT=TRUE
-make install/strip
+make install/strip -j$(nproc)
 
 print_build_stage ffi $FFI_VERSION
 cd $DEPS_SRC/ffi
@@ -45,7 +45,7 @@ cd $DEPS_SRC/ffi
   --disable-builddir \
   --disable-multi-os-directory \
   --disable-raw-api
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage glib $GLIB_VERSION
 cd $DEPS_SRC/glib
@@ -77,7 +77,7 @@ cd $DEPS_SRC/expat
   --disable-static \
   --disable-dependency-tracking \
   --without-xmlwf
-make install
+make install -j$(nproc)
 
 print_build_stage libxml2 $LIBXML2_VERSION
 cd $DEPS_SRC/libxml2
@@ -98,7 +98,7 @@ cd $DEPS_SRC/libxml2
   --with-zlib \
   --without-python \
   --without-lzma
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage libexif $LIBEXIF_VERSION
 cd $DEPS_SRC/libexif
@@ -110,7 +110,7 @@ autoreconf -i
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage lcms2 $LCMS2_VERSION
 cd $DEPS_SRC/lcms2
@@ -122,7 +122,7 @@ CFLAGS="${CFLAGS} -O3" \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage libjpeg-turbo $LIBJPEGTURBO_VERSION
 cd $DEPS_SRC/libjpeg-turbo
@@ -137,7 +137,7 @@ cmake \
   -DWITH_JPEG8=1 \
   -DPNG_SUPPORTED=FALSE \
   .
-make install/strip
+make install/strip -j$(nproc)
 
 print_build_stage libpng $LIBPNG_VERSION
 cd $DEPS_SRC/libpng
@@ -148,7 +148,7 @@ cd $DEPS_SRC/libpng
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage libspng $LIBSPNG_VERSION
 cd $DEPS_SRC/libspng
@@ -173,7 +173,7 @@ cd $DEPS_SRC/libwebp
   --disable-dependency-tracking \
   --enable-libwebpmux \
   --enable-libwebpdemux
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage libtiff $LIBTIFF_VERSION
 cd $DEPS_SRC/libtiff
@@ -189,7 +189,7 @@ cmake \
   -Dtiff-docs=FALSE \
   -Dtiff-deprecated=FALSE \
   .
-make
+make -j$(nproc)
 make install
 
 print_build_stage cgif $CGIF_VERSION
@@ -212,7 +212,7 @@ cd $DEPS_SRC/libde265
   --prefix=/usr/local \
   --enable-shared \
   --disable-static
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage dav1d $DAV1D_VERSION
 cd $DEPS_SRC/dav1d
@@ -250,7 +250,7 @@ cmake \
   -DENABLE_EXAMPLES=0 \
   -DCONFIG_WEBM_IO=0 \
   ..
-make
+make -j$(nproc)
 make install
 
 print_build_stage libyuv $LIBYUV_SHA
@@ -265,7 +265,7 @@ cmake \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_SHARED_LIBS=1 \
   ..
-make
+make -j$(nproc)
 make install
 
 print_build_stage libheif $LIBHEIF_VERSION
@@ -288,7 +288,7 @@ cmake \
   -DWITH_DAV1D=1 \
   -DWITH_AOM_DECODER=0 \
   ..
-make
+make -j$(nproc)
 make install
 
 print_build_stage gdk-pixbuf $GDKPIXBUF_VERSION
@@ -335,7 +335,7 @@ cd $DEPS_SRC/fontconfig
   --disable-static \
   --disable-dependency-tracking \
   --disable-docs
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage harfbuzz $HARFBUZZ_VERSION
 cd $DEPS_SRC/harfbuzz
@@ -365,7 +365,7 @@ cd $DEPS_SRC/pixman
   --disable-static \
   --disable-dependency-tracking \
   --disable-arm-iwmmxt
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage cairo $CAIRO_VERSION
 cd $DEPS_SRC/cairo
@@ -395,7 +395,7 @@ autoreconf -fiv
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage pango $PANGO_VERSION
 cd $DEPS_SRC/pango
@@ -432,7 +432,7 @@ RUST_TARGET=$CARGO_TARGET \
   --disable-nls \
   --without-libiconv-prefix \
   --without-libintl-prefix
-make install-strip
+make install-strip -j$(nproc)
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
