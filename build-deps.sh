@@ -270,10 +270,8 @@ make install
 
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
-# Fix possible memory leak
-curl -Ls https://github.com/strukturag/libheif/commit/9f9e084608f4fd38fe6abac85d97a5c7316d44c9.patch | git apply
 # libyuv support
-curl -Ls https://github.com/DarthSim/libheif/commit/cf4e086f1872b54123ac96efb02a3fdcfbf800fe.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/7a5e9a8f88c93bf8f2d32e035b0227f2feef2ab7.patch | git apply
 # Set default threads to 1 (works better for highly loaded apps)
 sed -i "s/p->integer.default_value = 4/p->integer.default_value = 1/" libheif/plugins/encoder_aom.cc
 mkdir _build
@@ -469,6 +467,10 @@ curl -Ls https://github.com/DarthSim/libvips/commit/8f51ade2ac9e8450058d2e6e0d1a
 curl -Ls https://github.com/DarthSim/libvips/commit/dfe65aa3c2d2bc786648577fc906430376b8f2f0.patch | git apply
 # heifload: don't allocate meta/ICC memory as local to out
 curl -Ls https://github.com/DarthSim/libvips/commit/967334684208a98630d76038b91b68b2430b708c.patch | git apply
+# call heif_init on heif startup
+curl -Ls https://github.com/DarthSim/libvips/commit/04d3755b0433fb1b0fc988261713780f9656b9e8.patch | git apply
+# heifsave: errors must have a message in libheif 1.17.0+
+curl -Ls https://github.com/DarthSim/libvips/commit/43933c7a992af2b487c175b3e91f71b003eed34c.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \

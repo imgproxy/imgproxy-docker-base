@@ -1,7 +1,12 @@
 # Changelog
 
 ## [Unreleased]
-## Change
+### Change
+- Update Go to 1.21.3.
+- Update zlib to 2.1.4.
+- Update libjpegturbo to 3.0.1.
+- Update libheif to 1.17.1.
+- Update harfbuzz to 8.2.2.
 - Patch vips to correctly treat EXIF strings with invalid UTF8 characters.
 - Patch vips to fix possible segfault in heifload.
 
