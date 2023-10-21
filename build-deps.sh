@@ -465,6 +465,10 @@ curl -Ls https://github.com/DarthSim/libvips/commit/d09c4509d28e6dc5c8c408821249
 curl -Ls https://github.com/DarthSim/libvips/commit/cbdfc48c1c7cb2ac4f5dea33bc2e702b5ed9f5db.patch | git apply
 # tiffload: use TIFFRGBAImage or TIFFReadRGBATile if tiff image type is not natively supported by libvips
 curl -Ls https://github.com/DarthSim/libvips/commit/8f51ade2ac9e8450058d2e6e0d1a3099f385145d.patch | git apply
+# Fix saving EXIF strings with invalid UTF8 encoding
+curl -Ls https://github.com/DarthSim/libvips/commit/dfe65aa3c2d2bc786648577fc906430376b8f2f0.patch | git apply
+# heifload: don't allocate meta/ICC memory as local to out
+curl -Ls https://github.com/DarthSim/libvips/commit/967334684208a98630d76038b91b68b2430b708c.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \

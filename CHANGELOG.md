@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+## Change
+- Patch vips to correctly treat EXIF strings with invalid UTF8 characters.
+- Patch vips to fix possible segfault in heifload.
 
 ## [3.7.3] - 2023-10-05
 ### Change
