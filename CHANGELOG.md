@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Change
 - Enable GIF gdkpixbuf loader.
+- Patch vips to set default NCLX profile to HEIC/AVIF if no ICC profile is provided.
 
 ## [3.7.4] - 2023-10-21
 ### Change

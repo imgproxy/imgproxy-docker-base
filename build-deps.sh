@@ -471,6 +471,8 @@ curl -Ls https://github.com/DarthSim/libvips/commit/967334684208a98630d76038b91b
 curl -Ls https://github.com/DarthSim/libvips/commit/04d3755b0433fb1b0fc988261713780f9656b9e8.patch | git apply
 # heifsave: errors must have a message in libheif 1.17.0+
 curl -Ls https://github.com/DarthSim/libvips/commit/43933c7a992af2b487c175b3e91f71b003eed34c.patch | git apply
+# heifsave: set default nclx profile if ICC profile is not provided
+curl -Ls https://github.com/DarthSim/libvips/commit/01b3c52e540570259aac9fd8ee42b04874eb4bac.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
