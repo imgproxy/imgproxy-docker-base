@@ -304,7 +304,7 @@ meson setup _build \
   -Dgio_sniffing=false \
   -Dman=false \
   -Dtiff=disabled \
-  -Dbuiltin_loaders=png,jpeg
+  -Dbuiltin_loaders=png,jpeg,gif
 ninja -C _build
 ninja -C _build install
 rm -rf /usr/local/lib/gdk-pixbuf-2.0

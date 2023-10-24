@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Change
+- Enable GIF gdkpixbuf loader.
+
 ## [3.7.4] - 2023-10-21
 ### Change
 - Update Go to 1.21.3.
