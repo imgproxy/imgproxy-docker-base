@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Add
+- Add highway.
+
 ## [3.7.5] - 2023-10-24
 ### Change
 - Enable GIF gdkpixbuf loader.

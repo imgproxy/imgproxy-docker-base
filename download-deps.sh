@@ -40,6 +40,12 @@ cd $DEPS_SRC/glib
 curl -Lks https://download.gnome.org/sources/glib/$(minor_version $GLIB_VERSION)/glib-${GLIB_VERSION}.tar.xz \
   | tar -xJC . --strip-components=1
 
+print_download_stage highway $HIGHWAY_VERSION
+mkdir $DEPS_SRC/highway
+cd $DEPS_SRC/highway
+curl -Lks https://github.com/google/highway/archive/refs/tags/$HIGHWAY_VERSION.tar.gz \
+  | tar -xzC . --strip-components=1
+
 print_download_stage quantizr $QUANTIZR_VERSION
 mkdir $DEPS_SRC/quantizr
 cd $DEPS_SRC/quantizr

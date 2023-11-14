@@ -61,6 +61,23 @@ meson setup _build \
 ninja -C _build
 ninja -C _build install
 
+print_build_stage highway $HIGHWAY_VERSION
+cd $DEPS_SRC/highway
+mkdir _build
+cd _build
+cmake \
+  -G"Unix Makefiles" \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_SYSTEM_NAME=Linux \
+  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
+  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DBUILD_SHARED_LIBS=TRUE \
+  -DHWY_ENABLE_EXAMPLES=FALSE \
+  -DHWY_ENABLE_TESTS=FALSE \
+  ..
+make -j$(nproc)
+make install/strip
+
 print_build_stage quantizr $QUANTIZR_VERSION
 cd $DEPS_SRC/quantizr
 mkdir .cargo
