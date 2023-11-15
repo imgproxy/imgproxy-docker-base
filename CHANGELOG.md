@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Add
 - Add highway.
+- Add kvazaar.
 
 ## [3.7.5] - 2023-10-24
 ### Change

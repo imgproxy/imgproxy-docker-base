@@ -231,6 +231,18 @@ cd $DEPS_SRC/libde265
   --disable-static
 make install-strip -j$(nproc)
 
+print_build_stage kvazaar $KVAZAAR_VERSION
+cd $DEPS_SRC/kvazaar
+# Disable redundant logging
+curl -Ls https://github.com/ultravideo/kvazaar/commit/580c6e27586d82394b1912ea1ef9932f8572a59d.patch | git apply
+./configure \
+  --build=$BUILD \
+  --host=$HOST \
+  --prefix=/usr/local \
+  --enable-shared \
+  --disable-static
+make install-strip -j$(nproc)
+
 print_build_stage dav1d $DAV1D_VERSION
 cd $DEPS_SRC/dav1d
 meson setup _build \
@@ -289,6 +301,10 @@ print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
 # libyuv support
 curl -Ls https://github.com/DarthSim/libheif/commit/7a5e9a8f88c93bf8f2d32e035b0227f2feef2ab7.patch | git apply
+# kvaazar: set chroma in kvazaar_query_input_colorspace2
+curl -Ls https://github.com/DarthSim/libheif/commit/0d6f1d935bafa3727a29bf25f9df164cb6c65814.patch | git apply
+# fix kvazaar encoding with odd image sizes
+curl -Ls https://github.com/DarthSim/libheif/commit/8f2cc0a09993cb9efddfe6250a7e5ee606326648.patch | git apply
 # Set default threads to 1 (works better for highly loaded apps)
 sed -i "s/p->integer.default_value = 4/p->integer.default_value = 1/" libheif/plugins/encoder_aom.cc
 mkdir _build
@@ -302,6 +318,7 @@ cmake \
   --preset=release-noplugins \
   -DBUILD_SHARED_LIBS=1 \
   -DWITH_EXAMPLES=0 \
+  -DWITH_KVAZAAR=1 \
   -DWITH_DAV1D=1 \
   -DWITH_AOM_DECODER=0 \
   ..

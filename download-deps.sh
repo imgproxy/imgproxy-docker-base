@@ -118,6 +118,12 @@ cd $DEPS_SRC/libde265
 curl -Ls https://github.com/strukturag/libde265/releases/download/v$LIBDE265_VERSION/libde265-$LIBDE265_VERSION.tar.gz \
   | tar -xzC . --strip-components=1
 
+print_download_stage kvazaar $KVAZAAR_VERSION
+mkdir $DEPS_SRC/kvazaar
+cd $DEPS_SRC/kvazaar
+curl -Ls https://github.com/ultravideo/kvazaar/releases/download/v$KVAZAAR_VERSION/kvazaar-$KVAZAAR_VERSION.tar.gz \
+  | tar -xzC . --strip-components=1
+
 print_download_stage dav1d $DAV1D_VERSION
 mkdir $DEPS_SRC/dav1d
 cd $DEPS_SRC/dav1d
