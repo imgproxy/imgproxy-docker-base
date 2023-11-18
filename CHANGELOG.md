@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.8.0] - 2023-11-18
 ### Add
 - Add highway.
 - Add kvazaar.
