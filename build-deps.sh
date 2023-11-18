@@ -305,8 +305,6 @@ curl -Ls https://github.com/DarthSim/libheif/commit/7a5e9a8f88c93bf8f2d32e035b02
 curl -Ls https://github.com/DarthSim/libheif/commit/0d6f1d935bafa3727a29bf25f9df164cb6c65814.patch | git apply
 # fix kvazaar encoding with odd image sizes
 curl -Ls https://github.com/DarthSim/libheif/commit/8f2cc0a09993cb9efddfe6250a7e5ee606326648.patch | git apply
-# Set default threads to 1 (works better for highly loaded apps)
-sed -i "s/p->integer.default_value = 4/p->integer.default_value = 1/" libheif/plugins/encoder_aom.cc
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
@@ -472,6 +470,8 @@ print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
 # tiffload: use TIFFRGBAImage or TIFFReadRGBATile if tiff image type is not natively supported by libvips
 curl -Ls https://github.com/DarthSim/libvips/commit/c1887f564108106c0c84fd89109774eb90f597d9.patch | git apply
+# heifsave: set `threads` to vips_concurrency_get()
+curl -Ls https://github.com/DarthSim/libvips/commit/869a8dca55edd17bad9e4de69c60e187fdd110d4.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \

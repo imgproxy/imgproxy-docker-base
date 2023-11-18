@@ -13,6 +13,7 @@
 - Update harfbuzz to 8.3.0.
 - Update pango to 1.51.1.
 - Update vips to 8.15.0.
+- Patch vips to use `vips_concurrency_get()` threads in `heifsave`.
 
 ## [3.7.5] - 2023-10-24
 ### Change
