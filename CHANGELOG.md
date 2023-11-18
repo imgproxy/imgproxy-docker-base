@@ -5,6 +5,15 @@
 - Add highway.
 - Add kvazaar.
 
+### Change
+- Update Go to 1.21.4.
+- Update GLib to 2.78.1.
+- Update libxml2 to 2.12.0.
+- Update libheif to 1.17.3.
+- Update harfbuzz to 8.3.0.
+- Update pango to 1.51.1.
+- Update vips to 8.15.0.
+
 ## [3.7.5] - 2023-10-24
 ### Change
 - Enable GIF gdkpixbuf loader.

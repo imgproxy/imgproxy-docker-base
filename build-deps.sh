@@ -470,43 +470,8 @@ make install-strip -j$(nproc)
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
-# Speedup premultiply/unpremutiply a bit
-curl -Ls https://github.com/DarthSim/libvips/commit/7d35d045933cde120f60dd0e98ab42437e91b98e.patch | git apply
-# Copyless vips_jpegload_buffer
-curl -Ls https://github.com/DarthSim/libvips/commit/c9f50f917aac4c62b9b288de77651037dce78941.patch | git apply
-curl -Ls https://github.com/DarthSim/libvips/commit/1ab7f72ad723cca0964ba8134bd0b68b0e3fe446.patch | git apply
-# Scan multiple lines at once in jpegload
-curl -Ls https://github.com/DarthSim/libvips/commit/1a6dbfeb5ea4099e99d356294eabf238d17228b9.patch | git apply
-# Optimize webpsave
-curl -Ls https://github.com/DarthSim/libvips/commit/650b3258b221126c27915320d70303a9656a743c.patch | git apply
-# Fix signed_fixed_round( 0 )
-curl -Ls https://github.com/DarthSim/libvips/commit/3d1ba235be21f33badeff94949a0cd449f9935a4.patch | git apply
-# int64_t intermediate for int/uint redice(v/h)
-curl -Ls https://github.com/DarthSim/libvips/commit/945be865cb39bba6e03edca0a1bfd14a16ca2b0e.patch | git apply
-# Aligned image buffers
-curl -Ls https://github.com/DarthSim/libvips/commit/71dd1a75ddc70f66c47884d021fb11498b1107e8.patch | git apply
-curl -Ls https://github.com/DarthSim/libvips/commit/290ff27989fab738d1afb16ab12cb92c49969018.patch | git apply
-# SIMD optimizations for convi, reducev, and reduceh
-curl -Ls https://github.com/DarthSim/libvips/commit/5b27fa725908ef6a819fb320017aec7845dbb3a9.patch | git apply
-curl -Ls https://github.com/DarthSim/libvips/commit/d436a527530206b3edd61ea26cebc79c5de5283e.patch | git apply
-# reduce(v/h) without embed
-curl -Ls https://github.com/DarthSim/libvips/commit/e9676d3020d7d09bd74b3cfad3fbe10207f5193e.patch | git apply
-# Fix invalid UTF-8 strings instead of ignoring them
-curl -Ls https://github.com/DarthSim/libvips/commit/d09c4509d28e6dc5c8c4088212494e03278ad515.patch | git apply
-# tiffload: add 16-bit float support
-curl -Ls https://github.com/DarthSim/libvips/commit/cbdfc48c1c7cb2ac4f5dea33bc2e702b5ed9f5db.patch | git apply
 # tiffload: use TIFFRGBAImage or TIFFReadRGBATile if tiff image type is not natively supported by libvips
-curl -Ls https://github.com/DarthSim/libvips/commit/8f51ade2ac9e8450058d2e6e0d1a3099f385145d.patch | git apply
-# Fix saving EXIF strings with invalid UTF8 encoding
-curl -Ls https://github.com/DarthSim/libvips/commit/dfe65aa3c2d2bc786648577fc906430376b8f2f0.patch | git apply
-# heifload: don't allocate meta/ICC memory as local to out
-curl -Ls https://github.com/DarthSim/libvips/commit/967334684208a98630d76038b91b68b2430b708c.patch | git apply
-# call heif_init on heif startup
-curl -Ls https://github.com/DarthSim/libvips/commit/04d3755b0433fb1b0fc988261713780f9656b9e8.patch | git apply
-# heifsave: errors must have a message in libheif 1.17.0+
-curl -Ls https://github.com/DarthSim/libvips/commit/43933c7a992af2b487c175b3e91f71b003eed34c.patch | git apply
-# heifsave: set default nclx profile if ICC profile is not provided
-curl -Ls https://github.com/DarthSim/libvips/commit/01b3c52e540570259aac9fd8ee42b04874eb4bac.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/c1887f564108106c0c84fd89109774eb90f597d9.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
@@ -514,9 +479,8 @@ meson setup _build \
   --prefix=/usr/local \
   --libdir=lib \
   -Dgtk_doc=false \
-  -Dintrospection=false \
+  -Dintrospection=disabled \
   -Dmodules=disabled \
-  -Dsimd=true \
   ${MESON_CROSS_CONFIG}
 ninja -C _build
 ninja -C _build install
