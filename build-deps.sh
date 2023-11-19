@@ -471,7 +471,7 @@ cd $DEPS_SRC/vips
 # tiffload: use TIFFRGBAImage or TIFFReadRGBATile if tiff image type is not natively supported by libvips
 curl -Ls https://github.com/DarthSim/libvips/commit/c1887f564108106c0c84fd89109774eb90f597d9.patch | git apply
 # heifsave: set `threads` to vips_concurrency_get()
-curl -Ls https://github.com/DarthSim/libvips/commit/869a8dca55edd17bad9e4de69c60e187fdd110d4.patch | git apply
+curl -Ls https://github.com/DarthSim/libvips/commit/3f35bd9ca5274e62ebd1c4f45d273a7568bad22d.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
