@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Fix
+- Patch vips to fix `reduceh` on SSE2 CPUs.
+
 ## [3.8.0] - 2023-11-18
 ### Add
 - Add highway.
