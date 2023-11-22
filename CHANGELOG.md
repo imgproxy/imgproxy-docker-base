@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.8.1] - 2023-11-22
 ### Change
 - Update libde265 to 1.0.14.
 - Update aom to 3.7.1.
