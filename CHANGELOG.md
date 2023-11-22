@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### Change
+- Update libde265 to 1.0.14.
+- Update aom to 3.7.1.
+- Update libheif to 1.17.5.
+
 ### Fix
 - Patch vips to fix `reduceh` on SSE2 CPUs.
 

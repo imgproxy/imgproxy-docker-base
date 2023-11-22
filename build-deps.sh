@@ -301,10 +301,6 @@ print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
 # libyuv support
 curl -Ls https://github.com/DarthSim/libheif/commit/7a5e9a8f88c93bf8f2d32e035b0227f2feef2ab7.patch | git apply
-# kvaazar: set chroma in kvazaar_query_input_colorspace2
-curl -Ls https://github.com/DarthSim/libheif/commit/0d6f1d935bafa3727a29bf25f9df164cb6c65814.patch | git apply
-# fix kvazaar encoding with odd image sizes
-curl -Ls https://github.com/DarthSim/libheif/commit/8f2cc0a09993cb9efddfe6250a7e5ee606326648.patch | git apply
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
