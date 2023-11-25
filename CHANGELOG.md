@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Change
+- Update libxml2 to 2.12.1.
 - Use Ninja in CMake builds.
 - Use `Release` build type for aom.
 
