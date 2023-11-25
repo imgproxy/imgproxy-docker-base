@@ -22,16 +22,19 @@ export CARGO_PROFILE_RELEASE_LTO=true
 
 print_build_stage zlib $ZLIB_VERSION
 cd $DEPS_SRC/zlib
+mkdir _build
+cd _build
 CFLAGS="${CFLAGS} -O3" \
 cmake \
-  -G"Unix Makefiles" \
+  -G"Ninja" \
+  -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_SYSTEM_NAME=Linux \
   -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
-  -DCMAKE_BUILD_TYPE=Release \
   -DBUILD_SHARED_LIBS=TRUE \
-  -DZLIB_COMPAT=TRUE
-make install/strip -j$(nproc)
+  -DZLIB_COMPAT=TRUE \
+  ..
+ninja install/strip
 
 print_build_stage ffi $FFI_VERSION
 cd $DEPS_SRC/ffi
@@ -66,7 +69,7 @@ cd $DEPS_SRC/highway
 mkdir _build
 cd _build
 cmake \
-  -G"Unix Makefiles" \
+  -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_SYSTEM_NAME=Linux \
   -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
@@ -75,8 +78,7 @@ cmake \
   -DHWY_ENABLE_EXAMPLES=FALSE \
   -DHWY_ENABLE_TESTS=FALSE \
   ..
-make -j$(nproc)
-make install/strip
+ninja install/strip
 
 print_build_stage quantizr $QUANTIZR_VERSION
 cd $DEPS_SRC/quantizr
@@ -143,8 +145,11 @@ make install-strip -j$(nproc)
 
 print_build_stage libjpeg-turbo $LIBJPEGTURBO_VERSION
 cd $DEPS_SRC/libjpeg-turbo
+mkdir _build
+cd _build
 cmake \
-  -G"Unix Makefiles" \
+  -G"Ninja" \
+  -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_SYSTEM_NAME=Linux \
   -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
@@ -153,8 +158,8 @@ cmake \
   -DWITH_TURBOJPEG=FALSE \
   -DWITH_JPEG8=1 \
   -DPNG_SUPPORTED=FALSE \
-  .
-make install/strip -j$(nproc)
+  ..
+ninja install/strip
 
 print_build_stage libpng $LIBPNG_VERSION
 cd $DEPS_SRC/libpng
@@ -194,8 +199,11 @@ make install-strip -j$(nproc)
 
 print_build_stage libtiff $LIBTIFF_VERSION
 cd $DEPS_SRC/libtiff
+mkdir _build
+cd _build
 cmake \
-  -G"Unix Makefiles" \
+  -G"Ninja" \
+  -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_SYSTEM_NAME=Linux \
   -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
@@ -205,9 +213,8 @@ cmake \
   -Dtiff-contrib=FALSE \
   -Dtiff-docs=FALSE \
   -Dtiff-deprecated=FALSE \
-  .
-make -j$(nproc)
-make install
+  ..
+ninja install/strip
 
 print_build_stage cgif $CGIF_VERSION
 cd $DEPS_SRC/cgif
@@ -266,12 +273,12 @@ mkdir _build
 cd _build
 AOM_AS_FLAGS=#{CFLAGS} \
 cmake \
-  -G"Unix Makefiles" \
+  -G"Ninja" \
+  -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_SYSTEM_NAME=Linux \
   -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_SHARED_LIBS=1 \
-  -DCMAKE_BUILD_TYPE=MinSizeRel \
   -DENABLE_DOCS=0 \
   -DENABLE_TESTS=0 \
   -DENABLE_TESTDATA=0 \
@@ -279,8 +286,7 @@ cmake \
   -DENABLE_EXAMPLES=0 \
   -DCONFIG_WEBM_IO=0 \
   ..
-make -j$(nproc)
-make install
+ninja install/strip
 
 print_build_stage libyuv $LIBYUV_SHA
 cd $DEPS_SRC/libyuv
@@ -288,14 +294,14 @@ mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 cmake \
-  -G"Unix Makefiles" \
+  -G"Ninja" \
+  -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_SYSTEM_NAME=Linux \
   -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_SHARED_LIBS=1 \
   ..
-make -j$(nproc)
-make install
+ninja install/strip
 
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
@@ -305,7 +311,8 @@ mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 cmake \
-  -G"Unix Makefiles" \
+  -G"Ninja" \
+  -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_SYSTEM_NAME=Linux \
   -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
@@ -316,8 +323,7 @@ cmake \
   -DWITH_DAV1D=1 \
   -DWITH_AOM_DECODER=0 \
   ..
-make -j$(nproc)
-make install
+ninja install/strip
 
 print_build_stage gdk-pixbuf $GDKPIXBUF_VERSION
 cd $DEPS_SRC/gdk-pixbuf

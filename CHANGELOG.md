@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+### Change
+- Use Ninja in CMake builds.
+- Use `Release` build type for aom.
+
 ## [3.8.1] - 2023-11-22
 ### Change
 - Update libde265 to 1.0.14.
