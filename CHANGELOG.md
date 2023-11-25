@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.8.2] - 2023-11-25
 ### Change
 - Update libxml2 to 2.12.1.
 - Use Ninja in CMake builds.
