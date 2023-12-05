@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.8.3] - 2023-12-05
 ### Change
 - Patch libheif to ignore alpha channel if it has different BPP instead of throwing an error.
 
