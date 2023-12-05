@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Change
+- Patch libheif to ignore alpha channel if it has different BPP instead of throwing an error.
+
 ## [3.8.2] - 2023-11-25
 ### Change
 - Update libxml2 to 2.12.1.
