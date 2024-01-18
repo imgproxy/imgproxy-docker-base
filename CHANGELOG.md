@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.8.4] - 2024-01-18
 ### Change
 - Update Go to 1.21.6.
 - Update zlib to 2.1.6.
