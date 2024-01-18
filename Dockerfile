@@ -46,7 +46,7 @@ RUN apt-get install -y --no-install-recommends \
     gperf \
   && ./install-rust.sh \
   && python3 -m venv /root/.python \
-  && /root/.python/bin/pip install meson ninja
+  && /root/.python/bin/pip install meson ninja packaging
 
 COPY versions.sh build-deps.sh build-bash-profile.sh *.patch meson_${TARGETARCH}.ini ./
 COPY --from=deps-src /root/deps /root/deps
