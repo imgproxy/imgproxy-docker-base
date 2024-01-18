@@ -392,15 +392,19 @@ rm /usr/local/lib/libharfbuzz-subset*
 
 print_build_stage pixman $PIXMAN_VERSION
 cd $DEPS_SRC/pixman
-./configure \
-  --build=$BUILD \
-  --host=$HOST \
+meson setup _build \
+  --buildtype=release \
+  --strip \
   --prefix=/usr/local \
-  --enable-shared \
-  --disable-static \
-  --disable-dependency-tracking \
-  --disable-arm-iwmmxt
-make install-strip -j$(nproc)
+  --libdir=lib \
+  -Dlibpng=disabled \
+  -Diwmmxt=disabled \
+  -Dgtk=disabled \
+  -Dopenmp=disabled \
+  -Dtests=disabled \
+  ${MESON_CROSS_CONFIG}
+ninja -C _build
+ninja -C _build install
 
 print_build_stage cairo $CAIRO_VERSION
 cd $DEPS_SRC/cairo
