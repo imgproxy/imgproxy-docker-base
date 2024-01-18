@@ -1,5 +1,22 @@
 # Changelog
 
+## [Unreleased]
+### Change
+- Update Go to 1.21.6.
+- Update zlib to 2.1.6.
+- Update GLib to 2.79.0.
+- Update quantizr to 1.4.2.
+- Update libxml2 to 2.12.4.
+- Update lcms2 to 2.16.
+- Update libde265 to 1.0.15.
+- Update kvazaar to 2.3.0.
+- Update aom to 3.8.0.
+- Update libheif to 1.17.6.
+- Update fontconfig to 2.15.0.
+- Update pixman to 0.43.0.
+- Update librsvg to 2.57.1.
+- Update vips to 8.15.1.
+
 ## [3.8.3] - 2023-12-05
 ### Change
 - Patch libheif to ignore alpha channel if it has different BPP instead of throwing an error.
