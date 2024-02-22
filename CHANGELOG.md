@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.8.5] - 2024-02-22
+### Change
+- Update Go to 1.22.0.
+- Update ffi to 3.4.6.
+- Update GLib to 2.79.2.
+- Update highway to 1.1.0.
+- Update libexpat to 2.6.0.
+- Update libxml2 to 2.12.5.
+- Update libjpegturbo to 3.0.2.
+- Update dav1d to 1.4.0.
+- Update aom to 3.8.1.
+- Update pixman to 0.43.2.
+- Update pango to 1.51.2.
+- Update librsvg to 2.57.91.
+
 ## [3.8.4] - 2024-01-18
 ### Change
 - Update Go to 1.21.6.
