@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.8.6] - 2024-03-06
+### Change
+- Update golang to 1.22.1.
+- Update GLib to 2.79.3.
+- Update libexpat to 2.6.1.
+- Update pixman to 0.43.4.
+- Update pango to 1.52.1.
+
 ## [3.8.5] - 2024-02-22
 ### Change
 - Update Go to 1.22.0.
