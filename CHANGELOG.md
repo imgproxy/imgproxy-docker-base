@@ -1,5 +1,16 @@
 # Changelog
 
+## [Unreleased]
+### Change
+- Update GLib to 2.80.0.
+- Update libexpat to 2.6.2.
+- Update libxml2 to 2.12.6.
+- Update dav1d to 1.4.1.
+- Update aom to 3.8.2.
+- Update harfbuzz to 8.3.1.
+- Update librsvg to 2.58.0.
+- Update vips to 8.15.2.
+
 ## [3.8.6] - 2024-03-06
 ### Change
 - Update golang to 1.22.1.
