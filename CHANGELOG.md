@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.9.0]
 ### Change
 - Change base image to `ubuntu:mantic`.
 - Update GLib to 2.80.0.
