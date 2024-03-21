@@ -1,6 +1,9 @@
-FROM --platform=${BUILDPLATFORM} debian:stable-slim AS base
+FROM --platform=${BUILDPLATFORM} ubuntu:mantic AS base
 
 ARG TARGETARCH
+
+# Use a custom sources.list that includes both amd64 and arm64 repositories
+COPY sources.list /etc/apt/sources.list
 
 RUN dpkg --add-architecture ${TARGETARCH} \
   && apt-get update \
@@ -60,12 +63,17 @@ RUN ./build-deps.sh
 
 # ==============================================================================
 
-FROM --platform=${TARGETPLATFORM} debian:stable-slim AS final
+FROM --platform=${TARGETPLATFORM} ubuntu:mantic AS final
 LABEL maintainer="Sergey Alexandrovich <darthsim@gmail.com>"
 
 ARG TARGETARCH
+ARG BUILDARCH
 
-RUN apt-get update \
+# Use a custom sources.list that includes both amd64 and arm64 repositories
+COPY sources.list /etc/apt/sources.list
+
+RUN dpkg --add-architecture ${BUILDARCH} \
+  && apt-get update \
   && apt-get install -y --no-install-recommends \
     bash \
     curl \

@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Change
+- Change base image to `ubuntu:mantic`.
 - Update GLib to 2.80.0.
 - Update libexpat to 2.6.2.
 - Update libxml2 to 2.12.6.
