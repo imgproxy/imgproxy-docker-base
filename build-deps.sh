@@ -14,7 +14,6 @@ print_build_stage() {
 DEPS_SRC=/root/deps
 mkdir -p $DEPS_SRC
 
-CMAKE_SYSTEM_PROCESSOR=${CMAKE_SYSTEM_PROCESSOR:-amd64}
 CARGO_TARGET=${CARGO_TARGET:-"x86_64-unknown-linux-gnu"}
 
 export CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1
@@ -28,11 +27,11 @@ CFLAGS="${CFLAGS} -O3" \
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_SYSTEM_NAME=Linux \
-  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_SHARED_LIBS=TRUE \
   -DZLIB_COMPAT=TRUE \
+  -DWITH_ARMV6=FALSE \
+  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
@@ -68,16 +67,16 @@ print_build_stage highway $HIGHWAY_VERSION
 cd $DEPS_SRC/highway
 mkdir _build
 cd _build
+CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_SYSTEM_NAME=Linux \
-  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_SHARED_LIBS=TRUE \
   -DHWY_ENABLE_EXAMPLES=FALSE \
   -DHWY_ENABLE_TESTS=FALSE \
   -DHWY_ENABLE_CONTRIB=FALSE \
+  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
@@ -151,14 +150,13 @@ cd _build
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_SYSTEM_NAME=Linux \
-  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DENABLE_SHARED=TRUE \
   -DENABLE_STATIC=FALSE \
   -DWITH_TURBOJPEG=FALSE \
   -DWITH_JPEG8=1 \
   -DPNG_SUPPORTED=FALSE \
+  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
@@ -205,8 +203,6 @@ cd _build
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_SYSTEM_NAME=Linux \
-  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_SHARED_LIBS=TRUE \
   -Dtiff-tools=FALSE \
@@ -214,6 +210,7 @@ cmake \
   -Dtiff-contrib=FALSE \
   -Dtiff-docs=FALSE \
   -Dtiff-deprecated=FALSE \
+  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
@@ -274,8 +271,6 @@ AOM_AS_FLAGS=#{CFLAGS} \
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_SYSTEM_NAME=Linux \
-  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_SHARED_LIBS=1 \
   -DENABLE_DOCS=0 \
@@ -284,6 +279,7 @@ cmake \
   -DENABLE_TOOLS=0 \
   -DENABLE_EXAMPLES=0 \
   -DCONFIG_WEBM_IO=0 \
+  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
@@ -295,10 +291,9 @@ CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_SYSTEM_NAME=Linux \
-  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_SHARED_LIBS=1 \
+  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
@@ -314,8 +309,6 @@ CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_SYSTEM_NAME=Linux \
-  -DCMAKE_SYSTEM_PROCESSOR=$CMAKE_SYSTEM_PROCESSOR \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   --preset=release-noplugins \
   -DBUILD_SHARED_LIBS=1 \
@@ -323,6 +316,7 @@ cmake \
   -DWITH_KVAZAAR=1 \
   -DWITH_DAV1D=1 \
   -DWITH_AOM_DECODER=0 \
+  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 

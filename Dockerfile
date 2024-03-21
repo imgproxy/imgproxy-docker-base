@@ -48,7 +48,7 @@ RUN apt-get install -y --no-install-recommends \
   && python3 -m venv /root/.python \
   && /root/.python/bin/pip install meson ninja packaging
 
-COPY versions.sh build-deps.sh build-bash-profile.sh *.patch meson_${TARGETARCH}.ini ./
+COPY versions.sh build-deps.sh build-bash-profile.sh *.patch cmake_${TARGETARCH}.cmake meson_${TARGETARCH}.ini ./
 COPY --from=deps-src /root/deps /root/deps
 
 # We need environment variables that based on the TARGETARCH,

@@ -6,12 +6,10 @@ case "$TARGETARCH" in
 
   amd64)
     ARCH="x86_64"
-    CMAKE_ARCH="x86_64"
     ;;
 
   arm64)
     ARCH="aarch64"
-    CMAKE_ARCH="arm64"
     ;;
 
   *)
@@ -30,7 +28,7 @@ fi
 
 if [ "$TARGETARCH" = "arm64" ]; then
   ARCH_ENV=$(cat << EOF
-export CFLAGS="-march=armv8.2-a+fp16+rcpc+dotprod+crypto -mtune=neoverse-n1"
+export CFLAGS="-march=armv8.2-a"
 EOF
   )
 fi
@@ -50,9 +48,9 @@ export CXX=$ARCH-linux-gnu-g++
 export STRIP=$ARCH-linux-gnu-strip
 export CFLAGS="\$CFLAGS -Os -fPIC -D_GLIBCXX_USE_CXX11_ABI=1 -fno-asynchronous-unwind-tables -ffunction-sections -fdata-sections"
 export CXXFLAGS=\$CFLAGS
-export CMAKE_SYSTEM_PROCESSOR=$CMAKE_ARCH
 export CMAKE_C_COMPILER=\$CC
 export CMAKE_CXX_COMPILER=\$CXX
+export CMAKE_CROSS_CONFIG="-DCMAKE_TOOLCHAIN_FILE=/root/cmake_$TARGETARCH.cmake"
 export MESON_CROSS_CONFIG="--cross-file=/root/meson_$TARGETARCH.ini"
 export CARGO_TARGET="$ARCH-unknown-linux-gnu"
 export CARGO_CROSS_CONFIG='[target.$ARCH-unknown-linux-gnu]\nlinker = "$ARCH-linux-gnu-gcc"'
