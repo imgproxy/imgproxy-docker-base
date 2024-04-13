@@ -473,6 +473,8 @@ cd $DEPS_SRC/vips
 curl -Ls https://github.com/DarthSim/libvips/commit/c1887f564108106c0c84fd89109774eb90f597d9.patch | git apply
 # heifsave: set `threads` to vips_concurrency_get()
 curl -Ls https://github.com/DarthSim/libvips/commit/3f35bd9ca5274e62ebd1c4f45d273a7568bad22d.patch | git apply
+# Increase EXIF size limit to 8Mb
+curl -Ls https://github.com/DarthSim/libvips/commit/1e2413f966bf356e7dc506d2c253c67b90c35d86.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \

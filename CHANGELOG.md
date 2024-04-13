@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Change
+- Patch vips to increase EXIF size limit to 8MB.
+
 ## [3.9.0]
 ### Change
 - Change base image to `ubuntu:mantic`.
