@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.9.1] - 2024-04-15
 ### Change
 - Update Go to 1.22.2.
 - Update libwebp to 1.4.0.
@@ -10,7 +10,7 @@
 - Update pango to 1.52.2.
 - Patch vips to increase EXIF size limit to 8MB.
 
-## [3.9.0]
+## [3.9.0] - 2024-03-21
 ### Change
 - Change base image to `ubuntu:mantic`.
 - Update GLib to 2.80.0.
