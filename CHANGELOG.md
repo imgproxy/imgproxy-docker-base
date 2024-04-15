@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 ### Change
+- Update Go to 1.22.2.
+- Update libwebp to 1.4.0.
+- Update cgif to 0.4.0.
+- Update kvazaar to 2.3.1.
+- Update harfbuzz to 8.4.0.
+- Update pango to 1.52.2.
 - Patch vips to increase EXIF size limit to 8MB.
 
 ## [3.9.0]
