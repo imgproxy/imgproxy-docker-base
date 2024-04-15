@@ -109,7 +109,7 @@ curl -Ls https://gitlab.com/libtiff/libtiff/-/archive/v$LIBTIFF_VERSION/libtiff-
 print_download_stage cgif $CGIF_VERSION
 mkdir $DEPS_SRC/cgif
 cd $DEPS_SRC/cgif
-curl -Ls https://github.com/dloebl/cgif/archive/refs/tags/V$CGIF_VERSION.tar.gz \
+curl -Ls https://github.com/dloebl/cgif/archive/refs/tags/v$CGIF_VERSION.tar.gz \
   | tar -xzC . --strip-components=1
 
 print_download_stage libde265 $LIBDE265_VERSION
