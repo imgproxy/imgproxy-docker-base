@@ -31,6 +31,7 @@ cmake \
   -DBUILD_SHARED_LIBS=TRUE \
   -DZLIB_COMPAT=TRUE \
   -DWITH_ARMV6=FALSE \
+  -DWITH_GTEST=FALSE \
   ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
