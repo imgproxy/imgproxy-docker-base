@@ -304,6 +304,8 @@ cd $DEPS_SRC/libheif
 curl -Ls https://github.com/DarthSim/libheif/commit/d16d3a501779de86939ce2841580f95132dcc008.patch | git apply
 # Ignore alpha in Op_RGB_HDR_to_RRGGBBaa_BE if aplpha has different BPP
 curl -Ls https://github.com/DarthSim/libheif/commit/c0bdbf72db1a699e0e1872048d0d41f612c8945a.patch | git apply
+# kvazaar: protect against unexpected chroma values
+curl -Ls https://github.com/strukturag/libheif/commit/bef5f0f49f9024957189b5b465cd4d07078cd06f.patch | git apply
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \

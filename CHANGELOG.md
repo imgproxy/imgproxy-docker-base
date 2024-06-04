@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.9.2] - 2024-06-04
 ### Change
 - Update Go 1.22.3.
 - Update GLib 2.80.2.
@@ -12,6 +12,9 @@
 - Update gdkpixbuf 2.42.12.
 - Update harfbuzz 8.5.0.
 - Update fribidi 1.0.14.
+
+### Fix
+- Fix possible crash in libheif when encoding HEIC.
 
 ## [3.9.1] - 2024-04-15
 ### Change
