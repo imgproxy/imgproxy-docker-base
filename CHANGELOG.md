@@ -1,5 +1,18 @@
 # Changelog
 
+## [Unreleased]
+### Change
+- Update Go 1.22.3.
+- Update GLib 2.80.2.
+- Update highway 1.2.0.
+- Update libxml2 2.12.7.
+- Update libjpegturbo 3.0.3.
+- Update dav1d 1.4.2.
+- Update aom 3.9.0.
+- Update gdkpixbuf 2.42.12.
+- Update harfbuzz 8.5.0.
+- Update fribidi 1.0.14.
+
 ## [3.9.1] - 2024-04-15
 ### Change
 - Update Go to 1.22.2.
