@@ -28,7 +28,7 @@ fi
 
 if [ "$TARGETARCH" = "arm64" ]; then
   ARCH_ENV=$(cat << EOF
-export CFLAGS="-march=armv8.2-a"
+export CFLAGS="-march=armv8.2-a+fp16"
 EOF
   )
 fi
