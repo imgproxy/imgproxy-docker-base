@@ -1,9 +1,9 @@
-FROM --platform=${BUILDPLATFORM} ubuntu:mantic AS base
+FROM --platform=${BUILDPLATFORM} ubuntu:noble AS base
 
 ARG TARGETARCH
 
-# Use a custom sources.list that includes both amd64 and arm64 repositories
-COPY sources.list /etc/apt/sources.list
+# Use a custom ubuntu.sources that includes both amd64 and arm64 repositories
+COPY ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
 
 RUN dpkg --add-architecture ${TARGETARCH} \
   && apt-get update \
@@ -63,14 +63,14 @@ RUN ./build-deps.sh
 
 # ==============================================================================
 
-FROM --platform=${TARGETPLATFORM} ubuntu:mantic AS final
+FROM --platform=${TARGETPLATFORM} ubuntu:noble AS final
 LABEL maintainer="Sergey Alexandrovich <darthsim@gmail.com>"
 
 ARG TARGETARCH
 ARG BUILDARCH
 
-# Use a custom sources.list that includes both amd64 and arm64 repositories
-COPY sources.list /etc/apt/sources.list
+# Use a custom ubuntu.sources that includes both amd64 and arm64 repositories
+COPY ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
 
 RUN dpkg --add-architecture ${BUILDARCH} \
   && apt-get update \

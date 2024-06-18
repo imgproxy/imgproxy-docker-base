@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Change
+- Update base image to `ubuntu:noble`.
+
 ## [3.9.2] - 2024-06-04
 ### Change
 - Update Go 1.22.3.
