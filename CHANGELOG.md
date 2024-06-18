@@ -1,8 +1,16 @@
 # Changelog
 
-## [Unreleased]
+## [3.10.0] - 2024-06-18
 ### Change
 - Update base image to `ubuntu:noble`.
+- Update Go to 1.22.4.
+- Update GLib to 2.80.3.
+- Update libxml2 to 2.13.0.
+- Update dav1d to 1.4.3.
+- Update aom to 3.9.1.
+- Update fribidi to 1.0.15.
+- Update pango to 1.54.0.
+- Update librsvg to 2.58.1.
 
 ## [3.9.2] - 2024-06-04
 ### Change
