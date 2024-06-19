@@ -63,6 +63,13 @@ RUN ./build-deps.sh
 
 # ==============================================================================
 
+FROM --platform=${BUILDPLATFORM} base as golang
+
+COPY versions.sh install-go.sh ./
+RUN ./install-go.sh
+
+# ==============================================================================
+
 FROM --platform=${TARGETPLATFORM} ubuntu:noble AS final
 LABEL maintainer="Sergey Alexandrovich <darthsim@gmail.com>"
 
@@ -88,9 +95,7 @@ RUN dpkg --add-architecture ${BUILDARCH} \
 
 WORKDIR /root
 
-# install Go
-COPY versions.sh install-go.sh ./
-RUN ./install-go.sh
+COPY --from=golang /usr/local/go /usr/local/go
 ENV PATH $PATH:/usr/local/go/bin
 
 COPY --from=deps /usr/local/lib /usr/local/lib
