@@ -7,7 +7,7 @@ COPY ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
 
 RUN dpkg --add-architecture ${TARGETARCH} \
   && apt-get update \
-  && apt-get install -y --no-install-recommends \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     bash \
     curl \
     git \
@@ -36,7 +36,7 @@ ARG TARGETARCH
 
 COPY install-rust.sh ./
 
-RUN apt-get install -y --no-install-recommends \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     autoconf \
     autopoint \
     automake \
@@ -74,7 +74,7 @@ COPY ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
 
 RUN dpkg --add-architecture ${BUILDARCH} \
   && apt-get update \
-  && apt-get install -y --no-install-recommends \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     bash \
     curl \
     git \
