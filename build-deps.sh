@@ -314,11 +314,9 @@ ninja install/strip
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
 # libyuv support
-curl -Ls https://github.com/DarthSim/libheif/commit/d16d3a501779de86939ce2841580f95132dcc008.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/d435ac9d94507e9dc020e97e41d7a74c0bb0c7ba.patch | git apply
 # Ignore alpha in Op_RGB_HDR_to_RRGGBBaa_BE if aplpha has different BPP
-curl -Ls https://github.com/DarthSim/libheif/commit/c0bdbf72db1a699e0e1872048d0d41f612c8945a.patch | git apply
-# kvazaar: protect against unexpected chroma values
-curl -Ls https://github.com/strukturag/libheif/commit/bef5f0f49f9024957189b5b465cd4d07078cd06f.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/0585312b459597d028f2200aeb44e50a8c186e82.patch | git apply
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \

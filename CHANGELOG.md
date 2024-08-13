@@ -1,9 +1,18 @@
 # Changelog
 
-## [Unreleased]
+## [3.11.0] - 2024-08-13
 ### Change
 - Change base image to `debian:bullseye` for glibc compatibility.
 - Install all dependencies to `/opt/imgproxy` to avoid conflicts with system libraries.
+- Update Go to 1.22.6.
+- Update zlib to 2.2.1.
+- Update GLib to 2.81.1.
+- Update libxml2 to 2.13.3.
+- Update cgif to 0.4.1.
+- Update libheif to 1.18.2.
+- Update freetype to 2.13.3.
+- Update harfbuzz to 9.0.0.
+- Update vips to 8.15.3.
 
 ### Removed
 - Remove liblzma.
