@@ -89,9 +89,9 @@ WORKDIR /root
 COPY --from=golang /usr/local/go /usr/local/go
 ENV PATH $PATH:/usr/local/go/bin
 
-COPY --from=deps /usr/local/lib /usr/local/lib
-COPY --from=deps /usr/local/include /usr/local/include
-COPY --from=deps /usr/local/bin /usr/local/bin
+COPY --from=deps /opt/imgproxy/lib /opt/imgproxy/lib
+COPY --from=deps /opt/imgproxy/include /opt/imgproxy/include
+COPY --from=deps /opt/imgproxy/bin /opt/imgproxy/bin
 
 COPY --from=deps /root/.bashrc /root/.bashrc
 ENV BASH_ENV=/root/.bashrc

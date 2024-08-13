@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Change
 - Change base image to `debian:bullseye` for glibc compatibility.
+- Install all dependencies to `/opt/imgproxy` to avoid conflicts with system libraries.
 
 ### Removed
 - Remove liblzma.

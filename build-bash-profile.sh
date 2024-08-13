@@ -34,11 +34,10 @@ EOF
 fi
 
 cat << EOF
-export PATH="/root/.cargo/bin:/root/.python/bin:\$PATH"
-export PKG_CONFIG_LIBDIR=/usr/local/lib/pkgconfig:/usr/lib/$ARCH-linux-gnu/pkgconfig
-export LD_LIBRARY_PATH=/usr/local/lib
-export CPATH=/usr/local/include
+export PATH="/opt/imgproxy/bin:/root/.cargo/bin:/root/.python/bin:\$PATH"
+export PKG_CONFIG_LIBDIR=/opt/imgproxy/lib/pkgconfig
 export CGO_LDFLAGS_ALLOW="-s|-w"
+export CGO_LDFLAGS="-Wl,-rpath,/opt/imgproxy/lib"
 
 $ARCH_ENV
 export BUILD=$(uname -m)-linux-gnu
@@ -48,6 +47,8 @@ export CXX=$ARCH-linux-gnu-g++
 export STRIP=$ARCH-linux-gnu-strip
 export CFLAGS="\$CFLAGS -Os -fPIC -D_GLIBCXX_USE_CXX11_ABI=1 -fno-asynchronous-unwind-tables -ffunction-sections -fdata-sections"
 export CXXFLAGS=\$CFLAGS
+export CPPFLAGS="\$CPPFLAGS -I/opt/imgproxy/include"
+export LDFLAGS="\$LDFLAGS -L/opt/imgproxy/lib -Wl,-rpath,/opt/imgproxy/lib"
 export CMAKE_C_COMPILER=\$CC
 export CMAKE_CXX_COMPILER=\$CXX
 export CMAKE_CROSS_CONFIG="-DCMAKE_TOOLCHAIN_FILE=/root/cmake_$TARGETARCH.cmake"

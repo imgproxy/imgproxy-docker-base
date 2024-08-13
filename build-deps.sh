@@ -14,6 +14,9 @@ print_build_stage() {
 DEPS_SRC=/root/deps
 mkdir -p $DEPS_SRC
 
+TARGET_PATH=/opt/imgproxy
+mkdir -p $TARGET_PATH
+
 CARGO_TARGET=${CARGO_TARGET:-"x86_64-unknown-linux-gnu"}
 
 export CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1
@@ -27,7 +30,7 @@ CFLAGS="${CFLAGS} -O3" \
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
   -DBUILD_SHARED_LIBS=TRUE \
   -DZLIB_COMPAT=TRUE \
   -DWITH_ARMV6=FALSE \
@@ -41,7 +44,7 @@ cd $DEPS_SRC/ffi
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking \
@@ -55,7 +58,7 @@ cd $DEPS_SRC/glib
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   ${MESON_CROSS_CONFIG} \
   -Dlibmount=disabled \
@@ -72,7 +75,7 @@ CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
   -DBUILD_SHARED_LIBS=TRUE \
   -DHWY_ENABLE_EXAMPLES=FALSE \
   -DHWY_ENABLE_TESTS=FALSE \
@@ -85,14 +88,19 @@ print_build_stage quantizr $QUANTIZR_VERSION
 cd $DEPS_SRC/quantizr
 mkdir .cargo
 echo -e $CARGO_CROSS_CONFIG > .cargo/config
-cargo cinstall --release --library-type=cdylib --target=$CARGO_TARGET
+cargo cinstall \
+  --release \
+  --library-type=cdylib \
+  --target=$CARGO_TARGET \
+  --prefix=$TARGET_PATH \
+  --libdir=$TARGET_PATH/lib
 
 print_build_stage expat $LIBEXPAT_VERSION
 cd $DEPS_SRC/expat
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking \
@@ -104,7 +112,7 @@ cd $DEPS_SRC/libxml2
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking \
@@ -126,7 +134,7 @@ autoreconf -i
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking
@@ -138,7 +146,7 @@ CFLAGS="${CFLAGS} -O3" \
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking
@@ -151,7 +159,7 @@ cd _build
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
   -DENABLE_SHARED=TRUE \
   -DENABLE_STATIC=FALSE \
   -DWITH_TURBOJPEG=FALSE \
@@ -166,7 +174,7 @@ cd $DEPS_SRC/libpng
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking
@@ -178,7 +186,7 @@ CFLAGS="${CFLAGS} -O3 -DSPNG_SSE=4" \
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   ${MESON_CROSS_CONFIG}
 ninja -C _build
@@ -189,7 +197,7 @@ cd $DEPS_SRC/libwebp
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking \
@@ -204,7 +212,7 @@ cd _build
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
   -DBUILD_SHARED_LIBS=TRUE \
   -Dtiff-tools=FALSE \
   -Dtiff-tests=FALSE \
@@ -221,7 +229,7 @@ CFLAGS="${CFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   ${MESON_CROSS_CONFIG}
 ninja -C _build
@@ -232,7 +240,7 @@ cd $DEPS_SRC/libde265
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static
 make install-strip -j$(nproc)
@@ -242,7 +250,7 @@ cd $DEPS_SRC/kvazaar
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static
 make install-strip -j$(nproc)
@@ -252,7 +260,7 @@ cd $DEPS_SRC/dav1d
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   ${MESON_CROSS_CONFIG}
 ninja -C _build
@@ -262,7 +270,12 @@ ninja -C _build install
 # cd $DEPS_SRC/rav1e
 # mkdir .cargo
 # echo -e $CARGO_CROSS_CONFIG > .cargo/config
-# cargo cinstall --release --library-type=cdylib --target=$CARGO_TARGET
+# cargo cinstall \
+#   --release \
+#   --library-type=cdylib \
+#   --target=$CARGO_TARGET \
+#   --prefix=$TARGET_PATH \
+#   --libdir=$TARGET_PATH/lib
 
 print_build_stage aom $AOM_VERSION
 cd $DEPS_SRC/aom
@@ -272,7 +285,7 @@ AOM_AS_FLAGS=#{CFLAGS} \
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
   -DBUILD_SHARED_LIBS=1 \
   -DENABLE_DOCS=0 \
   -DENABLE_TESTS=0 \
@@ -292,7 +305,7 @@ CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
   -DBUILD_SHARED_LIBS=1 \
   ${CMAKE_CROSS_CONFIG} \
   ..
@@ -312,7 +325,7 @@ CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 cmake \
   -G"Ninja" \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=/usr/local \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
   --preset=release-noplugins \
   -DBUILD_SHARED_LIBS=1 \
   -DWITH_EXAMPLES=0 \
@@ -328,7 +341,7 @@ cd $DEPS_SRC/gdk-pixbuf
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   ${MESON_CROSS_CONFIG} \
   -Dintrospection=disabled \
@@ -339,14 +352,14 @@ meson setup _build \
   -Dbuiltin_loaders=png,jpeg,gif
 ninja -C _build
 ninja -C _build install
-rm -rf /usr/local/lib/gdk-pixbuf-2.0
+rm -rf $TARGET_PATH/lib/gdk-pixbuf-2.0
 
 print_build_stage freetype $FREETYPE_VERSION
 cd $DEPS_SRC/freetype
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   ${MESON_CROSS_CONFIG} \
   -Dzlib=enabled \
@@ -362,7 +375,7 @@ cd $DEPS_SRC/fontconfig
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking \
@@ -374,7 +387,7 @@ cd $DEPS_SRC/harfbuzz
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dgobject=disabled \
   -Dicu=disabled \
@@ -385,14 +398,14 @@ meson setup _build \
   ${MESON_CROSS_CONFIG}
 ninja -C _build
 ninja -C _build install
-rm /usr/local/lib/libharfbuzz-subset*
+rm $TARGET_PATH/lib/libharfbuzz-subset*
 
 print_build_stage pixman $PIXMAN_VERSION
 cd $DEPS_SRC/pixman
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dlibpng=disabled \
   -Diwmmxt=disabled \
@@ -408,7 +421,7 @@ cd $DEPS_SRC/cairo
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dquartz=disabled \
   -Dxcb=disabled \
@@ -427,7 +440,7 @@ autoreconf -fiv
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking
@@ -438,7 +451,7 @@ cd $DEPS_SRC/pango
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dgtk_doc=false \
   -Dintrospection=disabled \
@@ -458,7 +471,7 @@ RUST_TARGET=$CARGO_TARGET \
 ./configure \
   --build=$BUILD \
   --host=$HOST \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
   --disable-dependency-tracking \
@@ -482,7 +495,7 @@ CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
   --strip \
-  --prefix=/usr/local \
+  --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dgtk_doc=false \
   -Dintrospection=disabled \
@@ -490,7 +503,7 @@ meson setup _build \
   ${MESON_CROSS_CONFIG}
 ninja -C _build
 ninja -C _build install
-rm -rf /usr/local/lib/libvips-cpp.*
+rm -rf $TARGET_PATH/lib/libvips-cpp.*
 
-rm -rf /usr/local/lib/*.a
-rm -rf /usr/local/lib/*.la
+rm -rf $TARGET_PATH/lib/*.a
+rm -rf $TARGET_PATH/lib/*.la
