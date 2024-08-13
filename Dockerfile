@@ -1,9 +1,7 @@
-FROM --platform=${BUILDPLATFORM} ubuntu:noble AS base
+# Use Debian Bullseye as a base image to link against glibc 2.31
+FROM --platform=${BUILDPLATFORM} debian:bullseye-slim AS base
 
 ARG TARGETARCH
-
-# Use a custom ubuntu.sources that includes both amd64 and arm64 repositories
-COPY ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
 
 RUN dpkg --add-architecture ${TARGETARCH} \
   && apt-get update \
@@ -15,9 +13,7 @@ RUN dpkg --add-architecture ${TARGETARCH} \
     crossbuild-essential-${TARGETARCH} \
     pkg-config \
     libssl-dev \
-    libstdc++-11-dev:${TARGETARCH} \
-    liblzma-dev:${TARGETARCH} \
-    libzstd-dev:${TARGETARCH}
+    libstdc++-10-dev:${TARGETARCH}
 
 WORKDIR /root
 
@@ -70,14 +66,11 @@ RUN ./install-go.sh
 
 # ==============================================================================
 
-FROM --platform=${TARGETPLATFORM} ubuntu:noble AS final
+FROM --platform=${TARGETPLATFORM} debian:bullseye-slim AS final
 LABEL maintainer="Sergey Alexandrovich <darthsim@gmail.com>"
 
 ARG TARGETARCH
 ARG BUILDARCH
-
-# Use a custom ubuntu.sources that includes both amd64 and arm64 repositories
-COPY ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources
 
 RUN dpkg --add-architecture ${BUILDARCH} \
   && apt-get update \
@@ -89,9 +82,7 @@ RUN dpkg --add-architecture ${BUILDARCH} \
     build-essential \
     pkg-config \
     libssl-dev \
-    libstdc++-11-dev \
-    liblzma-dev \
-    libzstd-dev
+    libstdc++-10-dev
 
 WORKDIR /root
 

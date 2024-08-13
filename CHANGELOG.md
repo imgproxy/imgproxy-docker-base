@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+### Change
+- Change base image to `debian:bullseye` for glibc compatibility.
+
+### Removed
+- Remove liblzma.
+- Remove libzstd.
+
 ## [3.10.0] - 2024-06-18
 ### Change
 - Update base image to `ubuntu:noble`.
