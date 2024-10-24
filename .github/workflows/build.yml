@@ -39,7 +39,7 @@ jobs:
           tags: ${{ env.DOCKER_META_TAGS }}
           flavor: |
             latest=auto
-            suffix=-${{ matrix.build.arch }}
+            suffix=-${{ matrix.build.arch }},onlatest=true
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
