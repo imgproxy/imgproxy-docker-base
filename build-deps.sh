@@ -55,6 +55,8 @@ make install-strip -j$(nproc)
 
 print_build_stage glib $GLIB_VERSION
 cd $DEPS_SRC/glib
+# Build GLib without gregex
+curl -Ls https://gist.githubusercontent.com/kleisauke/284d685efa00908da99ea6afbaaf39ae/raw/36e32c79e7962c5ea96cbb3f9c629e9145253e30/glib-without-gregex.patch | patch -p1
 meson setup _build \
   --buildtype=release \
   --strip \
@@ -63,7 +65,12 @@ meson setup _build \
   ${MESON_CROSS_CONFIG} \
   -Dlibmount=disabled \
   -Dtests=false \
-  -Dinstalled_tests=false
+  -Dintrospection=disabled \
+  -Dnls=disabled \
+  -Dsysprof=disabled \
+  -Dlibelf=disabled \
+  -Dinstalled_tests=false \
+  -Dglib_debug=disabled
 ninja -C _build
 ninja -C _build install
 
@@ -334,24 +341,6 @@ cmake \
   ..
 ninja install/strip
 
-print_build_stage gdk-pixbuf $GDKPIXBUF_VERSION
-cd $DEPS_SRC/gdk-pixbuf
-meson setup _build \
-  --buildtype=release \
-  --strip \
-  --prefix=$TARGET_PATH \
-  --libdir=lib \
-  ${MESON_CROSS_CONFIG} \
-  -Dintrospection=disabled \
-  -Dinstalled_tests=false \
-  -Dgio_sniffing=false \
-  -Dman=false \
-  -Dtiff=disabled \
-  -Dbuiltin_loaders=png,jpeg,gif
-ninja -C _build
-ninja -C _build install
-rm -rf $TARGET_PATH/lib/gdk-pixbuf-2.0
-
 print_build_stage freetype $FREETYPE_VERSION
 cd $DEPS_SRC/freetype
 meson setup _build \
@@ -421,7 +410,9 @@ meson setup _build \
   --strip \
   --prefix=$TARGET_PATH \
   --libdir=lib \
+  -Dfontconfig=enabled \
   -Dquartz=disabled \
+  -Dtee=disabled \
   -Dxcb=disabled \
   -Dxlib=disabled \
   -Dzlib=disabled \
@@ -460,26 +451,28 @@ ninja -C _build install
 
 print_build_stage librsvg $LIBRSVG_VERSION
 cd $DEPS_SRC/librsvg
-sed -i'.bak' "s/^\(Requires:.*\)/\1 cairo-gobject pangocairo/" librsvg.pc.in
-# LTO optimization does not work for staticlib+rlib compilation
-sed -i'.bak' "s/, \"rlib\"//" Cargo.toml
+# Remove pdf and ps support
+sed -i'.bak' "/cairo-rs = /s/, \"pdf\", \"ps\"//" {librsvg-c,rsvg}/Cargo.toml
 # Skip executables
-sed -i'.bak' "/SCRIPTS = /d" Makefile.in
-RUST_TARGET=$CARGO_TARGET \
-./configure \
-  --build=$BUILD \
-  --host=$HOST \
+sed -i'.bak' "/subdir('rsvg_convert')/d" meson.build
+# For some reason, librsvg fails to build without -ldl
+CFLAGS="${CFLAGS} -ldl" CXXFLAGS="${CXXFLAGS} -ldl" \
+LDFLAGS="${LDFLAGS} -ldl" \
+meson setup _build \
+  --buildtype=release \
+  --strip \
   --prefix=$TARGET_PATH \
-  --enable-shared \
-  --disable-static \
-  --disable-dependency-tracking \
-  --disable-introspection \
-  --disable-tools \
-  --disable-pixbuf-loader \
-  --disable-nls \
-  --without-libiconv-prefix \
-  --without-libintl-prefix
-make install-strip -j$(nproc)
+  --libdir=lib \
+  -Dtriplet=$CARGO_TARGET \
+  -Dintrospection=disabled \
+  -Dpixbuf{,-loader}=disabled \
+  -Ddocs=disabled \
+  -Dvala=disabled \
+  -Dtests=false \
+  -Davif=enabled \
+  ${MESON_CROSS_CONFIG}
+ninja -C _build
+ninja -C _build install
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips

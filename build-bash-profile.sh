@@ -48,7 +48,7 @@ export STRIP=$ARCH-linux-gnu-strip
 export CFLAGS="\$CFLAGS -Os -fPIC -D_GLIBCXX_USE_CXX11_ABI=1 -fno-asynchronous-unwind-tables -ffunction-sections -fdata-sections"
 export CXXFLAGS=\$CFLAGS
 export CPPFLAGS="\$CPPFLAGS -I/opt/imgproxy/include"
-export LDFLAGS="\$LDFLAGS -L/opt/imgproxy/lib -Wl,-rpath,/opt/imgproxy/lib"
+export LDFLAGS="\$LDFLAGS -L/opt/imgproxy/lib -Wl,--gc-sections -Wl,-rpath,/opt/imgproxy/lib"
 export CMAKE_C_COMPILER=\$CC
 export CMAKE_CXX_COMPILER=\$CXX
 export CMAKE_CROSS_CONFIG="-DCMAKE_TOOLCHAIN_FILE=/root/cmake_$TARGETARCH.cmake"

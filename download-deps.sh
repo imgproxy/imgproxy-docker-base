@@ -73,7 +73,7 @@ curl -Ls https://github.com/libexif/libexif/archive/libexif-$(snake_version $LIB
 print_download_stage lcms2 $LCMS2_VERSION
 mkdir $DEPS_SRC/lcms2
 cd $DEPS_SRC/lcms2
-curl -Ls https://sourceforge.net/projects/lcms/files/lcms/$(minor_version $LCMS2_VERSION)/lcms2-$LCMS2_VERSION.tar.gz/download \
+curl -Ls https://github.com/mm2/Little-CMS/releases/download/lcms${LCMS2_VERSION}/lcms2-${LCMS2_VERSION}.tar.gz \
   | tar -xzC . --strip-components=1
 
 print_download_stage libjpeg-turbo $LIBJPEGTURBO_VERSION
@@ -153,12 +153,6 @@ mkdir $DEPS_SRC/libheif
 cd $DEPS_SRC/libheif
 curl -Ls https://github.com/strukturag/libheif/releases/download/v$LIBHEIF_VERSION/libheif-$LIBHEIF_VERSION.tar.gz \
   | tar -xzC . --strip-components=1
-
-print_download_stage gdk-pixbuf $GDKPIXBUF_VERSION
-mkdir $DEPS_SRC/gdk-pixbuf
-cd $DEPS_SRC/gdk-pixbuf
-curl -Lks https://download.gnome.org/sources/gdk-pixbuf/$(minor_version $GDKPIXBUF_VERSION)/gdk-pixbuf-${GDKPIXBUF_VERSION}.tar.xz \
-  | tar -xJC . --strip-components=1
 
 print_download_stage freetype $FREETYPE_VERSION
 mkdir $DEPS_SRC/freetype

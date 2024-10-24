@@ -1,5 +1,25 @@
 # Changelog
 
+## [3.12.0] - 2024-10-24
+### Changed
+- Update Go to 1.23.2.
+- Update zlib to 2.2.2.
+- Update GLib to 2.82.2.
+- Update libexpat to 2.6.3.
+- Update libxml2 to 2.13.4.
+- Update libjpegturbo to 3.0.4.
+- Update libtiff to 4.7.0.
+- Update dav1d to 1.5.0.
+- Update aom to 3.10.0.
+- Update harfbuzz to 10.0.1.
+- Update cairo to 1.18.2.
+- Update fribidi to 1.0.16.
+- Update librsvg to 2.59.1.
+- Update vips to 8.15.5.
+
+### Removed
+- Remove gdkpixbuf.
+
 ## [3.11.0] - 2024-08-13
 ### Change
 - Change base image to `debian:bullseye` for glibc compatibility.
