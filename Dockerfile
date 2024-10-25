@@ -1,5 +1,5 @@
-# Use Debian Bullseye as a base image to link against glibc 2.31
-FROM debian:bullseye-slim AS base
+# Use Debian Bullseye as a base image to link against glibc 2.31.
+FROM public.ecr.aws/debian/debian:bullseye-slim AS base
 
 RUN apt-get update \
   && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -61,7 +61,7 @@ RUN ./install-go.sh
 
 # ==============================================================================
 
-FROM debian:bullseye-slim AS final
+FROM public.ecr.aws/debian/debian:bullseye-slim AS final
 LABEL maintainer="Sergey Alexandrovich <darthsim@gmail.com>"
 
 RUN apt-get update \
