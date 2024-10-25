@@ -2,6 +2,8 @@ name: Build
 
 on:
   push:
+    branches:
+      - 'test/*'
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+*'
       - 'test-[a-zA-Z0-9]+'
@@ -11,7 +13,7 @@ env:
     darthsim/imgproxy-base
   DOCKER_META_TAGS: |
     type=semver,pattern=v{{version}}
-    type=raw,value=${{github.ref_name}},enable=${{ startsWith(github.ref, 'ref/tags/test-') }}
+    type=ref,event=branch,enable=${{ startsWith(github.ref, 'refs/heads/test/') }}
 
 jobs:
   build:
