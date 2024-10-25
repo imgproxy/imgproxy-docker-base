@@ -17,8 +17,6 @@ mkdir -p $DEPS_SRC
 TARGET_PATH=/opt/imgproxy
 mkdir -p $TARGET_PATH
 
-CARGO_TARGET=${CARGO_TARGET:-"x86_64-unknown-linux-gnu"}
-
 export CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1
 export CARGO_PROFILE_RELEASE_LTO=true
 
@@ -35,15 +33,12 @@ cmake \
   -DZLIB_COMPAT=TRUE \
   -DWITH_ARMV6=FALSE \
   -DWITH_GTEST=FALSE \
-  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
 print_build_stage ffi $FFI_VERSION
 cd $DEPS_SRC/ffi
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
@@ -60,9 +55,9 @@ curl -Ls https://gist.githubusercontent.com/kleisauke/284d685efa00908da99ea6afba
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
-  ${MESON_CROSS_CONFIG} \
   -Dlibmount=disabled \
   -Dtests=false \
   -Dintrospection=disabled \
@@ -87,26 +82,20 @@ cmake \
   -DHWY_ENABLE_EXAMPLES=FALSE \
   -DHWY_ENABLE_TESTS=FALSE \
   -DHWY_ENABLE_CONTRIB=FALSE \
-  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
 print_build_stage quantizr $QUANTIZR_VERSION
 cd $DEPS_SRC/quantizr
-mkdir .cargo
-echo -e $CARGO_CROSS_CONFIG > .cargo/config
 cargo cinstall \
   --release \
   --library-type=cdylib \
-  --target=$CARGO_TARGET \
   --prefix=$TARGET_PATH \
   --libdir=$TARGET_PATH/lib
 
 print_build_stage expat $LIBEXPAT_VERSION
 cd $DEPS_SRC/expat
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
@@ -117,8 +106,6 @@ make install -j$(nproc)
 print_build_stage libxml2 $LIBXML2_VERSION
 cd $DEPS_SRC/libxml2
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
@@ -139,8 +126,6 @@ print_build_stage libexif $LIBEXIF_VERSION
 cd $DEPS_SRC/libexif
 autoreconf -i
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
@@ -151,8 +136,6 @@ print_build_stage lcms2 $LCMS2_VERSION
 cd $DEPS_SRC/lcms2
 CFLAGS="${CFLAGS} -O3" \
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
@@ -172,15 +155,12 @@ cmake \
   -DWITH_TURBOJPEG=FALSE \
   -DWITH_JPEG8=1 \
   -DPNG_SUPPORTED=FALSE \
-  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
 print_build_stage libpng $LIBPNG_VERSION
 cd $DEPS_SRC/libpng
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
@@ -193,17 +173,15 @@ CFLAGS="${CFLAGS} -O3 -DSPNG_SSE=4" \
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
-  --libdir=lib \
-  ${MESON_CROSS_CONFIG}
+  --libdir=lib
 ninja -C _build
 ninja -C _build install
 
 print_build_stage libwebp $LIBWEBP_VERSION
 cd $DEPS_SRC/libwebp
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
@@ -226,7 +204,6 @@ cmake \
   -Dtiff-contrib=FALSE \
   -Dtiff-docs=FALSE \
   -Dtiff-deprecated=FALSE \
-  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
@@ -236,17 +213,15 @@ CFLAGS="${CFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
-  --libdir=lib \
-  ${MESON_CROSS_CONFIG}
+  --libdir=lib
 ninja -C _build
 ninja -C _build install
 
 print_build_stage libde265 $LIBDE265_VERSION
 cd $DEPS_SRC/libde265
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static
@@ -255,8 +230,6 @@ make install-strip -j$(nproc)
 print_build_stage kvazaar $KVAZAAR_VERSION
 cd $DEPS_SRC/kvazaar
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static
@@ -267,20 +240,17 @@ cd $DEPS_SRC/dav1d
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
-  --libdir=lib \
-  ${MESON_CROSS_CONFIG}
+  --libdir=lib
 ninja -C _build
 ninja -C _build install
 
 # print_build_stage rav1e $RAV1E_VERSION
 # cd $DEPS_SRC/rav1e
-# mkdir .cargo
-# echo -e $CARGO_CROSS_CONFIG > .cargo/config
 # cargo cinstall \
 #   --release \
 #   --library-type=cdylib \
-#   --target=$CARGO_TARGET \
 #   --prefix=$TARGET_PATH \
 #   --libdir=$TARGET_PATH/lib
 
@@ -300,7 +270,6 @@ cmake \
   -DENABLE_TOOLS=0 \
   -DENABLE_EXAMPLES=0 \
   -DCONFIG_WEBM_IO=0 \
-  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
@@ -314,7 +283,6 @@ cmake \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
   -DBUILD_SHARED_LIBS=1 \
-  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
@@ -337,7 +305,6 @@ cmake \
   -DWITH_KVAZAAR=1 \
   -DWITH_DAV1D=1 \
   -DWITH_AOM_DECODER=0 \
-  ${CMAKE_CROSS_CONFIG} \
   ..
 ninja install/strip
 
@@ -346,9 +313,9 @@ cd $DEPS_SRC/freetype
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
-  ${MESON_CROSS_CONFIG} \
   -Dzlib=enabled \
   -Dpng=disabled \
   -Dharfbuzz=disabled \
@@ -360,8 +327,6 @@ ninja -C _build install
 print_build_stage fontconfig $FONTCONFIG_VERSION
 cd $DEPS_SRC/fontconfig
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
@@ -374,6 +339,7 @@ cd $DEPS_SRC/harfbuzz
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dgobject=disabled \
@@ -381,8 +347,7 @@ meson setup _build \
   -Dtests=disabled \
   -Dintrospection=disabled \
   -Ddocs=disabled \
-  -Dbenchmark=disabled \
-  ${MESON_CROSS_CONFIG}
+  -Dbenchmark=disabled
 ninja -C _build
 ninja -C _build install
 rm $TARGET_PATH/lib/libharfbuzz-subset*
@@ -392,14 +357,14 @@ cd $DEPS_SRC/pixman
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dlibpng=disabled \
   -Diwmmxt=disabled \
   -Dgtk=disabled \
   -Dopenmp=disabled \
-  -Dtests=disabled \
-  ${MESON_CROSS_CONFIG}
+  -Dtests=disabled
 ninja -C _build
 ninja -C _build install
 
@@ -408,6 +373,7 @@ cd $DEPS_SRC/cairo
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dfontconfig=enabled \
@@ -418,8 +384,7 @@ meson setup _build \
   -Dzlib=disabled \
   -Dtests=disabled \
   -Dspectre=disabled \
-  -Dsymbol-lookup=disabled \
-  ${MESON_CROSS_CONFIG}
+  -Dsymbol-lookup=disabled
 ninja -C _build
 ninja -C _build install
 
@@ -427,8 +392,6 @@ print_build_stage fribidi $FRIBIDI_VERSION
 cd $DEPS_SRC/fribidi
 autoreconf -fiv
 ./configure \
-  --build=$BUILD \
-  --host=$HOST \
   --prefix=$TARGET_PATH \
   --enable-shared \
   --disable-static \
@@ -440,12 +403,12 @@ cd $DEPS_SRC/pango
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dgtk_doc=false \
   -Dintrospection=disabled \
-  -Dfontconfig=enabled \
-  ${MESON_CROSS_CONFIG}
+  -Dfontconfig=enabled
 ninja -C _build
 ninja -C _build install
 
@@ -461,16 +424,15 @@ LDFLAGS="${LDFLAGS} -ldl" \
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
-  -Dtriplet=$CARGO_TARGET \
   -Dintrospection=disabled \
   -Dpixbuf{,-loader}=disabled \
   -Ddocs=disabled \
   -Dvala=disabled \
   -Dtests=false \
-  -Davif=enabled \
-  ${MESON_CROSS_CONFIG}
+  -Davif=enabled
 ninja -C _build
 ninja -C _build install
 
@@ -486,12 +448,12 @@ CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
   --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dgtk_doc=false \
   -Dintrospection=disabled \
-  -Dmodules=disabled \
-  ${MESON_CROSS_CONFIG}
+  -Dmodules=disabled
 ninja -C _build
 ninja -C _build install
 rm -rf $TARGET_PATH/lib/libvips-cpp.*
