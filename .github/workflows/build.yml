@@ -10,7 +10,7 @@ on:
 
 env:
   DOCKER_META_IMAGES: |
-    darthsim/imgproxy-base
+    ghcr.io/imgproxy/imgproxy-base
   DOCKER_META_TAGS: |
     type=semver,pattern=v{{version}}
     type=ref,event=branch,enable=${{ startsWith(github.ref, 'refs/heads/test/') }}
@@ -29,6 +29,9 @@ jobs:
     runs-on:
       - codebuild-imgproxy-${{ github.run_id }}-${{ github.run_attempt }}
       - image:${{ matrix.build.image }}
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,11 +46,12 @@ jobs:
             latest=auto
             suffix=-${{ matrix.build.arch }},onlatest=true
 
-      - name: Login to Docker Hub
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -64,6 +68,9 @@ jobs:
   push_manifests:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Docker meta
         id: meta
@@ -74,11 +81,12 @@ jobs:
           flavor: |
             latest=auto
 
-      - name: Login to Docker Hub
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push manifests
         run: |
