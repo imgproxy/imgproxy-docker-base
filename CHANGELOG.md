@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [3.13.0] - 2024-12-05
 ### Added
 - Add brotli 1.1.0.
 - Add libjxl 0.11.1.
