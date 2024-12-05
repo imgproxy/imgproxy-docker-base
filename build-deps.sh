@@ -329,9 +329,9 @@ ninja install/strip
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
 # libyuv support
-curl -Ls https://github.com/DarthSim/libheif/commit/d435ac9d94507e9dc020e97e41d7a74c0bb0c7ba.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/668ef49faa25d62faf02a5ee1c2fd0da426acd23.patch | git apply
 # Ignore alpha in Op_RGB_HDR_to_RRGGBBaa_BE if aplpha has different BPP
-curl -Ls https://github.com/DarthSim/libheif/commit/0585312b459597d028f2200aeb44e50a8c186e82.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/b3e71a5bd320b5d70b9f48f0aa02efc907c9bd36.patch | git apply
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
@@ -401,9 +401,9 @@ meson setup _build \
   --prefix=$TARGET_PATH \
   --libdir=lib \
   -Dlibpng=disabled \
-  -Diwmmxt=disabled \
   -Dgtk=disabled \
   -Dopenmp=disabled \
+  -Ddemos=disabled \
   -Dtests=disabled
 ninja -C _build
 ninja -C _build install
@@ -478,12 +478,6 @@ ninja -C _build install
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
-# tiffload: use TIFFRGBAImage or TIFFReadRGBATile if tiff image type is not natively supported by libvips
-curl -Ls https://github.com/DarthSim/libvips/commit/c1887f564108106c0c84fd89109774eb90f597d9.patch | git apply
-# heifsave: set `threads` to vips_concurrency_get()
-curl -Ls https://github.com/DarthSim/libvips/commit/3f35bd9ca5274e62ebd1c4f45d273a7568bad22d.patch | git apply
-# Increase EXIF size limit to 8Mb
-curl -Ls https://github.com/DarthSim/libvips/commit/1e2413f966bf356e7dc506d2c253c67b90c35d86.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \

@@ -5,6 +5,19 @@
 - Add brotli 1.1.0.
 - Add libjxl 0.11.1.
 
+### Changed
+- Update Go to 1.23.4.
+- Update GLib to 2.83.0.
+- Update libexpat to 2.6.4.
+- Update libxml2 to 2.13.5.
+- Update aom to 3.11.0.
+- Update libheif to 1.19.5.
+- Update harfbuzz to 10.1.0.
+- Update pixman to 0.44.2.
+- Update pango to 1.55.0.
+- Update librsvg to 2.59.2.
+- Update vips to 8.16.0.
+
 ## [3.12.0] - 2024-10-24
 ### Changed
 - Update Go to 1.23.2.
