@@ -36,6 +36,20 @@ cmake \
   ..
 ninja install/strip
 
+print_build_stage brotli $BROTLI_VERSION
+cd $DEPS_SRC/brotli
+mkdir _build
+cd _build
+CFLAGS="${CFLAGS} -O3" \
+cmake \
+  -G"Ninja" \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
+  -DBUILD_SHARED_LIBS=TRUE \
+  -DBROTLI_DISABLE_TESTS=TRUE \
+  ..
+ninja install/strip
+
 print_build_stage ffi $FFI_VERSION
 cd $DEPS_SRC/ffi
 ./configure \
@@ -155,6 +169,32 @@ cmake \
   -DWITH_TURBOJPEG=FALSE \
   -DWITH_JPEG8=1 \
   -DPNG_SUPPORTED=FALSE \
+  ..
+ninja install/strip
+
+print_build_stage libjxl $LIBJXL_VERSION
+cd $DEPS_SRC/libjxl
+mkdir _build
+cd _build
+cmake \
+  -G"Ninja" \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
+  -DJPEGXL_STATIC=FALSE \
+  -DBUILD_TESTING=OFF \
+  -DJPEGXL_ENABLE_FUZZERS=FALSE \
+  -DJPEGXL_ENABLE_DEVTOOLS=FALSE \
+  -DJPEGXL_ENABLE_TOOLS=FALSE \
+  -DJPEGXL_ENABLE_JPEGLI=FALSE \
+  -DJPEGXL_ENABLE_JPEGLI_LIBJPEG=FALSE \
+  -DJPEGXL_ENABLE_DOXYGEN=FALSE \
+  -DJPEGXL_ENABLE_MANPAGES=FALSE \
+  -DJPEGXL_ENABLE_BENCHMARK=FALSE \
+  -DJPEGXL_ENABLE_EXAMPLES=FALSE \
+  -DJPEGXL_BUNDLE_LIBPNG=FALSE \
+  -DJPEGXL_ENABLE_JNI=FALSE \
+  -DJPEGXL_ENABLE_SKCMS=FALSE \
+  -DJPEGXL_ENABLE_SJPEG=FALSE \
   ..
 ninja install/strip
 

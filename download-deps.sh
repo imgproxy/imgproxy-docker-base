@@ -28,6 +28,12 @@ cd $DEPS_SRC/zlib
 curl -Lks https://github.com/zlib-ng/zlib-ng/archive/${ZLIB_VERSION}.tar.gz \
   | tar -xzC . --strip-components=1
 
+print_download_stage brotli $BROTLI_VERSION
+mkdir $DEPS_SRC/brotli
+cd $DEPS_SRC/brotli
+curl -Lks https://github.com/google/brotli/archive/refs/tags/v$BROTLI_VERSION.tar.gz \
+  | tar -xzC . --strip-components=1
+
 print_download_stage ffi $FFI_VERSION
 mkdir $DEPS_SRC/ffi
 cd $DEPS_SRC/ffi
@@ -80,6 +86,12 @@ print_download_stage libjpeg-turbo $LIBJPEGTURBO_VERSION
 mkdir $DEPS_SRC/libjpeg-turbo
 cd $DEPS_SRC/libjpeg-turbo
 curl -Ls https://github.com/libjpeg-turbo/libjpeg-turbo/archive/$LIBJPEGTURBO_VERSION.tar.gz \
+  | tar -xzC . --strip-components=1
+
+print_download_stage libjxl $LIBJXL_VERSION
+mkdir $DEPS_SRC/libjxl
+cd $DEPS_SRC/libjxl
+curl -Ls https://github.com/libjxl/libjxl/archive/refs/tags/v$LIBJXL_VERSION.tar.gz \
   | tar -xzC . --strip-components=1
 
 print_download_stage libpng $LIBPNG_VERSION
