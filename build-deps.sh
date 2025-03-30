@@ -65,7 +65,7 @@ make install-strip -j$(nproc)
 print_build_stage glib $GLIB_VERSION
 cd $DEPS_SRC/glib
 # Build GLib without gregex
-curl -Ls https://gist.githubusercontent.com/kleisauke/284d685efa00908da99ea6afbaaf39ae/raw/36e32c79e7962c5ea96cbb3f9c629e9145253e30/glib-without-gregex.patch | patch -p1
+curl -Ls https://gist.github.com/kleisauke/284d685efa00908da99ea6afbaaf39ae/raw/936a6b8013d07d358c6944cc5b5f0e27db707ace/glib-without-gregex.patch | patch -p1
 meson setup _build \
   --buildtype=release \
   --strip \
@@ -329,9 +329,9 @@ ninja install/strip
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
 # libyuv support
-curl -Ls https://github.com/DarthSim/libheif/commit/668ef49faa25d62faf02a5ee1c2fd0da426acd23.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/a1deab044df96b3758c1c0476169dffeb85030f1.patch | git apply
 # Ignore alpha in Op_RGB_HDR_to_RRGGBBaa_BE if aplpha has different BPP
-curl -Ls https://github.com/DarthSim/libheif/commit/b3e71a5bd320b5d70b9f48f0aa02efc907c9bd36.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/dcd4f0f90704a849ddd2440c671a7df41110c9b5.patch | git apply
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
@@ -366,13 +366,19 @@ ninja -C _build install
 
 print_build_stage fontconfig $FONTCONFIG_VERSION
 cd $DEPS_SRC/fontconfig
-./configure \
+meson setup _build \
+  --buildtype=release \
+  --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
-  --enable-shared \
-  --disable-static \
-  --disable-dependency-tracking \
-  --disable-docs
-make install-strip -j$(nproc)
+  --libdir=lib \
+  -Ddoc=disabled \
+  -Dnls=disabled \
+  -Dtests=disabled \
+  -Dtools=disabled \
+  -Dcache-build=disabled
+ninja -C _build
+ninja -C _build install
 
 print_build_stage harfbuzz $HARFBUZZ_VERSION
 cd $DEPS_SRC/harfbuzz

@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.13.1] - 2025-03-30
+### Changed
+- Update Go to 1.24.1.
+- Update zlib to 2.2.4.
+- Update ffi to 3.4.7.
+- Update GLib to 2.84.0.
+- Update libexpat to 2.7.1.
+- Update libxml2 to 2.14.0.
+- Update libexif to 0.6.25.
+- Update lcms2 to 2.17.
+- Update libjpegturbo to 3.1.0.
+- Update libwebp to 1.5.0.
+- Update cgif to 0.5.0.
+- Update dav1d to 1.5.1.
+- Update aom to 3.12.0.
+- Update libheif to 1.19.7.
+- Update fontconfig to 2.16.1.
+- Update harfbuzz to 11.0.0.
+- Update cairo to 1.18.4.
+- Update pango to 1.56.3.
+- Update librsvg to 2.60.0.
+- Update vips to 8.16.1.
+
 ## [3.13.0] - 2024-12-05
 ### Added
 - Add brotli 1.1.0.

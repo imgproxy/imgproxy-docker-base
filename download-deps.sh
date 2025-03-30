@@ -175,8 +175,8 @@ curl -Ls https://gitlab.freedesktop.org/freetype/freetype/-/archive/VER-${FREETY
 print_download_stage fontconfig $FONTCONFIG_VERSION
 mkdir $DEPS_SRC/fontconfig
 cd $DEPS_SRC/fontconfig
-curl -Ls https://www.freedesktop.org/software/fontconfig/release/fontconfig-${FONTCONFIG_VERSION}.tar.xz \
-  | tar -xJC . --strip-components=1
+curl -Ls https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/${FONTCONFIG_VERSION}/fontconfig-${FONTCONFIG_VERSION}.tar.gz \
+  | tar -xzC . --strip-components=1
 
 print_download_stage harfbuzz $HARFBUZZ_VERSION
 mkdir $DEPS_SRC/harfbuzz
