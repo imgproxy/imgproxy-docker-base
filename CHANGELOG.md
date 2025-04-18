@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.13.2] - 2025-04-18
+### Changed
+- Update Go to 1.24.2.
+- Update ffi to 3.4.8.
+- Update GLib to 2.84.1.
+- Update quantizr to 1.4.3.
+- Update libxml2 to 2.14.2.
+- Update aom to 3.12.1.
+- Update fontconfig to 2.16.2.
+- Update harfbuzz to 11.1.0.
+
 ## [3.13.1] - 2025-03-30
 ### Changed
 - Update Go to 1.24.1.
