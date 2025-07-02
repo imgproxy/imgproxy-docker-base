@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.13.3] - 2025-07-02
+### Changed
+- Update Go to 1.24.4.
+- Update ffi to 3.5.1.
+- Update GLib to 2.85.1.
+- Update libxml2 to 2.14.4.
+- Update libjpegturbo to 3.1.1.
+- Update libde265 to 1.0.16.
+- Update libheif to 1.20.0.
+- Update fontconfig to 2.17.0.
+- Update harfbuzz to 11.2.1.
+- Update pixman to 0.46.2.
+- Update pango to 1.56.4.
+- Update vips to 8.17.0.
+
 ## [3.13.2] - 2025-04-18
 ### Changed
 - Update Go to 1.24.2.

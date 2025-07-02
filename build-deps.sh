@@ -65,7 +65,7 @@ make install-strip -j$(nproc)
 print_build_stage glib $GLIB_VERSION
 cd $DEPS_SRC/glib
 # Build GLib without gregex
-curl -Ls https://gist.github.com/kleisauke/284d685efa00908da99ea6afbaaf39ae/raw/936a6b8013d07d358c6944cc5b5f0e27db707ace/glib-without-gregex.patch | patch -p1
+curl -Ls https://gist.github.com/kleisauke/284d685efa00908da99ea6afbaaf39ae/raw/12773e117bd557b83ba2a7410698db41813c3fda/glib-without-gregex.patch | patch -p1
 meson setup _build \
   --buildtype=release \
   --strip \
@@ -119,22 +119,23 @@ make install -j$(nproc)
 
 print_build_stage libxml2 $LIBXML2_VERSION
 cd $DEPS_SRC/libxml2
-./configure \
+meson setup _build \
+  --buildtype=release \
+  --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
-  --enable-shared \
-  --disable-static \
-  --disable-dependency-tracking \
-  --with-minimum \
-  --with-reader \
-  --with-writer \
-  --with-valid \
-  --with-http \
-  --with-tree \
-  --with-xpath \
-  --with-zlib \
-  --without-python \
-  --without-lzma
-make install-strip -j$(nproc)
+  --libdir=lib \
+  -Dminimum=true \
+  -Dreader=enabled \
+  -Dwriter=enabled \
+  -Dvalid=enabled \
+  -Dhttp=enabled \
+  -Dxpath=enabled \
+  -Dzlib=enabled \
+  -Dpython=disabled \
+  -Dlzma=disabled
+ninja -C _build
+ninja -C _build install
 
 print_build_stage libexif $LIBEXIF_VERSION
 cd $DEPS_SRC/libexif
@@ -329,9 +330,9 @@ ninja install/strip
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
 # libyuv support
-curl -Ls https://github.com/DarthSim/libheif/commit/a1deab044df96b3758c1c0476169dffeb85030f1.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/d58ce94240aabc3a94e2d84e97f091fd539d8b2c.patch | git apply
 # Ignore alpha in Op_RGB_HDR_to_RRGGBBaa_BE if aplpha has different BPP
-curl -Ls https://github.com/DarthSim/libheif/commit/dcd4f0f90704a849ddd2440c671a7df41110c9b5.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/84036c045e1816c4ba59ef735962e7ddcf0824c0.patch | git apply
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
@@ -344,6 +345,7 @@ cmake \
   -DWITH_EXAMPLES=0 \
   -DWITH_KVAZAAR=1 \
   -DWITH_DAV1D=1 \
+  -DWITH_DAV1D_PLUGIN=0 \
   -DWITH_AOM_DECODER=0 \
   ..
 ninja install/strip
@@ -484,6 +486,9 @@ ninja -C _build install
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
+# Suppress cache invalidation errors. See https://github.com/libvips/libvips/pull/4596
+# Remove when vips 8.17.1 is released
+curl -Ls https://github.com/libvips/libvips/commit/a8a9c9cb0973a57832f639d3b2eb3775b24c6af4.patch | git apply --exclude ChangeLog
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
@@ -491,7 +496,7 @@ meson setup _build \
   --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
-  -Dgtk_doc=false \
+  -Ddocs=false \
   -Dintrospection=disabled \
   -Dmodules=disabled
 ninja -C _build
