@@ -62,10 +62,23 @@ cd $DEPS_SRC/ffi
   --disable-raw-api
 make install-strip -j$(nproc)
 
+print_build_stage pcre2 $PCRE2_VERSION
+cd $DEPS_SRC/pcre2
+mkdir _build
+cd _build
+CFLAGS="${CFLAGS} -O3" \
+cmake \
+  -G"Ninja" \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
+  -DBUILD_SHARED_LIBS=TRUE \
+  -DBUILD_STATIC_LIBS=OFF \
+  -DPCRE2_SUPPORT_JIT=ON \
+  ..
+ninja install/strip
+
 print_build_stage glib $GLIB_VERSION
 cd $DEPS_SRC/glib
-# Build GLib without gregex
-curl -Ls https://gist.github.com/kleisauke/284d685efa00908da99ea6afbaaf39ae/raw/12773e117bd557b83ba2a7410698db41813c3fda/glib-without-gregex.patch | patch -p1
 meson setup _build \
   --buildtype=release \
   --strip \
@@ -125,15 +138,7 @@ meson setup _build \
   --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
-  -Dminimum=true \
-  -Dreader=enabled \
-  -Dwriter=enabled \
-  -Dvalid=enabled \
-  -Dhttp=enabled \
-  -Dxpath=enabled \
-  -Dzlib=enabled \
-  -Dpython=disabled \
-  -Dlzma=disabled
+  -Dminimum=true
 ninja -C _build
 ninja -C _build install
 
@@ -270,6 +275,7 @@ make install-strip -j$(nproc)
 
 print_build_stage kvazaar $KVAZAAR_VERSION
 cd $DEPS_SRC/kvazaar
+./autogen.sh
 ./configure \
   --prefix=$TARGET_PATH \
   --enable-shared \
@@ -330,9 +336,9 @@ ninja install/strip
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
 # libyuv support
-curl -Ls https://github.com/DarthSim/libheif/commit/d58ce94240aabc3a94e2d84e97f091fd539d8b2c.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/193f65d241262e9c6291b6f8c57cd38da07b9422.patch | git apply
 # Ignore alpha in Op_RGB_HDR_to_RRGGBBaa_BE if aplpha has different BPP
-curl -Ls https://github.com/DarthSim/libheif/commit/84036c045e1816c4ba59ef735962e7ddcf0824c0.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/9d41f81cdd0a119f5b278ad2eee09ddad14ac2a4.patch | git apply
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
@@ -486,9 +492,6 @@ ninja -C _build install
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
-# Suppress cache invalidation errors. See https://github.com/libvips/libvips/pull/4596
-# Remove when vips 8.17.1 is released
-curl -Ls https://github.com/libvips/libvips/commit/a8a9c9cb0973a57832f639d3b2eb3775b24c6af4.patch | git apply --exclude ChangeLog
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \

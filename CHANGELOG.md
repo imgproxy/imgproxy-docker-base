@@ -1,5 +1,30 @@
 # Changelog
 
+## [3.14.0] - 2025-09-17
+### Added
+- Add PCRE2 10.40.
+
+### Changed
+- Update Go to 1.25.1.
+- Update zlib to 2.2.5.
+- Update ffi to 3.5.2.
+- Update GLib to 2.86.0.
+- Update highway to 1.3.0.
+- Update libexpat to 2.7.2.
+- Update libxml2 to 2.15.0.
+- Update libjpegturbo to 3.1.2.
+- Update libwebp to 1.6.0.
+- Update kvazaar to 2.3.2.
+- Update aom to 3.13.1.
+- Update libheif to 1.20.2.
+- Update freetype to 2.14.1.
+- Update fontconfig to 2.17.1.
+- Update harfbuzz to 11.5.0.
+- Update pixman to 0.46.4.
+- Update pango to 1.57.0.
+- Update librsvg to 2.61.1.
+- Update vips to 8.17.2.
+
 ## [3.13.3] - 2025-07-02
 ### Changed
 - Update Go to 1.24.4.

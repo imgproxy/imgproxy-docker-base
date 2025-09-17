@@ -40,6 +40,16 @@ cd $DEPS_SRC/ffi
 curl -Lks https://github.com/libffi/libffi/releases/download/v${FFI_VERSION}/libffi-${FFI_VERSION}.tar.gz \
   | tar -xzC . --strip-components=1
 
+print_download_stage pcre2 $PCRE2_VERSION
+mkdir $DEPS_SRC/pcre2
+cd $DEPS_SRC/pcre2
+git clone https://github.com/PCRE2Project/pcre2.git . \
+    --branch pcre2-$PCRE2_VERSION \
+    -c advice.detachedHead=false --depth 1
+git submodule update --init
+# curl -Lks https://github.com/PCRE2Project/pcre2/releases/download/pcre2-${PCRE2_VERSION}/pcre2-${PCRE2_VERSION}.tar.gz \
+#   | tar -xzC . --strip-components=1
+
 print_download_stage glib $GLIB_VERSION
 mkdir $DEPS_SRC/glib
 cd $DEPS_SRC/glib
@@ -133,7 +143,7 @@ curl -Ls https://github.com/strukturag/libde265/releases/download/v$LIBDE265_VER
 print_download_stage kvazaar $KVAZAAR_VERSION
 mkdir $DEPS_SRC/kvazaar
 cd $DEPS_SRC/kvazaar
-curl -Ls https://github.com/ultravideo/kvazaar/releases/download/v$KVAZAAR_VERSION/kvazaar-$KVAZAAR_VERSION.tar.gz \
+curl -Ls https://github.com/ultravideo/kvazaar/archive/refs/tags/v$KVAZAAR_VERSION.tar.gz \
   | tar -xzC . --strip-components=1
 
 print_download_stage dav1d $DAV1D_VERSION
