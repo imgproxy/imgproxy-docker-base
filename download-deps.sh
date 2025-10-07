@@ -217,3 +217,9 @@ mkdir $DEPS_SRC/vips
 cd $DEPS_SRC/vips
 curl -Ls https://github.com/libvips/libvips/releases/download/v$VIPS_VERSION/vips-$VIPS_VERSION.tar.xz \
   | tar -xJC . --strip-components=1
+
+print_download_stage lychee $LYCHEE_VERSION
+mkdir $DEPS_SRC/lychee
+cd $DEPS_SRC/lychee
+curl -L "https://github.com/lycheeverse/lychee/releases/download/lychee-v${LYCHEE_VERSION}/lychee-$(uname -m)-unknown-linux-gnu.tar.gz" \
+  | tar -xz
