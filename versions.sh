@@ -33,3 +33,6 @@ export FRIBIDI_VERSION=1.0.16
 export PANGO_VERSION=1.57.0
 export LIBRSVG_VERSION=2.61.1
 export VIPS_VERSION=8.17.2
+
+# dev depdendencies
+export LYCHEE_VERSION=0.20.1
