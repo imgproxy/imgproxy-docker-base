@@ -79,6 +79,8 @@ RUN apt-get update \
     libstdc++-10-dev \
     software-properties-common \
     gpg-agent \
+    fontconfig-config \
+    fonts-dejavu-core \
   && apt-get clean \
   && truncate -s 0 /var/log/*log \
   && rm -rf /tmp/* \
