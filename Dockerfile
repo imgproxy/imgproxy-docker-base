@@ -107,7 +107,7 @@ WORKDIR /root
 COPY --from=golang /usr/local/go /usr/local/go
 ENV PATH=$PATH:/usr/local/go/bin:/root/go/bin
 
-RUN go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.5.0 \
+RUN go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.7.2 \
   && go install github.com/evilmartians/lefthook@latest \
   && go install gotest.tools/gotestsum@latest \
   && go install github.com/air-verse/air@latest \
