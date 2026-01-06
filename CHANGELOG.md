@@ -1,6 +1,23 @@
 # Changelog
 
-## [Unreleased]
+## [3.15.0] - 2026-01-06
+### Changed
+- Update Go to 1.25.5.
+- Update zlib to 2.3.2.
+- Update brotli to 1.2.0.
+- Update glib to 2.87.1.
+- Update pcre2 to 10.47.
+- Update libexpat to 2.7.3.
+- Update libxml2 to 2.15.1.
+- Update libjpegturbo to 3.1.3.
+- Update libpng to 1.6.53.
+- Update libtiff to 4.7.1.
+- Update dav1d to 1.5.3.
+- Update libheif to 1.21.1.
+- Update harfbuzz to 12.3.0.
+- Update librsvg to 2.61.3.
+- Update vips to 8.18.0.
+
 ### Removed
 - Remove libspng.
 - Remove libyuv.

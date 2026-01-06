@@ -311,7 +311,7 @@ ninja install/strip
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
 # Ignore alpha in Op_RGB_HDR_to_RRGGBBaa_BE if aplpha has different BPP
-curl -Ls https://github.com/DarthSim/libheif/commit/9d41f81cdd0a119f5b278ad2eee09ddad14ac2a4.patch | git apply
+curl -Ls https://github.com/DarthSim/libheif/commit/9b2752bbaaa20ebd5a6be9cb266114620af2833a.patch | git apply
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
