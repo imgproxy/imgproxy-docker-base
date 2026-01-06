@@ -213,18 +213,6 @@ cd $DEPS_SRC/libpng
   --disable-dependency-tracking
 make install-strip -j$(nproc)
 
-print_build_stage libspng $LIBSPNG_VERSION
-cd $DEPS_SRC/libspng
-CFLAGS="${CFLAGS} -O3 -DSPNG_SSE=4" \
-meson setup _build \
-  --buildtype=release \
-  --strip \
-  --wrap-mode=nofallback \
-  --prefix=$TARGET_PATH \
-  --libdir=lib
-ninja -C _build
-ninja -C _build install
-
 print_build_stage libwebp $LIBWEBP_VERSION
 cd $DEPS_SRC/libwebp
 ./configure \
