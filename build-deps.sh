@@ -308,23 +308,8 @@ cmake \
   ..
 ninja install/strip
 
-print_build_stage libyuv $LIBYUV_SHA
-cd $DEPS_SRC/libyuv
-mkdir _build
-cd _build
-CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
-cmake \
-  -G"Ninja" \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
-  -DBUILD_SHARED_LIBS=1 \
-  ..
-ninja install/strip
-
 print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
-# libyuv support
-curl -Ls https://github.com/DarthSim/libheif/commit/193f65d241262e9c6291b6f8c57cd38da07b9422.patch | git apply
 # Ignore alpha in Op_RGB_HDR_to_RRGGBBaa_BE if aplpha has different BPP
 curl -Ls https://github.com/DarthSim/libheif/commit/9d41f81cdd0a119f5b278ad2eee09ddad14ac2a4.patch | git apply
 mkdir _build
