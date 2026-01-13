@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.15.1] - 2026-01-13
+### Fix
+- Patch vips to fix saving and loading of non-8-bit JPEG XL images.
+
 ## [3.15.0] - 2026-01-06
 ### Changed
 - Update Go to 1.25.5.

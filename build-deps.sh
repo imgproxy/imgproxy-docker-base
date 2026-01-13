@@ -465,6 +465,9 @@ ninja -C _build install
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
+# Patch loading/saving non-8-bit JPEG XL images.
+# Remove when https://github.com/libvips/libvips/pull/4830 is merged and released.
+curl -Ls https://github.com/DarthSim/libvips/commit/dd245c7da6d14cb0199373c4b248d775758a941e.patch | git apply
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
