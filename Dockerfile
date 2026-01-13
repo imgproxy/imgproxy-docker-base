@@ -10,6 +10,7 @@ RUN apt-get update \
     build-essential \
     pkg-config \
     libssl-dev \
+    libcurl4-openssl-dev \
     libstdc++-10-dev
 
 WORKDIR /root
