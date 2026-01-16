@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.15.2] - 2026-01-16
+### Changed
+- Update Go to 1.25.6.
+- Update lcms2 to 2.18.
+- Update libpng to 1.6.54.
+- Update libheif to 1.21.2.
+
+### Fix
+- Patch libheif to fix loading of HEIC/AVIF images with alpha channel of different bit depth.
+
 ## [3.15.1] - 2026-01-13
 ### Fix
 - Patch vips to fix saving and loading of non-8-bit JPEG XL images.
