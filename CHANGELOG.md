@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.15.3] - 2026-03-05
+### Changed
+- Update Go to 1.26.0.
+- Update zlib to 2.3.3.
+- Update GLib to 2.87.3.
+- Update libexpat to 2.7.4.
+- Update libxml2 to 2.15.2.
+- Update libjxl to 0.11.2.
+- Update libpng to 1.6.55.
+- Update cgif to 0.5.2.
+- Update freetype to 2.14.2.
+- Update harfbuzz to 13.0.0.
+- Update librsvg to 2.62.0.
+
 ## [3.15.2] - 2026-01-16
 ### Changed
 - Update Go to 1.25.6.
