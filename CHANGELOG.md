@@ -4,6 +4,7 @@
 ### Changed
 - Update Go to 1.26.1.
 - Update harfbuzz to 13.0.1.
+- Patch vips for faster PNG load.
 
 ## [3.15.3] - 2026-03-05
 ### Changed
