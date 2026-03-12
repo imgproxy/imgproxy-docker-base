@@ -10,11 +10,19 @@ RUN apt-get update \
     curl \
     git \
     ca-certificates \
-    build-essential \
+    gcc-12 \
+    g++-12 \
+    make \
+    libc6-dev \
+    xz-utils \
+    bzip2 \
     pkg-config \
     libssl-dev \
     libcurl4-openssl-dev \
     libstdc++-10-dev
+
+RUN update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-12 100 && \
+    update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-12 100
 
 WORKDIR /root
 
@@ -74,7 +82,12 @@ RUN apt-get update \
     bash \
     curl \
     ca-certificates \
-    build-essential \
+    gcc-12 \
+    g++-12 \
+    make \
+    xz-utils \
+    bzip2 \
+    libc6-dev \
     pkg-config \
     libssl-dev \
     libstdc++-10-dev \
@@ -86,6 +99,9 @@ RUN apt-get update \
   && truncate -s 0 /var/log/*log \
   && rm -rf /tmp/* \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-12 100 && \
+    update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-12 100
 
 # Install LLVM 20 (for clang-format) and latest git (custom, newer versions)
 RUN echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-20 main" > /etc/apt/sources.list.d/llvm20.list \
