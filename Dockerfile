@@ -103,7 +103,9 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-12 100 && \
-    update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-12 100
+    update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-12 100 && \
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100 && \
+    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 100
 
 # Install LLVM 20 (for clang-format) and latest git (custom, newer versions)
 RUN echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-20 main" > /etc/apt/sources.list.d/llvm20.list \
