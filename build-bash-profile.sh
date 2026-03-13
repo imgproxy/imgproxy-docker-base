@@ -5,7 +5,7 @@ set -e
 case "$(uname -m)" in
   x86_64)
     ARCH_ENV=$(cat << EOF
-export CFLAGS="-msse42"
+export CFLAGS="-msse4"
 EOF
     )
     ;;

@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.15.5] - 2026-03-13
+### Changed
+- Update GLib to 2.87.5.
+- Update harfbuzz to 13.1.1.
+- Build everything with `-msse4` on amd64 for better performance.
+
 ## [3.15.4] - 2026-03-10
 ### Changed
 - Update Go to 1.26.1.
