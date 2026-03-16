@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.15.6] - 2026-03-17
+### Fixed
+- Fix memory leak in libheif when saving HEIC/AVIF images with alpha channel.
+
 ## [3.15.5] - 2026-03-13
 ### Changed
 - Update GLib to 2.87.5.

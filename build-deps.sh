@@ -312,6 +312,9 @@ print_build_stage libheif $LIBHEIF_VERSION
 cd $DEPS_SRC/libheif
 # Ignore alpha in yuv2rgb and rgb2rgb if it has different BPP
 curl -Ls https://github.com/DarthSim/libheif/commit/d63ec62d93ab1420c8cf76378af2a806aeb5292d.patch | git apply
+# Fix memory leak in encoders
+# Remove when the fix is released
+curl -Ls https://github.com/DarthSim/libheif/commit/5d56b234d465358f0fcdfbac93835f1094dc13ae.patch | git apply
 mkdir _build
 cd _build
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
