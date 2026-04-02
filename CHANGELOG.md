@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.15.7] - 2026-04-02
+### Changed
+- Update GLib to 2.88.0.
+- Update libexpat to 2.7.5.
+- Update libjpegturbo to 3.1.4.1.
+- Update libpng to 1.6.56.
+- Update cgif to 0.5.3.
+- Update libde265 to 1.0.18.
+- Update aom to 3.13.2.
+- Update freetype to 2.14.3.
+- Update harfbuzz to 14.0.0.
+- Update pango to 1.57.1.
+- Update librsvg to 2.62.1.
+- Update vips to 8.18.2.
+
 ## [3.15.6] - 2026-03-17
 ### Fixed
 - Fix memory leak in libheif when saving HEIC/AVIF images with alpha channel.

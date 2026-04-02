@@ -255,11 +255,18 @@ ninja -C _build install
 
 print_build_stage libde265 $LIBDE265_VERSION
 cd $DEPS_SRC/libde265
-./configure \
-  --prefix=$TARGET_PATH \
-  --enable-shared \
-  --disable-static
-make install-strip -j$(nproc)
+mkdir _build
+cd _build
+CFLAGS="${CFLAGS} -O3 -pthread" CXXFLAGS="${CXXFLAGS} -O3 -pthread" \
+LDFLAGS="${LDFLAGS} -pthread" \
+cmake \
+  -G"Ninja" \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX=$TARGET_PATH \
+  --preset=release \
+  -DBUILD_SHARED_LIBS=1 \
+  ..
+ninja install/strip
 
 print_build_stage kvazaar $KVAZAAR_VERSION
 cd $DEPS_SRC/kvazaar
@@ -377,7 +384,9 @@ meson setup _build \
   -Dtests=disabled \
   -Dintrospection=disabled \
   -Ddocs=disabled \
-  -Dbenchmark=disabled
+  -Dbenchmark=disabled \
+  -Dgpu=disabled \
+  -Dgpu_demo=disabled
 ninja -C _build
 ninja -C _build install
 rm $TARGET_PATH/lib/libharfbuzz-subset*
@@ -468,12 +477,6 @@ ninja -C _build install
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
-# Patch loading/saving non-8-bit JPEG XL images.
-# Remove after update to v8.18.1
-curl -Ls https://github.com/DarthSim/libvips/commit/dd245c7da6d14cb0199373c4b248d775758a941e.patch | git apply
-# Patch expensive PNG header read.
-# Remove after update to v8.18.1
-curl -Ls https://github.com/libvips/libvips/commit/0f83bf408a01043f1a68b012178b02ce1dbd9d94.patch | git apply --exclude ChangeLog
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
