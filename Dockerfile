@@ -19,7 +19,7 @@ RUN apt-get update \
     pkg-config \
     libssl-dev \
     libcurl4-openssl-dev \
-    libstdc++-10-dev
+    libstdc++-12-dev
 
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-12 100 && \
     update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-12 100 && \
@@ -91,7 +91,7 @@ RUN apt-get update \
     libc6-dev \
     pkg-config \
     libssl-dev \
-    libstdc++-10-dev \
+    libstdc++-12-dev \
     software-properties-common \
     gpg-agent \
     fontconfig-config \
