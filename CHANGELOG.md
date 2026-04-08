@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0] - 2026-04-08
+### Changed
+- Base system is now Ubuntu 22.04 LTS
+- glibc to 2.35
+- gcc to 12.3
+
+### Added
+- dev dependencies: lefthook (latest), gotestsum (latest), air (latest)
+- golangci-lint 2.11.1
+- lychee 0.20.1
+
 ## [3.15.7] - 2026-04-02
 ### Changed
 - Update GLib to 2.88.0.
