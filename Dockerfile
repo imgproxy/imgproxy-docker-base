@@ -46,7 +46,6 @@ RUN apt-get update \
     autoconf \
     autopoint \
     automake \
-    cmake \
     nasm \
     libtool \
     python3-pip \
@@ -55,7 +54,7 @@ RUN apt-get update \
     gperf \
   && ./install-rust.sh \
   && python3 -m venv /root/.python \
-  && /root/.python/bin/pip install meson ninja packaging
+  && /root/.python/bin/pip install meson ninja packaging cmake
 
 COPY versions.sh build-deps.sh build-bash-profile.sh *.patch ./
 COPY --from=deps-src /root/deps /root/deps
