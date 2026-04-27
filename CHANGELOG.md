@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.15.8] - 2026-04-27
+### Changed
+- Update Go to 1.26.2.
+- Update highway to 1.4.0.
+- Update libexpat to 2.8.0.
+- Update libxml2 to 2.15.3.
+- Update libexif to 0.6.26.
+- Update lcms2 to 2.19.
+- Update libpng to 1.6.58.
+- Update aom to 3.13.3.
+- Update harfbuzz to 14.2.0.
+
 ## [3.15.7] - 2026-04-02
 ### Changed
 - Update GLib to 2.88.0.
