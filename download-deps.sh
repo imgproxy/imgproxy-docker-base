@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 my_dir="$(dirname "$0")"
 source "$my_dir/versions.sh"
