@@ -95,6 +95,21 @@ CMD ["imgproxy"]
 EXPOSE 8080
 ```
 
+## Build the new version
+
+git tag the new release:
+
+```
+git tag v4.0.2
+git push origin master --tags
+```
+
+This will start the build of the new version.
+
+## Build a test version
+
+Create and push the branch named `test/foobar`. It will build and push `:test-foobar` docker tag.
+
 ## Author
 
 Sergey "[DarthSim](https://github.com/DarthSim)" Alexandrovich
