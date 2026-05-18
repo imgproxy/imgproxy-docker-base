@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.0.2] - 2026-05-18
+### Changed
+- Update Go to 1.26.3
+- Update glib to 2.88.1
+- Update libexpat to 2.8.1
+- Update lcsm2 to 2.19.1
+- Update aom to 3.14.0
+- Update librsvg to 2.62.1
+
 ## [4.0.1] - 2026-04-27
 ### Changed
 - Update Go to 1.26.2.
