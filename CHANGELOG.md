@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.1] - 2026-04-22
+## Changed
+- Update glib to 2.89.0
+- Update libhde265 to 1.0.19
+- Update libheif to 1.22.0
+- Update fontconfig to 2.18.0
+
 ## [4.0.2] - 2026-05-18
 ### Changed
 - Update Go to 1.26.3
