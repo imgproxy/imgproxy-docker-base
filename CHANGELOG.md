@@ -1,5 +1,27 @@
 # Changelog
 
+## [4.1.2] - 2026-06-08
+### Changed
+- Update GOLANG to 1.26.4.
+- Update GLIB to 2.89.0.
+- Update LIBDE265 to 1.1.1.
+- Update AOM to 3.14.1.
+- Update LIBHEIF to 1.23.0.
+- Update FONTCONFIG to 2.18.1.
+- Update HARFBUZZ to 14.2.1.
+- Update LIBRSVG to 2.62.3.
+
+## [4.0.3] - 2026-06-08
+### Changed
+- Update GOLANG to 1.26.4.
+- Update GLIB to 2.89.0.
+- Update LIBDE265 to 1.1.1.
+- Update AOM to 3.14.1.
+- Update LIBHEIF to 1.23.0.
+- Update FONTCONFIG to 2.18.1.
+- Update HARFBUZZ to 14.2.1.
+- Update LIBRSVG to 2.62.3.
+
 ## [4.1.1] - 2026-04-22
 ## Changed
 - Update glib to 2.89.0
