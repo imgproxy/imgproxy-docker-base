@@ -16,8 +16,35 @@ env:
     type=ref,event=branch,enable=${{ startsWith(github.ref, 'refs/heads/test/') }}
 
 jobs:
+  # Get the latest tag to determine if the current build is for the latest version.
+  # This is needed to decide whether to push the "latest" tag for the current build.
+  is-latest-tag:
+    if: github.repository_owner == 'imgproxy'
+    runs-on: ubuntu-latest
+    outputs:
+      is-latest: ${{ steps.get-latest-tag.outputs.result }}
+    permissions:
+      contents: read
+    steps:
+      - name: Get the latest tag
+        id: get-latest-tag
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { data: tags } = await github.rest.repos.listTags({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100,
+            });
+
+            const latestTag = tags.find(tag => /^v\d+\.\d+\.\d+$/.test(tag.name));
+            const currentTag = context.ref.replace('refs/tags/', '');
+
+            return latestTag ? currentTag === latestTag.name : false;
+
   build:
     if: github.repository_owner == 'imgproxy'
+    needs: is-latest-tag
     strategy:
       matrix:
         build:
@@ -44,7 +71,7 @@ jobs:
           images: ${{ env.DOCKER_META_IMAGES }}
           tags: ${{ env.DOCKER_META_TAGS }}
           flavor: |
-            latest=auto
+            latest=${{ needs.is-latest-tag.outputs.is-latest }}
             suffix=-${{ matrix.build.arch }},onlatest=true
 
       - name: Login to GitHub Container Registry
@@ -64,7 +91,7 @@ jobs:
           push: true
 
   push_manifests:
-    needs: build
+    needs: [is-latest-tag, build]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -77,7 +104,7 @@ jobs:
           images: ${{ env.DOCKER_META_IMAGES }}
           tags: ${{ env.DOCKER_META_TAGS }}
           flavor: |
-            latest=auto
+            latest=${{ needs.is-latest-tag.outputs.is-latest }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
