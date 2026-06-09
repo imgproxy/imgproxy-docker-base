@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.15.9] - 2026-06-09
+### Changed
+- Update Go to 1.26.4.
+- Update GLib to 2.89.0.
+- Update libexpat to 2.8.1.
+- Update lcms2 to 2.19.1.
+- Update libde265 to 1.1.1.
+- Update aom to 3.14.1.
+- Update libheif to 1.23.0.
+- Update fontconfig to 2.18.1.
+- Update harfbuzz to 14.2.1.
+- Update librsvg to 2.62.3.
+
 ## [3.15.8] - 2026-04-27
 ### Changed
 - Update Go to 1.26.2.
