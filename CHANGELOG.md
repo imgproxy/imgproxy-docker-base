@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.1.3] - 2026-06-24
+### Changed
+- Update ffi to 3.6.0.
+- Update vips to 8.18.3.
+
+### Fixed
+- Patch vips to fix saving CMYK images as JPEG XL.
+
+## [4.0.4] - 2026-06-24
+### Changed
+- Update ffi to 3.6.0.
+- Update vips to 8.18.3.
+
+### Fixed
+- Patch vips to fix saving CMYK images as JPEG XL.
+
 ## [4.1.2] - 2026-06-08
 ### Changed
 - Update GOLANG to 1.26.4.

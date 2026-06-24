@@ -472,6 +472,7 @@ ninja -C _build install
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
+curl -Ls "https://github.com/libvips/libvips/commit/e4d9b8b0c57d304f872dafe201445bbedefbd32a.patch" | git apply -p1
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
