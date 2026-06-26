@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.4] - 2026-06-26
+### Fixed
+- Patch vips to lighten the HEIF items limit to 256.
+
+## [4.0.5] - 2026-06-26
+### Fixed
+- Patch vips to lighten the HEIF items limit to 256.
+
 ## [4.1.3] - 2026-06-24
 ### Changed
 - Update ffi to 3.6.0.
