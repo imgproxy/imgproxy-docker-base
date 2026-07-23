@@ -1,5 +1,23 @@
 # Changelog
 
+## [4.0.6] - 2026-07-23
+## Changed
+- Update Go to 1.26.5
+- Update glib to 2.89.2
+- Update ffi to 3.7.1
+- Update libexpat to 2.8.2
+- Update libjpeg-turbo to 3.2.0
+- Update libjxl to 0.12.0
+- Update libtiff to 4.7.2
+- Update dav1d to 1.5.4
+- Update libheif to 1.23.1
+- Update fontconfig to 2.18.2
+- Update pango to 1.58.0
+- Update vips to 8.18.4
+
+## Removed
+- golangci-lint, lefthook, air, gotestsum - replaced by `go tool`.
+
 ## [4.1.4] - 2026-06-26
 ### Fixed
 - Patch vips to lighten the HEIF items limit to 256.
@@ -37,14 +55,14 @@
 
 ## [4.0.3] - 2026-06-08
 ### Changed
-- Update GOLANG to 1.26.4.
-- Update GLIB to 2.89.0.
-- Update LIBDE265 to 1.1.1.
-- Update AOM to 3.14.1.
-- Update LIBHEIF to 1.23.0.
-- Update FONTCONFIG to 2.18.1.
-- Update HARFBUZZ to 14.2.1.
-- Update LIBRSVG to 2.62.3.
+- Update Go to 1.26.4.
+- Update glib to 2.89.0.
+- Update libde256 to 1.1.1.
+- Update aom to 3.14.1.
+- Update libheif to 1.23.0.
+- Update fontconfig to 2.18.1.
+- Update harfbuzz to 14.2.1.
+- Update librsvg to 2.62.3.
 
 ## [4.1.1] - 2026-04-22
 ## Changed
