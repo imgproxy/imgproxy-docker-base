@@ -1,9 +1,6 @@
 # Changelog
 
 ## [4.0.6] - 2026-07-23
-## Removed
-- golangci-lint, lefthook, air, gotestsum - replaced by `go tool`.
-
 ## Changed
 - Update Go to 1.26.5
 - Update glib to 2.89.2
@@ -16,8 +13,10 @@
 - Update libheif to 1.23.1
 - Update fontconfig to 2.18.2
 - Update pango to 1.58.0
-- Update librsvg to 2.62.90
 - Update vips to 8.18.4
+
+## Removed
+- golangci-lint, lefthook, air, gotestsum - replaced by `go tool`.
 
 ## [4.0.5] - 2026-06-26
 ### Fixed

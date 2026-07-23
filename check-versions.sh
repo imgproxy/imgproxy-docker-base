@@ -25,7 +25,9 @@ update_version() {
 check_version() {
   name=$1
   old_version=$2
-  new_version=$(curl -s https://release-monitoring.org/api/project/$3  | jq -r '.versions | map(select(match("^[0-9]+(\\.[0-9]+)*$")))[0]')
+  exclude=$4
+  new_version=$(curl -s https://release-monitoring.org/api/project/$3 | jq -r --arg exclude "$exclude" \
+    '.versions | map(select(match("^[0-9]+(\\.[0-9]+)*$"))) | map(select($exclude == "" or (test($exclude) | not)))[0]')
 
   update_version $name $old_version $new_version
 }
@@ -69,5 +71,5 @@ check_version "PIXMAN" $PIXMAN_VERSION "3648"
 check_version "CAIRO" $CAIRO_VERSION "247"
 check_version "FRIBIDI" $FRIBIDI_VERSION "857"
 check_version "PANGO" $PANGO_VERSION "11783"
-check_version "LIBRSVG" $LIBRSVG_VERSION "5420"
+check_version "LIBRSVG" $LIBRSVG_VERSION "5420" '\.9[0-9]$'
 check_version "VIPS" $VIPS_VERSION "5097"

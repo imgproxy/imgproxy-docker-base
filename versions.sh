@@ -29,7 +29,7 @@ export PIXMAN_VERSION=0.46.4
 export CAIRO_VERSION=1.18.4
 export FRIBIDI_VERSION=1.0.16
 export PANGO_VERSION=1.58.0
-export LIBRSVG_VERSION=2.62.90
+export LIBRSVG_VERSION=2.62.3
 export VIPS_VERSION=8.18.4
 
 # dev depdendencies
