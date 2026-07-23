@@ -472,13 +472,6 @@ ninja -C _build install
 
 print_build_stage vips $VIPS_VERSION
 cd $DEPS_SRC/vips
-# Patch saving CMYK images as JPEG XL.
-# Remove when vips 8.18.4 is released.
-curl -Ls "https://github.com/libvips/libvips/commit/e4d9b8b0c57d304f872dafe201445bbedefbd32a.patch" | git apply -p1
-# vips 8.18.3 tightened the HEIF items limit too much, which breaks even basic
-# iPhone photos loading.
-# Remove when vips 8.18.4 is released.
-sed -i.bak -E "s|limits->max_items = [0-9]+;|limits->max_items = 256;|"  libvips/foreign/heifload.c
 CFLAGS="${CFLAGS} -O3" CXXFLAGS="${CXXFLAGS} -O3" \
 meson setup _build \
   --buildtype=release \
