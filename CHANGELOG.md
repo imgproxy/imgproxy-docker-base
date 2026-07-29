@@ -1,5 +1,9 @@
 # Changelog
 
+## [4.1.5] - 2026-07-29
+## Changed
+- Update glib to 2.89.3
+
 ## [4.0.6] - 2026-07-23
 ## Changed
 - Update Go to 1.26.5
