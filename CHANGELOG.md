@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.7] - 2026-08-14
+## Changed
+- Update Go to 1.26.6
+- Update ffi to 3.8.0
+- Update glib to 2.89.3
+- Update libexpat to 2.8.3
+- Update fontconfig to 2.18.3
+- Update harfbuzz to 14.3.1
+- Update pango to 1.58.2
+- Update vips to 8.18.5
+
 ## [4.1.5] - 2026-07-29
 ## Changed
 - Update glib to 2.89.3
