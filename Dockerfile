@@ -56,12 +56,12 @@ RUN apt-get update \
   && python3 -m venv /root/.python \
   && /root/.python/bin/pip install meson ninja packaging cmake
 
-COPY versions.sh build-deps.sh build-bash-profile.sh *.patch ./
+COPY versions.sh build-deps.sh *.patch ./
 COPY --from=deps-src /root/deps /root/deps
 
 # We need environment variables that are based on the uname -m output,
 # so we have to use a Bash profile instead of ENV
-RUN ./build-bash-profile.sh > /root/.bashrc
+COPY bashrc.sh /root/.bashrc
 ENV BASH_ENV=/root/.bashrc
 
 RUN ./build-deps.sh
@@ -131,6 +131,7 @@ COPY --from=deps /root/deps/lychee/lychee /usr/local/bin/lychee
 COPY --from=deps /opt/imgproxy/lib /opt/imgproxy/lib
 COPY --from=deps /opt/imgproxy/include /opt/imgproxy/include
 COPY --from=deps /opt/imgproxy/bin /opt/imgproxy/bin
+COPY --from=deps /opt/imgproxy/sbom /opt/imgproxy/sbom
 
 COPY --from=deps /root/.bashrc /root/.bashrc
 ENV BASH_ENV=/root/.bashrc
