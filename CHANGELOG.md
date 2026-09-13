@@ -1,7 +1,25 @@
 # Changelog
 
+## [4.0.8] - 2026-09-13
+### Added
+- Added SBOM files for self-built libraries.
+
+### Changed
+- Update Go to 1.27.1.
+- Update GLib to 2.90.0.
+- Update pcre2 to 10.48.
+- Update libexpat to 2.8.4.
+- Update libxml2 to 2.15.4.
+- Update cgif to 0.5.4.
+- Update libde265 to 1.1.2.
+- Update aom to 3.15.0.
+- Update libheif to 1.23.4.
+- Update harfbuzz to 14.4.0.
+- Update librsvg to 2.63.0.
+- Update vips to 8.18.6.
+
 ## [4.0.7] - 2026-08-14
-## Changed
+### Changed
 - Update Go to 1.26.6
 - Update ffi to 3.8.0
 - Update glib to 2.89.3
@@ -16,7 +34,7 @@
 - Update glib to 2.89.3
 
 ## [4.0.6] - 2026-07-23
-## Changed
+### Changed
 - Update Go to 1.26.5
 - Update glib to 2.89.2
 - Update ffi to 3.7.1
@@ -30,7 +48,7 @@
 - Update pango to 1.58.0
 - Update vips to 8.18.4
 
-## Removed
+### Removed
 - golangci-lint, lefthook, air, gotestsum - replaced by `go tool`.
 
 ## [4.1.4] - 2026-06-26
