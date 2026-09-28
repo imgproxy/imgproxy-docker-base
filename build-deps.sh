@@ -520,13 +520,17 @@ add_sbom "cairo" $CAIRO_VERSION \
 
 print_build_stage fribidi $FRIBIDI_VERSION
 cd $DEPS_SRC/fribidi
-autoreconf -fiv
-./configure \
+meson setup _build \
+  --buildtype=release \
+  --strip \
+  --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
-  --enable-shared \
-  --disable-static \
-  --disable-dependency-tracking
-make install-strip -j$(nproc)
+  --libdir=lib \
+  -Ddocs=false \
+  -Dbin=false \
+  -Dtests=false
+ninja -C _build
+ninja -C _build install
 add_sbom "fribidi" $FRIBIDI_VERSION \
   "cpe:2.3:a:gnu:fribidi:$FRIBIDI_VERSION:*:*:*:*:*:*:*"
 
