@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.0.9] - 2026-09-28
+### Changed
+- Update libexpat to 2.8.5.
+- Update libde265 to 1.1.3.
+- Update aom to 3.15.1.
+- Update libheif to 1.23.5.
+- Update harfbuzz to 14.5.0.
+- Update cairo to 1.18.6.
+- Update fribidi to 1.0.17.
+- Update librsvg to 2.63.2.
+- Update vips to 8.18.7.
+
 ## [4.0.8] - 2026-09-13
 ### Added
 - Added SBOM files for self-built libraries.
