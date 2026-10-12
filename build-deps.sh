@@ -194,6 +194,7 @@ meson setup _build \
   --wrap-mode=nofallback \
   --prefix=$TARGET_PATH \
   --libdir=lib \
+  -Dthreads=enabled \
   -Dminimum=true
 ninja -C _build
 ninja -C _build install
