@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.1.8] - 2026-10-13
+### Changed
+- Update Go to 1.27.2
+- Update glib to 2.90.1
+- Update prce2 to 10.49
+- Update libexpat to 2.9.0.
+- Update libpng to 1.6.59.
+- Update aom to 3.15.2.
+- Update libheif to 1.23.6.
+- Update harfbuzz to 14.6.0.
+
 ## [4.0.10] - 2026-10-12
 ### Changed
 - Update Go to 1.27.2
