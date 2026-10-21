@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.0.11] - 2026-10-21
+### Changed
+- Update Go to 1.27.3.
+- Update freetype to 2.15.0.
+- Update librsvg to 2.63.3.
+
 ## [4.0.10] - 2026-10-12
 ### Changed
 - Update Go to 1.27.2
