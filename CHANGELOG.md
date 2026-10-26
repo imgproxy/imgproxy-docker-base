@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.12] - 2026-10-26
+## Changed
+- Update brotli to 1.2.1.
+- Update libheif to 1.23.7.
+- Update harfbuzz to 15.0.0.
+- Update librsvg to 2.63.4.
+
 ## [4.0.11] - 2026-10-21
 ### Changed
 - Update Go to 1.27.3.
