@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.11] - 2026-11-02
+## Changed
+- Updated lcms2 to 2.20.
+- Updated libjpeg-turbo to 3.2.1.
+- Updated aom to 3.15.3.
+- Updated fribidi to 1.0.18.
+
 ## [4.0.13] - 2026-11-02
 ## Changed
 - Updated lcms2 to 2.20.
