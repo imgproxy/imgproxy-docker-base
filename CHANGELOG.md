@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.1.12] - 2026-11-05
+### Changed
+- Updated libexpat to 2.10.0.
+- Updated harfbuzz to 15.1.0.
+
+## [4.0.14] - 2026-11-05
+### Changed
+- Updated libexpat to 2.10.0.
+- Updated harfbuzz to 15.1.0.
+
 ## [4.1.11] - 2026-11-02
 ## Changed
 - Updated lcms2 to 2.20.
