@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.13] - 2026-11-12
+- Updated Go to 1.27.4.
+- Updated libjxl to 0.13.0.
+
+## [4.0.15] - 2026-11-12
+- Updated Go to 1.27.4.
+- Updated libjxl to 0.13.0.
+
 ## [4.1.12] - 2026-11-05
 ### Changed
 - Updated libexpat to 2.10.0.
