@@ -1,6 +1,7 @@
 # Changelog
 
 ## [4.1.13] - 2026-11-12
+### Changed
 - Updated Go to 1.27.4.
 - Updated libjxl to 0.13.0.
 
@@ -20,7 +21,7 @@
 - Updated harfbuzz to 15.1.0.
 
 ## [4.1.11] - 2026-11-02
-## Changed
+### Changed
 - Updated lcms2 to 2.20.
 - Updated libjpeg-turbo to 3.2.1.
 - Updated aom to 3.15.3.
@@ -34,7 +35,7 @@
 - Updated fribidi to 1.0.18.
 
 ## [4.1.10] - 2026-10-26
-## Changed
+### Changed
 - Update brotli to 1.2.1.
 - Update libheif to 1.23.7.
 - Update harfbuzz to 15.0.0.
