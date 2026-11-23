@@ -35,7 +35,8 @@ check_version() {
 check_version_github() {
   name=$1
   old_version=$2
-  new_version=$(curl -sL https://api.github.com/repos/$3/releases | jq -r 'map(select(.prerelease == false)) | map(select(.draft == false)) | map(.tag_name)[0] | ltrimstr("v") | ltrimstr("V")')
+  prefix=$4
+  new_version=$(curl -sL https://api.github.com/repos/$3/releases | jq -r --arg prefix "$prefix" 'map(select(.prerelease == false)) | map(select(.draft == false)) | map(select(.tag_name | startswith($prefix))) | map(.tag_name)[0] | ltrimstr($prefix) | ltrimstr("v") | ltrimstr("V")')
 
   update_version $name $old_version $new_version
 }
@@ -73,3 +74,5 @@ check_version "FRIBIDI" $FRIBIDI_VERSION "857"
 check_version "PANGO" $PANGO_VERSION "11783"
 check_version "LIBRSVG" $LIBRSVG_VERSION "5420" '\.9[0-9]$'
 check_version "VIPS" $VIPS_VERSION "5097"
+
+check_version_github "LYCHEE" $LYCHEE_VERSION "lycheeverse/lychee" "lychee-v"

@@ -222,4 +222,4 @@ print_download_stage lychee $LYCHEE_VERSION
 mkdir $DEPS_SRC/lychee
 cd $DEPS_SRC/lychee
 curl -L "https://github.com/lycheeverse/lychee/releases/download/lychee-v${LYCHEE_VERSION}/lychee-$(uname -m)-unknown-linux-gnu.tar.gz" \
-  | tar -xz
+  | tar -xzC . --strip-components=1

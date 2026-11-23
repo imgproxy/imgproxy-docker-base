@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.0.16] - 2026-11-23
+### Changed
+- Updated ffi to 3.8.1.
+- Updated dav1d to 1.5.5.
+- Updated fontconfig to 2.18.4.
+- Updated harfbuzz to 15.2.0.
+- Updated lychee to 0.24.2.
+
 ## [4.0.15] - 2026-11-12
 ### Changed
 - Updated Go to 1.27.4.
